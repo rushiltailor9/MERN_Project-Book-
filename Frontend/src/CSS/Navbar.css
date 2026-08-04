@@ -1,0 +1,77 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 32px;
+    background-color: #1e1e2f;
+    color: #ffffff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-logo a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.navbar-logo a:hover {
+    opacity: 0.85;
+}
+
+.navbar-links {
+    display: flex;
+    list-style: none;
+    gap: 24px;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-links a {
+    color: #d1d1e0;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.2s;
+}
+
+.navbar-links a:hover {
+    color: #ffffff;
+}
+
+.navbar-auth {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Icon-only circular button */
+.auth-icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 40px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #d1d1e0;
+    border: 1px solid #4f4fff;
+    background-color: transparent;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.auth-icon-btn:hover {
+    background-color: #4f4fff;
+    color: #ffffff;
+}
+
+.auth-icon-btn--primary {
+    background-color: #4f4fff;
+    color: #ffffff;
+}
+
+.auth-icon-btn--primary:hover {
+    background-color: #3a3ae0;
+}

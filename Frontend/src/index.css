@@ -1,0 +1,14 @@
+/* ─── Global Reset ──────────────────────────── */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: sans-serif;
+    background-color: #f4f4f9;
+    color: #1e1e2f;
+}
