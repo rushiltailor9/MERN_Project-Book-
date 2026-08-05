@@ -2,7 +2,6 @@ const BookModel = require('../Modules/Book');
 
 //create POST
 const createBooks = async(req, res) =>{
-    const data = req.body;
     try{
         const model = new BookModel(req.body);
         await model.save();
@@ -12,9 +11,11 @@ const createBooks = async(req, res) =>{
                 success:true
             });
     }catch(error){
+        console.error("Error creating book:", error);
         res.status(500)
             .json({
                 message:"Book Is Not Created",
+                error: error.message,
                 success:false
             });
     }
@@ -23,18 +24,19 @@ const createBooks = async(req, res) =>{
 //Fetch GET
 const fetchBooks = async(req, res) =>{
     try{
-
         const data = await BookModel.find({});
-        res.status(201)
+        res.status(200)
             .json({
                 message:"Book Is Fetch",
                 success:true,
                 data
             });
     }catch(error){
+        console.error("Error fetching books:", error);
         res.status(500)
             .json({
                 message:"Book Is Not Fetch",
+                error: error.message,
                 success:false
             });
     }
@@ -47,15 +49,17 @@ const updateBookById = async(req, res) =>{
         const body = req.body;
         const obj = {$set: {... body}};
         await BookModel.findByIdAndUpdate( id, obj );
-        res.status(201)
+        res.status(200)
             .json({
                 message:"Book Is Updated",
                 success:true
             });
     }catch(error){
+        console.error("Error updating book:", error);
         res.status(500)
             .json({
                 message:"Book Is Not Updated",
+                error: error.message,
                 success:false
             });
     }
@@ -66,15 +70,17 @@ const deleteBookById = async(req, res) =>{
     try{
         const id = req.params.id;
         await BookModel.findByIdAndDelete(id);
-        res.status(201)
+        res.status(200)
             .json({
                 message:"Book Is Deleted",
                 success:true
             });
     }catch(error){
+        console.error("Error deleting book:", error);
         res.status(500)
             .json({
                 message:"Book Is Not Deleted",
+                error: error.message,
                 success:false
             });
     }

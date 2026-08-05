@@ -9,7 +9,7 @@ const Navbar = ({ isLogin, loggedInUser }) => {
         <nav className="navbar">
             <div className="navbar-logo">
                 <Link to="/">
-                    <span className="logo-text">BookShop</span>
+                    <span className="logo-text">E-Book</span>
                 </Link>
             </div>
 
@@ -18,7 +18,7 @@ const Navbar = ({ isLogin, loggedInUser }) => {
                     <Link to="/">Home</Link>
                 </li>
                 <li>
-                    <Link to="/books-upload">Books Upload</Link>
+                    <Link to="/books-upload">Books_Upload</Link>
                 </li>
             </ul>
 

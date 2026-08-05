@@ -1,4 +1,3 @@
-
 const Home = () => {
   return (
     <div style={{ textAlign: "center", padding: "40px" }}>
