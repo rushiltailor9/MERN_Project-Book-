@@ -32,11 +32,18 @@ const registerUser = async (req, res) =>{
             success:true
         });
     }catch(error){
-        console.log(error);
+        console.error("Register Error:", error);
+        if (error.code === 11000) {
+            return res.status(400).json({
+                message: "Email already registered",
+                success: false
+            });
+        }
         res.status(500)
             .json({
                 message: "Internal Server Error",
-                success: false
+                success: false,
+                error: error.message
             });
     }
 }
@@ -79,7 +86,7 @@ const loginUser = async (req, res) =>{
             success:true,
             jwtToken,
             email: user.email,
-            name: user.name
+            name: `${user.firstName} ${user.lastName}`.trim() || user.firstName || user.name || user.email
         });
     }catch(error){
         console.log(error);

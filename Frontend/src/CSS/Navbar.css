@@ -75,3 +75,31 @@
 .auth-icon-btn--primary:hover {
     background-color: #3a3ae0;
 }
+
+.account-icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    text-decoration: none;
+    color: #d1d1e0;
+    border: 1px solid #4f4fff;
+    background-color: transparent;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.account-icon-btn:hover {
+    background-color: #4f4fff;
+    color: #ffffff;
+}
+
+.navbar-user-name {
+    font-weight: 600;
+    color: #ffffff;
+    font-size: 1rem;
+    padding: 6px 12px;
+    background-color: #2a2a40;
+    border-radius: 4px;
+}
