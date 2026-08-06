@@ -6,6 +6,7 @@ const cors = require("cors");
 require("./Modules/db");
 const UserRouter = require("./Routes/UserRouter");
 const BookRouter = require("./Routes/BookRouter");
+const CartRouter = require("./Routes/CartRouter");
 
 const PORT = process.env.PORT || 5000;
 
@@ -21,6 +22,8 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
 app.use('/auth',UserRouter);
 app.use('/book',BookRouter);
+
+app.use('/cart',CartRouter);
 
 app.listen(PORT,()=>{
     console.log(`Server Is Running On Port ${PORT}`);

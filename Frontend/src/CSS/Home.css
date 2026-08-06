@@ -1,0 +1,60 @@
+/* Home.css */
+
+.home-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  text-align: center;
+  background: #f5f7fa;
+  padding: 40px 20px;
+}
+
+.home-title {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.home-text {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.read-books {
+  display: inline-block;
+  padding: 12px 28px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.read-books:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.read-books:active {
+  transform: scale(0.98);
+}
+
+@media (max-width: 768px) {
+  .home-title {
+    font-size: 2rem;
+  }
+
+  .home-text {
+    font-size: 1rem;
+  }
+
+  .read-books {
+    padding: 10px 22px;
+    font-size: 16px;
+  }
+}

@@ -1,0 +1,186 @@
+/* ===========================
+   Books Page
+=========================== */
+
+.books-container {
+  max-width: 1300px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.heading {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #222;
+  margin-bottom: 30px;
+}
+
+/* ===========================
+   Search Box
+=========================== */
+
+.search-container {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto 35px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #777;
+  font-size: 18px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 14px 18px 14px 48px;
+  border: 2px solid #ddd;
+  border-radius: 30px;
+  outline: none;
+  font-size: 16px;
+  transition: .3s;
+}
+
+.search-input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 10px rgba(37,99,235,.25);
+}
+
+.search-input::placeholder {
+  color: #999;
+}
+
+/* ===========================
+   Books Grid
+=========================== */
+
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 30px;
+}
+
+/* ===========================
+   Book Card
+=========================== */
+
+.book-card {
+  background: #fff;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 8px 18px rgba(0,0,0,.12);
+  transition: .3s;
+}
+
+.book-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 25px rgba(0,0,0,.18);
+}
+
+/* ===========================
+   Image
+=========================== */
+
+.book-image {
+  width: 100%;
+  height: 320px;
+  object-fit: contain;
+  background: #f8f8f8;
+  padding: 15px;
+  display: block;
+}
+
+/* ===========================
+   Details
+=========================== */
+
+.book-details {
+  padding: 18px;
+}
+
+.book-details h2 {
+  font-size: 22px;
+  color: #222;
+  margin-bottom: 12px;
+}
+
+.book-details p {
+  margin: 8px 0;
+  color: #555;
+  font-size: 15px;
+}
+
+.book-details strong {
+  color: #000;
+}
+
+/* ===========================
+   Buttons
+=========================== */
+
+.book-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.buy-btn,
+.cart-btn {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  transition: .3s;
+}
+
+.buy-btn {
+  background: #28a745;
+}
+
+.buy-btn:hover {
+  background: #218838;
+}
+
+.cart-btn {
+  background: #ff9800;
+}
+
+.cart-btn:hover {
+  background: #f57c00;
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media(max-width:768px){
+
+.heading{
+    font-size:2rem;
+}
+
+.book-grid{
+    grid-template-columns:1fr;
+}
+
+.book-image{
+    height:280px;
+}
+
+.book-buttons{
+    flex-direction:column;
+}
+
+.buy-btn,
+.cart-btn{
+    width:100%;
+}
+}

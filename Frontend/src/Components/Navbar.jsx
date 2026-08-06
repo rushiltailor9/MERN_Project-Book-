@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import "../CSS/Navbar.css";
+import { FaShoppingCart } from "react-icons/fa";
+import logo from "../assets/mainlogo.png";
 
 const Navbar = ({ isLogin, loggedInUser }) => {
     const rawName = loggedInUser || localStorage.getItem("name") || "";
@@ -9,7 +11,7 @@ const Navbar = ({ isLogin, loggedInUser }) => {
         <nav className="navbar">
             <div className="navbar-logo">
                 <Link to="/">
-                    <span className="logo-text">E-Book</span>
+                    <span className="logo-text"><img src={logo} className="logo"/>ReadEasy</span>
                 </Link>
             </div>
 
@@ -18,11 +20,17 @@ const Navbar = ({ isLogin, loggedInUser }) => {
                     <Link to="/">Home</Link>
                 </li>
                 <li>
+                    <Link to="/books">Books</Link>
+                </li>
+                <li>
                     <Link to="/books-upload">Books_Upload</Link>
                 </li>
             </ul>
 
             <div className="navbar-auth">
+                <Link to="/cart"  className="cart-link">
+                            <FaShoppingCart className="cart-icon"/>
+                </Link>
                 <Link to="/account" className="account-icon-btn" title="Account">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -40,6 +48,7 @@ const Navbar = ({ isLogin, loggedInUser }) => {
                         <circle cx="12" cy="7" r="4"></circle>
                     </svg>
                 </Link>
+                
 
                 {isLogin && user ? (
                     <span className="navbar-user-name">{user}</span>
@@ -52,6 +61,7 @@ const Navbar = ({ isLogin, loggedInUser }) => {
                         <Link to="/register" className="auth-icon-btn auth-icon-btn--primary" title="Sign Up">
                             Signup
                         </Link>
+
                     </>
                 )}
             </div>

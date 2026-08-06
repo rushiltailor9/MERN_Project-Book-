@@ -1,0 +1,18 @@
+-------------------Book API---------------------------
+POST ----> "http://localhost:5000/book" ----> Add Data
+GET  ----> "http://localhost:5000/book" ----> Fetch Data
+PUT  ----> "http://localhost:5000/book/:id"-> Update Data By id
+DELETE---> "http://localhost:5000/book/:id"-> Delete Data By id
+
+---------------------Login-SingUp-----------------------
+POST ---->"http://localhost:5000/auth/register"-->register
+POST ---->"http://localhost:5000/auth/login"----->login
+
+-------------------------Cart---------------------------
+POST ---->"http://localhost:5000/cart/add"---->addToCart
+GET  ---->"http://localhost:5000/cart"    ---->getCart
+PUT  ---->"http://localhost:5000/cart/update/:id"---->update cart quantity
+DELETE--->"http://localhost:5000/cart/update/:id"---->Delete cart item id
+DELETE--->"http://localhost:5000/cart/update"-------->Clear Cart
+
+

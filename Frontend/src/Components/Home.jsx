@@ -1,10 +1,17 @@
+import { Link } from "react-router-dom";
+import "../CSS/Home.css";
+
 const Home = () => {
   return (
-    <div style={{ textAlign: "center", padding: "40px" }}>
-      <h2>Welcome to the E-Book Platform</h2>
-      <p>Read and upload books</p>
+    <div className="home-container">
+      <h2 className="home-title">Welcome to the E-Book Platform</h2>
+      <p className="home-text">Read and Upload Books</p>
+
+      <Link to="/books" className="read-books">
+        Read Books
+      </Link>
     </div>
   );
 };
 
-export default Home
+export default Home;
