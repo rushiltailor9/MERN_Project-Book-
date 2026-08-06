@@ -90,7 +90,6 @@ const Books = () => {
                 <strong>Price:</strong> ₹{book.price}
               </p>
               <div className="book-buttons">
-                <button className="buy-btn">Buy</button>
                 <button className="cart-btn" onClick={()=>handleAddToCart(book)}>Add To Cart</button>
               </div>
             </div>

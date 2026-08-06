@@ -84,6 +84,9 @@ const Cart = () => {
                 <button className="remove-btn" onClick={() => handleRemove(item._id)}>
                   Remove
                 </button>
+                <button className="btn-buy">
+                    Process To CheckOut
+                </button>
               </div>
             </div>
           ))}
