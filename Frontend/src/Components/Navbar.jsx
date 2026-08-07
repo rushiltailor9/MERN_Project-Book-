@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "../CSS/Navbar.css";
 import { FaShoppingCart } from "react-icons/fa";
-import logo from "../assets/mainlogo.png";
+
 
 const Navbar = ({ isLogin, loggedInUser }) => {
     const rawName = loggedInUser || localStorage.getItem("name") || "";
@@ -27,6 +27,9 @@ const Navbar = ({ isLogin, loggedInUser }) => {
                 </li>
                 <li>
                     <Link to="/contact">Contact-Us</Link>
+                </li>
+                <li>
+                    <Link to="/about">About-Us</Link>
                 </li>
                 <li>
                     <Link to="/feedback">Feedback</Link>

@@ -14,6 +14,7 @@ import Footer from "./Components/Footer";
 import Cart from "./Components/Cart";
 import Contact from "./Components/Contact-Us";
 import Feedback from "./Components/Feedback";
+import AboutUs from "./Components/About-Us";
 
 function App() {
     const [isLogin, setIsLogin] = useState(() => Boolean(localStorage.getItem("token")));
@@ -37,6 +38,7 @@ function App() {
                 <Route path="/cart" element={protectedRoutes({element:<Cart setIsLogin={setIsLogin} setLoggedInUser={setLoggedInUser}/>})}/>
                 <Route path="/contact" element={protectedRoutes({ element: <Contact loggedInUser={loggedInUser} /> })}/>
                 <Route path="/feedback" element={protectedRoutes({ element: <Feedback loggedInUser={loggedInUser} /> })}/>
+                <Route path="/about" element={<AboutUs/>}/>
             </Routes>
             <Footer/>
         </>
