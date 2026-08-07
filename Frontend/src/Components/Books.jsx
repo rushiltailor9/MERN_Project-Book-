@@ -3,7 +3,7 @@ import { getBooks } from "../API/bookApi";
 import "../CSS/Books.css";
 import { FaSearch } from "react-icons/fa";
 import { addToCart } from "../API/cartApi";
-import { IoBag } from "react-icons/io5";
+import { BsBag } from "react-icons/bs";
 
 const Books = () => {
   const [books,setBooks] = useState([]);
@@ -94,7 +94,7 @@ const Books = () => {
                 <strong>Uploaded By:</strong> <span className="uploader-name">{book.uploadedBy || "Guest"}</span>
               </p>
               <div className="book-buttons">
-                <button className="cart-btn" onClick={()=>handleAddToCart(book)}>Add To Cart   <IoBag/></button>
+                <button className="cart-btn" onClick={()=>handleAddToCart(book)}>Add To Cart   <BsBag/></button>
               </div>
             </div>
           </div>
