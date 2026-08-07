@@ -10,7 +10,11 @@
   background: #f5f7fa;
   padding: 40px 20px;
 }
-
+.readEasy{
+  color: #4f46e5;
+  font-weight: 900;
+  font-size: 50px;
+}
 .home-title {
   font-size: 2.5rem;
   color: #333;

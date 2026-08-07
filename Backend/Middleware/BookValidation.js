@@ -6,7 +6,8 @@ const bookValidation = (req, res, next) =>{
             authorName: Joi.string().min(1).max(100).required(),
             price: Joi.number().positive().required(),
             bookImg: Joi.string().required(),
-            language:Joi.string().min(1).max(100).required()
+            language:Joi.string().min(1).max(100).required(),
+            uploadedBy: Joi.string().min(1).max(100).optional()
         });
         const { error } = schema.validate(req.body);
         if (error) {

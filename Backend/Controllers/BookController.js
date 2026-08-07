@@ -47,7 +47,14 @@ const updateBookById = async(req, res) =>{
     try{
         const id = req.params.id;
         const body = req.body;
-        const obj = {$set: {... body}};
+        const existingBook = await BookModel.findById(id);
+        const updateData = { ...body };
+
+        if (!updateData.uploadedBy && existingBook?.uploadedBy) {
+            updateData.uploadedBy = existingBook.uploadedBy;
+        }
+
+        const obj = {$set: updateData};
         await BookModel.findByIdAndUpdate( id, obj );
         res.status(200)
             .json({

@@ -21,6 +21,11 @@ const bookSchema = new mongoose.Schema({
     language:{
         type:String,
         required:true
+    },
+    uploadedBy:{
+        type:String,
+        required:true,
+        default:"Guest"
     }
 });
 

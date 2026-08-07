@@ -25,6 +25,12 @@ const Navbar = ({ isLogin, loggedInUser }) => {
                 <li>
                     <Link to="/books-upload">Books_Upload</Link>
                 </li>
+                <li>
+                    <Link to="/contact">Contact-Us</Link>
+                </li>
+                <li>
+                    <Link to="/feedback">Feedback</Link>
+                </li>
             </ul>
 
             <div className="navbar-auth">

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
-import { getBooks } from "../api";
+import { getBooks } from "../API/bookApi";
 import "../CSS/Books.css";
 import { FaSearch } from "react-icons/fa";
-import { addToCart } from "../cartApi";
+import { addToCart } from "../API/cartApi";
+import { IoBag } from "react-icons/io5";
 
 const Books = () => {
   const [books,setBooks] = useState([]);
@@ -89,8 +90,11 @@ const Books = () => {
               <p>
                 <strong>Price:</strong> ₹{book.price}
               </p>
+              <p>
+                <strong>Uploaded By:</strong> <span className="uploader-name">{book.uploadedBy || "Guest"}</span>
+              </p>
               <div className="book-buttons">
-                <button className="cart-btn" onClick={()=>handleAddToCart(book)}>Add To Cart</button>
+                <button className="cart-btn" onClick={()=>handleAddToCart(book)}>Add To Cart   <IoBag/></button>
               </div>
             </div>
           </div>

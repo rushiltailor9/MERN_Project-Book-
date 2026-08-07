@@ -5,11 +5,28 @@ import {
     addBook,
     updateBook,
     deleteBook
-} from "../api";
+} from "../API/bookApi";
 import { handleSuccess, handleError } from "../utils";
 
-const BookUpload = () => {
+const getDisplayName = (loggedInUser = "") => {
+    if (loggedInUser) return loggedInUser;
+
+    const token = localStorage.getItem("token");
+    if (!token) return "Guest";
+
+    try {
+        const payload = token.split(".")[1];
+        const decoded = JSON.parse(atob(payload));
+        return decoded.name || decoded.firstName || decoded.email || "Guest";
+    } catch (error) {
+        console.log(error);
+        return "Guest";
+    }
+};
+
+const BookUpload = ({ loggedInUser = "" }) => {
     const [books, setBooks] = useState([]);
+    const [uploadedBy] = useState(() => getDisplayName(loggedInUser));
     const [book, setBook] = useState({
         bookName: "",
         authorName: "",
@@ -91,7 +108,8 @@ const BookUpload = () => {
                 authorName: book.authorName,
                 price: Number(book.price),
                 bookImg: book.bookImg || "",
-                language: book.language
+                language: book.language,
+                uploadedBy: uploadedBy
             };
 
             if (editId) {
@@ -121,6 +139,7 @@ const BookUpload = () => {
         <div className="upload-page">
             <form className="upload-form" onSubmit={handleSubmit}>
                 <h2>{editId ? "Edit Book Details" : "Upload a Book"}</h2>
+                <p className="upload-user">Uploading as: <span>{uploadedBy}</span></p>
 
                 <div className="input-group">
                     <label>Book Name</label>
@@ -194,7 +213,8 @@ const BookUpload = () => {
                                 <th>Author Name</th>
                                 <th>Price</th>
                                 <th>Cover</th>
-                                <th>Language</th>    
+                                <th>Language</th>
+                                <th>Uploaded By</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -214,6 +234,7 @@ const BookUpload = () => {
                                                 )}
                                             </td>
                                             <td><span className="lang-badge">{item.language}</span></td>
+                                            <td><span className="uploader-badge">{item.uploadedBy || "Guest"}</span></td>
 
                                             <td className="action-cells">
                                                 <button className="btn-edit" onClick={() => handleEdit(item)}>

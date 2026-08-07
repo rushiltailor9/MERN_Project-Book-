@@ -30,8 +30,20 @@
 .upload-form h2 {
     text-align: center;
     color: #2c3e50;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
     font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.upload-user {
+    text-align: center;
+    margin: 0 0 8px;
+    color: #4b5563;
+    font-size: 0.95rem;
+}
+
+.upload-user span {
+    color: #111827;
     font-weight: 700;
 }
 
@@ -163,6 +175,15 @@
 .lang-badge {
     background-color: #eff6ff;
     color: #1d4ed8;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.uploader-badge {
+    background-color: #fef3c7;
+    color: #92400e;
     padding: 4px 10px;
     border-radius: 12px;
     font-weight: 600;

@@ -15,4 +15,17 @@ PUT  ---->"http://localhost:5000/cart/update/:id"---->update cart quantity
 DELETE--->"http://localhost:5000/cart/update/:id"---->Delete cart item id
 DELETE--->"http://localhost:5000/cart/update"-------->Clear Cart
 
+-------------------------Contact---------------------------
+
+POST ---->"http://localhost:5000/contact"---->Add contact
+GET ---->"http://localhost:5000/contact"---->get Contact
+
+
+
+-------------------------Feedback---------------------------
+
+POST ---->"http://localhost:5000/feedback"---->Add contact
+GET ---->"http://localhost:5000/feedback"---->get Contact
+
+
 
