@@ -5,31 +5,33 @@
     gap: 30px;
     padding: 30px 20px;
     min-height: 90vh;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background: #1d1710;
+    color: #f8f4ef;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* Form Styling */
 .upload-form {
-    background: #ffffff;
+    background: #2f2720;
     padding: 30px 35px;
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.32);
     width: 100%;
     max-width: 480px;
     display: flex;
     flex-direction: column;
     gap: 16px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .upload-form:hover {
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.36);
 }
 
 .upload-form h2 {
     text-align: center;
-    color: #2c3e50;
+    color: #f8f4ef;
     margin-bottom: 4px;
     font-size: 1.6rem;
     font-weight: 700;
@@ -38,12 +40,12 @@
 .upload-user {
     text-align: center;
     margin: 0 0 8px;
-    color: #4b5563;
+    color: #d3b58d;
     font-size: 0.95rem;
 }
 
 .upload-user span {
-    color: #111827;
+    color: #f1c27d;
     font-weight: 700;
 }
 
@@ -56,70 +58,75 @@
 .input-group label {
     font-size: 0.9rem;
     font-weight: 600;
-    color: #4a5568;
+    color: #c7b298;
 }
 
 .upload-form input[type="text"],
 .upload-form input[type="number"],
 .upload-form input[type="file"] {
     padding: 10px 14px;
-    border: 1.5px solid #cbd5e0;
+    border: 1.5px solid #4c3f34;
     border-radius: 8px;
     font-size: 0.95rem;
     transition: border-color 0.2s, box-shadow 0.2s;
-    background-color: #f8fafc;
+    background-color: #2b231c;
+    color: #f4ebdc;
+}
+
+.upload-form input::placeholder {
+    color: #b19b82;
 }
 
 .upload-form input:focus {
     outline: none;
-    border-color: #4f46e5;
-    background-color: #ffffff;
-    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+    border-color: #d29f68;
+    box-shadow: 0 0 0 3px rgba(210, 159, 104, 0.2);
 }
 
 .submit-btn {
     margin-top: 10px;
     padding: 12px;
-    background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%);
-    color: #ffffff;
+    background: #d29f68;
+    color: #2b1f14;
     border: none;
     border-radius: 8px;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+    box-shadow: 0 8px 18px rgba(210, 159, 104, 0.24);
     transition: all 0.2s ease;
 }
 
 .submit-btn:hover {
-    background: linear-gradient(135deg, #4338ca 0%, #312e81 100%);
+    background: #b6864a;
     transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(79, 70, 229, 0.4);
+    box-shadow: 0 10px 22px rgba(210, 159, 104, 0.32);
 }
 
 /* Table Section Styling */
 .table-section {
     width: 100%;
     max-width: 950px;
-    background: #ffffff;
+    background: #2f2720;
     padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.32);
+    border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .table-section h2 {
-    color: #1e293b;
+    color: #f8f4ef;
     margin-bottom: 18px;
     font-size: 1.4rem;
     font-weight: 700;
-    border-left: 5px solid #4f46e5;
+    border-left: 5px solid #d29f68;
     padding-left: 12px;
 }
 
 .table-wrapper {
     overflow-x: auto;
-    border-radius: 8px;
-    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .books-table {
@@ -130,8 +137,8 @@
 }
 
 .books-table thead tr {
-    background: linear-gradient(90deg, #1e293b 0%, #334155 100%);
-    color: #ffffff;
+    background: #3b2f24;
+    color: #f8f4ef;
 }
 
 .books-table th {
@@ -140,12 +147,13 @@
     text-transform: uppercase;
     font-size: 0.82rem;
     letter-spacing: 0.5px;
+    color: #d9c4a9;
 }
 
 .books-table td {
     padding: 12px 16px;
-    border-bottom: 1px solid #f1f5f9;
-    color: #334155;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    color: #d3c7b7;
     vertical-align: middle;
 }
 
@@ -154,27 +162,27 @@
 }
 
 .books-table tbody tr:hover {
-    background-color: #f8fafc;
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
 .book-name-cell {
     font-weight: 600;
-    color: #0f172a;
+    color: #f8f4ef;
 }
 
 .price-badge {
-    background-color: #ecfdf5;
-    color: #047857;
+    background-color: #f4e2b0;
+    color: #6f481d;
     padding: 4px 10px;
     border-radius: 20px;
     font-weight: 700;
     font-size: 0.9rem;
-    border: 1px solid #a7f3d0;
+    border: 1px solid #d6b377;
 }
 
 .lang-badge {
-    background-color: #eff6ff;
-    color: #1d4ed8;
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #e6d4b2;
     padding: 4px 10px;
     border-radius: 12px;
     font-weight: 600;
@@ -182,8 +190,8 @@
 }
 
 .uploader-badge {
-    background-color: #fef3c7;
-    color: #92400e;
+    background-color: rgba(242, 194, 120, 0.18);
+    color: #f1c27d;
     padding: 4px 10px;
     border-radius: 12px;
     font-weight: 600;
@@ -199,7 +207,7 @@
 }
 
 .no-img {
-    color: #94a3b8;
+    color: #a38d79;
     font-size: 0.85rem;
     font-style: italic;
 }
@@ -212,8 +220,8 @@
 
 .btn-edit {
     padding: 6px 14px;
-    background-color: #3b82f6;
-    color: #ffffff;
+    background-color: #d29f68;
+    color: #2b1f14;
     border: none;
     border-radius: 6px;
     font-weight: 600;
@@ -223,14 +231,14 @@
 }
 
 .btn-edit:hover {
-    background-color: #2563eb;
+    background-color: #b6864a;
     transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.4);
+    box-shadow: 0 2px 8px rgba(210, 159, 104, 0.3);
 }
 
 .btn-delete {
     padding: 6px 14px;
-    background-color: #ef4444;
+    background-color: #c24f38;
     color: #ffffff;
     border: none;
     border-radius: 6px;
@@ -241,14 +249,14 @@
 }
 
 .btn-delete:hover {
-    background-color: #dc2626;
+    background-color: #a23a2b;
     transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(239, 68, 68, 0.4);
+    box-shadow: 0 2px 8px rgba(194, 79, 56, 0.3);
 }
 
 .empty-row {
     text-align: center;
     padding: 24px;
-    color: #64748b;
+    color: #9e8e79;
     font-style: italic;
 }

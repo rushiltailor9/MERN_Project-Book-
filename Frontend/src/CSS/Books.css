@@ -6,12 +6,13 @@
   max-width: 1300px;
   margin: 40px auto;
   padding: 20px;
+  color: #f8f4ef;
 }
 
 .heading {
   text-align: center;
   font-size: 2.5rem;
-  color: #222;
+  color: #f8f4ef;
   margin-bottom: 30px;
 }
 
@@ -31,27 +32,29 @@
   left: 18px;
   top: 50%;
   transform: translateY(-50%);
-  color: #777;
+  color: #c9b69d;
   font-size: 18px;
 }
 
 .search-input {
   width: 100%;
   padding: 14px 18px 14px 48px;
-  border: 2px solid #ddd;
+  border: 2px solid #4b3e33;
   border-radius: 30px;
   outline: none;
   font-size: 16px;
   transition: .3s;
+  background: #2f2620;
+  color: #f5eee1;
 }
 
 .search-input:focus {
-  border-color: #2563eb;
-  box-shadow: 0 0 10px rgba(37,99,235,.25);
+  border-color: #d29f68;
+  box-shadow: 0 0 10px rgba(210, 159, 104, .25);
 }
 
 .search-input::placeholder {
-  color: #999;
+  color: #b69c80;
 }
 
 /* ===========================
@@ -69,16 +72,17 @@
 =========================== */
 
 .book-card {
-  background: #fff;
-  border-radius: 15px;
+  background: #2a1f17;
+  border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 8px 18px rgba(0,0,0,.12);
+  box-shadow: 0 10px 30px rgba(0,0,0,.28);
   transition: .3s;
+  border: 1px solid rgba(255,255,255,.08);
 }
 
 .book-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 12px 25px rgba(0,0,0,.18);
+  box-shadow: 0 16px 35px rgba(0,0,0,.32);
 }
 
 /* ===========================
@@ -89,7 +93,7 @@
   width: 100%;
   height: 320px;
   object-fit: contain;
-  background: #f8f8f8;
+  background: #34291f;
   padding: 15px;
   display: block;
 }
@@ -104,22 +108,22 @@
 
 .book-details h2 {
   font-size: 22px;
-  color: #222;
+  color: #f8f4ef;
   margin-bottom: 12px;
 }
 
 .book-details p {
   margin: 8px 0;
-  color: #555;
+  color: #d3c4ae;
   font-size: 15px;
 }
 
 .book-details strong {
-  color: #000;
+  color: #f8f4ef;
 }
 
 .uploader-name {
-  color: #4f46e5;
+  color: #f1c27d;
   font-weight: 600;
 }
 
@@ -140,26 +144,26 @@
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  color: white;
+  color: #2a1f14;
   font-size: 15px;
   font-weight: bold;
   transition: .3s;
 }
 
 .buy-btn {
-  background: #28a745;
+  background: #d29f68;
 }
 
 .buy-btn:hover {
-  background: #218838;
+  background: #b6864a;
 }
 
 .cart-btn {
-  background:  #4f46e5;
+  background: #f1c27d;
 }
 
 .cart-btn:hover {
-  background:  #3d34ec;
+  background: #c39652;
 }
 
 /* ===========================

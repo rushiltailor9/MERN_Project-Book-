@@ -139,7 +139,7 @@ const BookUpload = ({ loggedInUser = "" }) => {
         <div className="upload-page">
             <form className="upload-form" onSubmit={handleSubmit}>
                 <h2>{editId ? "Edit Book Details" : "Upload a Book"}</h2>
-                <p className="upload-user">Uploading as: <span>{uploadedBy}</span></p>
+                <p className="upload-user">Uploading As: <span>{uploadedBy}</span></p>
 
                 <div className="input-group">
                     <label>Book Name</label>

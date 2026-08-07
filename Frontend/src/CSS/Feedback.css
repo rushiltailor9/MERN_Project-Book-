@@ -4,21 +4,23 @@
     display:flex;
     justify-content:center;
     align-items:center;
-    background:#f5f5f5;
+    background:#1d1710;
     padding:40px 20px;
 }
 
 .feedback-form{
     width:450px;
-    background:white;
+    background:#2f2720;
     padding:30px;
-    border-radius:10px;
-    box-shadow:0 5px 20px rgba(0,0,0,.2);
+    border-radius:16px;
+    box-shadow:0 18px 45px rgba(0,0,0,.35);
+    border:1px solid rgba(255,255,255,0.08);
 }
 
 .feedback-form h2{
     text-align:center;
     margin-bottom:20px;
+    color:#f8f4ef;
 }
 
 .feedback-form input,
@@ -27,10 +29,17 @@
     width:100%;
     padding:12px;
     margin:10px 0;
-    border:1px solid #ccc;
+    border:1px solid #4c3f34;
     border-radius:6px;
     font-size:16px;
     outline:none;
+    background:#2b231c;
+    color:#f8f4ef;
+}
+
+.feedback-form input::placeholder,
+.feedback-form textarea::placeholder {
+    color:#b8a687;
 }
 
 .feedback-form textarea{
@@ -40,14 +49,15 @@
 .feedback-form button{
     width:100%;
     padding:12px;
-    background:#4f46e5;
-    color:white;
+    background:#d29f68;
+    color:#2a1f14;
     border:none;
     border-radius:6px;
     cursor:pointer;
     font-size:17px;
+    transition: background-color 0.2s ease;
 }
 
 .feedback-form button:hover{
-    background:#084fc7;
+    background:#b6864a;
 }

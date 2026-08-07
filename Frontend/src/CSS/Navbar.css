@@ -3,9 +3,9 @@
     align-items: center;
     justify-content: space-between;
     padding: 16px 32px;
-    background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
-    color: #1f2937;
-    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    background: linear-gradient(135deg, #2f261f 0%, #1d1610 100%);
+    color: #f8f4ef;
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.28);
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -16,7 +16,7 @@
     align-items: center;
     gap: 10px;
     text-decoration: none;
-    color: #1f2937;
+    color: #f8f4ef;
     font-size: 1.15rem;
     font-weight: 700;
     letter-spacing: 0.3px;
@@ -26,8 +26,8 @@
 }
 
 .navbar-logo a:hover {
-    background: rgba(79, 70, 229, 0.08);
-    color: #4338ca;
+    background: rgba(242, 201, 127, 0.18);
+    color: #f6e0b2;
 }
 
 .logo {
@@ -43,7 +43,7 @@
 .logo-text {
     display: flex;
     align-items: center;
-    color: #4f46e5;
+    color: #f1c27d;
     gap: 8px;
     font-weight: 800;
     font-size: 1.05rem;
@@ -58,9 +58,8 @@
 }
 
 .navbar-links a {
-    color: #4b5563;
+    color: #e9d7c1;
     text-decoration: none;
-    color: #4f46e5;
     font-size: 0.98rem;
     padding: 8px 12px;
     border-radius: 999px;
@@ -68,8 +67,8 @@
 }
 
 .navbar-links a:hover {
-    color: #111827;
-    background: rgba(79, 70, 229, 0.08);
+    color: #fff7eb;
+    background: rgba(242, 201, 127, 0.18);
 }
 
 .navbar-auth {
@@ -86,27 +85,27 @@
     height: 40px;
     border-radius: 999px;
     text-decoration: none;
-    color: #4f46e5;
-    border: 1px solid #c7d2fe;
-    background-color: #ffffff;
+    color: #e8cfac;
+    border: 1px solid rgba(232, 207, 172, 0.38);
+    background-color: rgba(255, 255, 255, 0.08);
     transition: all 0.2s ease;
     padding: 0 14px;
 }
 
 .auth-icon-btn:hover {
-    background-color: #eef2ff;
-    color: #4338ca;
-    border-color: #a5b4fc;
+    background-color: rgba(255, 255, 255, 0.14);
+    color: #fff;
+    border-color: rgba(242, 201, 127, 0.6);
 }
 
 .auth-icon-btn--primary {
-    background-color: #4f46e5;
-    color: #ffffff;
-    border-color: #4f46e5;
+    background-color: #d29f69;
+    color: #2a1d11;
+    border-color: #d29f69;
 }
 
 .auth-icon-btn--primary:hover {
-    background-color: #4338ca;
+    background-color: #b6864a;
 }
 
 .account-icon-btn {
@@ -117,24 +116,24 @@
     height: 42px;
     border-radius: 50%;
     text-decoration: none;
-    color: #4f46e5;
-    border: 1px solid #c7d2fe;
-    background-color: #ffffff;
+    color: #f1c27d;
+    border: 1px solid rgba(242, 201, 127, 0.38);
+    background-color: rgba(255, 255, 255, 0.08);
     transition: all 0.2s ease;
 }
 
 .account-icon-btn:hover {
-    background-color: #eef2ff;
-    color: #4338ca;
-    border-color: #a5b4fc;
+    background-color: rgba(255, 255, 255, 0.14);
+    color: #fff;
+    border-color: rgba(242, 201, 127, 0.6);
 }
 
 .navbar-user-name {
     font-weight: 600;
-    color: #4f46e5;
+    color: #f8f4ef;
     font-size: 0.95rem;
     padding: 7px 12px;
-    background: #f3f4f6;
+    background: rgba(255, 255, 255, 0.08);
     border-radius: 999px;
 }
 

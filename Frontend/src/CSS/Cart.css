@@ -4,24 +4,27 @@
   align-items: center;
   gap: 8px;
   text-decoration: none;
-  color: #3730a3;
+  color: #f8f4ef;
   font-size: 18px;
   font-weight: 600;
   padding: 8px 15px;
   border-radius: 30px;
   transition: all 0.3s ease;
   position: relative;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
 .cart-link:hover {
-  background: #f4f4f4;
-  color: #2563eb;
+  background: rgba(210, 159, 104, 0.18);
+  color: #fff;
 }
 
 /* Cart Icon */
 .cart-icon {
   font-size: 24px;
   transition: transform 0.3s ease;
+  color: #f1c27d;
 }
 
 .cart-link:hover .cart-icon {
@@ -35,8 +38,8 @@
 
 /* Cart Count Badge */
 .cart-count {
-  background: #ff3b30;
-  color: white;
+  background: #d29f68;
+  color: #2a1f14;
   font-size: 12px;
   font-weight: bold;
   min-width: 20px;
@@ -53,6 +56,7 @@
   max-width: 900px;
   margin: 40px auto;
   padding: 24px;
+  color: #f8f4ef;
 }
 
 .cart-header {
@@ -65,13 +69,13 @@
 .cart-title {
   font-size: 2rem;
   margin: 0;
-  color: #1f2937;
+  color: #f8f4ef;
 }
 
 .cart-total {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #2563eb;
+  color: #f1c27d;
 }
 
 .cart-list {
@@ -83,11 +87,11 @@
   display: flex;
   align-items: center;
   gap: 18px;
-  background: #fff;
-  border: 1px solid #e5e7eb;
+  background: #2f2720;
+  border: 1px solid rgba(255,255,255,0.08);
   border-radius: 16px;
   padding: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.28);
 }
 
 .cart-item-image {
@@ -99,21 +103,21 @@
 
 .cart-item-details h3 {
   margin: 0 0 6px;
-  color: #111827;
+  color: #f8f4ef;
 }
 
 .cart-item-details p {
   margin: 4px 0;
-  color: #4b5563;
+  color: #d3c4ae;
 }
 
 .cart-empty {
   padding: 20px;
   text-align: center;
-  background: #f9fafb;
-  border: 1px dashed #d1d5db;
+  background: #2a1f17;
+  border: 1px dashed #5c4d3f;
   border-radius: 12px;
-  color: #6b7280;
+  color: #c9b69d;
 }
 
 .cart-actions {
@@ -124,22 +128,24 @@
 }
 
 .qty-btn {
-  border: 1px solid #d1d5db;
-  background: #fff;
+  border: 1px solid #4c3f33;
+  background: #2a1f17;
   border-radius: 8px;
   width: 30px;
   height: 30px;
   cursor: pointer;
+  color: #f8f4ef;
 }
 
 .qty-value {
   min-width: 24px;
   text-align: center;
   font-weight: 600;
+  color: #f8f4ef;
 }
 
 .remove-btn {
-  background: #ef4444;
+  background: #c24f38;
   color: white;
   border: none;
   border-radius: 8px;
@@ -147,9 +153,8 @@
   cursor: pointer;
 }
 
-
 .remove-btn:hover {
-  background: #dc2626;
+  background: #a23a2b;
 }
 
 /* Responsive */

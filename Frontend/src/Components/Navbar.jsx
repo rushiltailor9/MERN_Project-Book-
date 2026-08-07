@@ -11,7 +11,7 @@ const Navbar = ({ isLogin, loggedInUser }) => {
         <nav className="navbar">
             <div className="navbar-logo">
                 <Link to="/">
-                    <span className="logo-text"><img src={logo} className="logo"/>ReadEasy</span>
+                    <span className="logo-text">ReadEasy</span>
                 </Link>
             </div>
 
