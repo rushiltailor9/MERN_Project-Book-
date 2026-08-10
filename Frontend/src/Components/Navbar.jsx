@@ -23,9 +23,6 @@ const Navbar = ({ isLogin, loggedInUser }) => {
                     <Link to="/books">Books</Link>
                 </li>
                 <li>
-                    <Link to="/books-upload">Books_Upload</Link>
-                </li>
-                <li>
                     <Link to="/contact">Contact-Us</Link>
                 </li>
                 <li>

@@ -1,0 +1,340 @@
+/* =========================
+   ADMIN LAYOUT
+========================= */
+
+.admin-container {
+    display: flex;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #111111 0%, #2c2c2c 100%);
+    color: #e5e7eb;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.admin-sidebar {
+    width: 260px;
+    min-height: 100vh;
+    background: linear-gradient(180deg, #101010 0%, #2a2a2a 100%);
+    color: #e5e7eb;
+    display: flex;
+    flex-direction: column;
+    padding: 24px 18px;
+    box-shadow: 4px 0 22px rgba(0, 0, 0, 0.3);
+}
+
+.admin-logo {
+    font-size: 1.45rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 10px 0 28px;
+    color: #f8fafc;
+}
+
+.admin-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.admin-nav a {
+    text-decoration: none;
+    color: #cbd5e1;
+    padding: 12px 14px;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.admin-nav a:hover,
+.admin-nav a.active {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    transform: translateX(2px);
+}
+
+.admin-logout {
+    margin-top: auto;
+    padding: 12px 14px;
+    border: none;
+    border-radius: 10px;
+    background: #ffffff;
+    color: #111111;
+    cursor: pointer;
+    font-weight: 700;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+}
+
+.admin-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: #16181d;
+}
+
+.admin-header {
+    height: 78px;
+    background: rgba(16, 16, 16, 0.96);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+.admin-header h2 {
+    margin: 0;
+    font-size: 1.35rem;
+    color: #f8fafc;
+}
+
+.admin-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.admin-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #3f3f46, #111111);
+    color: #f8fafc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+
+.admin-content {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.welcome-text {
+    color: #d1d5db;
+    font-size: 1rem;
+    margin-top: -6px;
+}
+
+.dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+}
+
+.dashboard-card {
+    background: #1f2126;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.dashboard-card h3 {
+    margin: 0 0 8px;
+    color: #cbd5e1;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.dashboard-card h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: #f8fafc;
+}
+
+.dashboard-section {
+    background: #1f2126;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.admin-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-size: 1.2rem;
+    color: #4b5563;
+}
+
+/* =========================
+   BOOK UPLOAD
+========================= */
+
+.upload-page {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 0;
+    background: transparent;
+    color: #374151;
+}
+
+.upload-form,
+.table-section {
+    background: #1f2126;
+    padding: 24px 26px;
+    border-radius: 18px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.upload-form h2,
+.table-section h2 {
+    margin: 0 0 12px;
+    color: #f8fafc;
+    font-size: 1.35rem;
+}
+
+.upload-user {
+    margin: 0 0 14px;
+    color: #6b7280;
+    font-size: 0.95rem;
+}
+
+.upload-user span {
+    color: #f8fafc;
+    font-weight: 700;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    margin-bottom: 7px;
+    font-weight: 600;
+    color: #d1d5db;
+}
+
+.upload-form input[type="text"],
+.upload-form input[type="number"],
+.upload-form input[type="file"] {
+    padding: 11px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    font-size: 0.95rem;
+    background: #121212;
+    color: #f8fafc;
+}
+
+.upload-form input:focus {
+    outline: none;
+    border-color: #111111;
+    box-shadow: 0 0 0 3px rgba(17, 17, 17, 0.12);
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #111111, #303030);
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 8px;
+    box-shadow: 0 8px 18px rgba(245, 158, 11, 0.2);
+}
+
+.submit-btn:hover {
+    transform: translateY(-1px);
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+}
+
+.books-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+.books-table thead tr {
+    background: #f9fafb;
+}
+
+.books-table th,
+.books-table td {
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.books-table th {
+    color: #6b7280;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.books-table tbody tr:hover {
+    background: #fffaf1;
+}
+
+.price-badge,
+.lang-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.price-badge {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.lang-badge {
+    background: #ede9fe;
+    color: #5b21b6;
+}
+
+.book-thumb {
+    width: 52px;
+    height: 52px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+}
+
+.btn-edit,
+.btn-delete {
+    padding: 7px 12px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-edit {
+    background: #e5e7eb;
+    color: #111111;
+}
+
+.btn-delete {
+    background: #f3f4f6;
+    color: #111111;
+}
+
+.empty-row {
+    text-align: center;
+    padding: 20px;
+    color: #6b7280;
+}

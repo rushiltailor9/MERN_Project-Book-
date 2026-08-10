@@ -4,13 +4,13 @@
     display:flex;
     justify-content:center;
     align-items:center;
-    background:#1d1710;
+    background:#0c0f14;
     padding:40px 20px;
 }
 
 .feedback-form{
     width:450px;
-    background:#2f2720;
+    background:rgba(255,255,255,0.04);
     padding:30px;
     border-radius:16px;
     box-shadow:0 18px 45px rgba(0,0,0,.35);
@@ -20,7 +20,7 @@
 .feedback-form h2{
     text-align:center;
     margin-bottom:20px;
-    color:#f8f4ef;
+    color:#f8fafc;
 }
 
 .feedback-form input,
@@ -29,17 +29,17 @@
     width:100%;
     padding:12px;
     margin:10px 0;
-    border:1px solid #4c3f34;
+    border:1px solid #303033;
     border-radius:6px;
     font-size:16px;
     outline:none;
-    background:#2b231c;
-    color:#f8f4ef;
+    background:#111111;
+    color:#e5e7eb;
 }
 
 .feedback-form input::placeholder,
 .feedback-form textarea::placeholder {
-    color:#b8a687;
+    color:#94a3b8;
 }
 
 .feedback-form textarea{
@@ -49,8 +49,8 @@
 .feedback-form button{
     width:100%;
     padding:12px;
-    background:#d29f68;
-    color:#2a1f14;
+    background:#27272a;
+    color:#f8fafc;
     border:none;
     border-radius:6px;
     cursor:pointer;
@@ -59,5 +59,5 @@
 }
 
 .feedback-form button:hover{
-    background:#b6864a;
+    background:#3f3f46;
 }

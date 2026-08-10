@@ -1,9 +1,8 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Navbar from "./Components/Navbar";
 import Login from "./Components/Login";
 import Register from "./Components/Register";
-import BookUpload from "./Components/BookUpload";
 import Account from "./Components/Account";
 import "./App.css";
 import { useState } from "react";
@@ -15,22 +14,26 @@ import Cart from "./Components/Cart";
 import Contact from "./Components/Contact-Us";
 import Feedback from "./Components/Feedback";
 import AboutUs from "./Components/About-Us";
+import ProtectedAdminRoute from "./Components/ProtectedAdminRoute";
+import AdminDashboard from "./Admin/AdminDashboard";
+import BookUpload from "./Admin/BookUpload";
 
 function App() {
     const [isLogin, setIsLogin] = useState(() => Boolean(localStorage.getItem("token")));
     const [loggedInUser, setLoggedInUser] = useState(() => localStorage.getItem("name") || "");
+    const location = useLocation();
+    const isAdminRoute = location.pathname.startsWith("/admin");
 
     const protectedRoutes = ({ element }) => {
         return isLogin ? element : <Navigate to="/login" />;
     }
     return (
         <>
-            <Navbar isLogin={isLogin} loggedInUser={loggedInUser} />
+            {!isAdminRoute && <Navbar isLogin={isLogin} loggedInUser={loggedInUser} />}
             <ToastContainer />
             <RefreshHandler setIsLogin={setIsLogin} setLoggedInUser={setLoggedInUser} />
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/books-upload" element={protectedRoutes({ element: <BookUpload loggedInUser={loggedInUser} /> })} />
                 <Route path="/account" element={protectedRoutes({ element: <Account setIsLogin={setIsLogin} setLoggedInUser={setLoggedInUser} /> })} />
                 <Route path="/books" element={<Books/>}/>
                 <Route path="/login" element={<Login />} />
@@ -39,8 +42,18 @@ function App() {
                 <Route path="/contact" element={protectedRoutes({ element: <Contact loggedInUser={loggedInUser} /> })}/>
                 <Route path="/feedback" element={protectedRoutes({ element: <Feedback loggedInUser={loggedInUser} /> })}/>
                 <Route path="/about" element={<AboutUs/>}/>
+                <Route element={<ProtectedAdminRoute/>}>
+                    <Route 
+                        path="/admin/dashboard"
+                        element={<AdminDashboard/>}
+                    />
+                    <Route 
+                        path="/admin/book"
+                        element={<BookUpload/>}
+                    />
+                </Route>
             </Routes>
-            <Footer/>
+            {!isAdminRoute && <Footer isLogin={isLogin} loggedInUser={loggedInUser} />}
         </>
     );
 }

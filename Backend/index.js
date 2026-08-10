@@ -9,6 +9,7 @@ const BookRouter = require("./Routes/BookRouter");
 const CartRouter = require("./Routes/CartRouter");
 const ContactRouter = require("./Routes/ContactRouter");
 const FeedbackRouter = require("./Routes/FeedbackRouter");
+const AdminRouter = require("./Routes/AdminRouter");
 
 const PORT = process.env.PORT || 5000;
 
@@ -31,6 +32,8 @@ app.use('/cart',CartRouter);
 app.use('/contact',ContactRouter);
 
 app.use('/feedback',FeedbackRouter);
+
+app.use('/admin',AdminRouter);
 
 app.listen(PORT,()=>{
     console.log(`Server Is Running On Port ${PORT}`);

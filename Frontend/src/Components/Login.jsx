@@ -10,6 +10,10 @@ const Login = () => {
     });
     const navigate = useNavigate();
 
+    const isAdminLogin = (email, password) => {
+        return email === "admin@gmail.com" && password === "admin";
+    };
+
 //Get value from inputbox
 const handleChange = (e) =>{
     const { name, value } = e.target; //fetch change value in input
@@ -26,6 +30,16 @@ const handleLogin = async(e) =>{
     if( !email || !password ){ //validation
         return handleError("All Filed is require...");
     }
+    if (isAdminLogin(email, password)) {
+        handleSuccess("Admin login successful");
+        localStorage.setItem("token", "admin-token");
+        localStorage.setItem("name", "Admin");
+        setTimeout(() => {
+            navigate("/admin");
+        }, 1000);
+        return;
+    }
+
     try{
         const url = "http://localhost:5000/auth/login"; //api
         const response = await fetch(url,{ //get api response
@@ -36,14 +50,19 @@ const handleLogin = async(e) =>{
             body: JSON.stringify(loginInfo) //convert body into string
         });
         const result = await response.json(); //bind into JSON
-        const { message, success, jwtToken, name, email, error } = result;
+        const { message, success, jwtToken, name, email, role,error } = result;
         if(success){
             handleSuccess(message); //toast message Success form utils.js
             localStorage.setItem('token',jwtToken);
             localStorage.setItem('name', name || email || "");
+            localStorage.setItem("role",role);
             setTimeout(()=>{
-                navigate("/books-upload"); //navigate to login page
-            }, 1000);
+                if( role === "admin"){
+                    navigate("/admin/dashboard");
+                }else{
+                    navigate("/");
+                }
+            })
         }else{
             const errorMessage = typeof error === 'string' ? error : message || "Registration failed"; //check error
             handleError(errorMessage);

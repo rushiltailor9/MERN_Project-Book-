@@ -3,193 +3,415 @@
 =========================== */
 
 .books-container {
-  max-width: 1300px;
-  margin: 40px auto;
-  padding: 20px;
-  color: #f8f4ef;
+    max-width: 1300px;
+    width: 100%;
+    margin: 40px auto;
+    padding: 20px;
+
+    color: #f8fafc;
+    background: #0c0f14;
+
+    box-sizing: border-box;
 }
 
+
+/* ===========================
+   Heading
+=========================== */
+
 .heading {
-  text-align: center;
-  font-size: 2.5rem;
-  color: #f8f4ef;
-  margin-bottom: 30px;
+    text-align: center;
+
+    font-size: 2.5rem;
+    font-weight: 700;
+
+    color: #f8fafc;
+
+    margin: 0 0 30px;
 }
+
 
 /* ===========================
    Search Box
 =========================== */
 
 .search-container {
-  position: relative;
-  width: 100%;
-  max-width: 500px;
-  margin: 0 auto 35px;
+    position: relative;
+
+    width: 100%;
+    max-width: 500px;
+
+    margin: 0 auto 35px;
 }
+
 
 .search-icon {
-  position: absolute;
-  left: 18px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #c9b69d;
-  font-size: 18px;
+    position: absolute;
+
+    left: 18px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #94a3b8;
+
+    font-size: 18px;
+
+    pointer-events: none;
 }
+
 
 .search-input {
-  width: 100%;
-  padding: 14px 18px 14px 48px;
-  border: 2px solid #4b3e33;
-  border-radius: 30px;
-  outline: none;
-  font-size: 16px;
-  transition: .3s;
-  background: #2f2620;
-  color: #f5eee1;
+    width: 100%;
+    height: 48px;
+
+    padding: 0 18px 0 48px;
+
+    border: 2px solid #303033;
+
+    border-radius: 30px;
+
+    outline: none;
+
+    font-size: 16px;
+
+    transition: 0.3s;
+
+    background: #111111;
+
+    color: #f8fafc;
+
+    box-sizing: border-box;
 }
+
 
 .search-input:focus {
-  border-color: #d29f68;
-  box-shadow: 0 0 10px rgba(210, 159, 104, .25);
+    border-color: #6b7280;
+
+    box-shadow:
+        0 0 10px rgba(156, 163, 175, 0.18);
 }
 
+
 .search-input::placeholder {
-  color: #b69c80;
+    color: #94a3b8;
 }
+
 
 /* ===========================
    Books Grid
 =========================== */
 
 .book-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-  gap: 30px;
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(270px, 1fr));
+
+    gap: 30px;
 }
+
 
 /* ===========================
    Book Card
 =========================== */
 
 .book-card {
-  background: #2a1f17;
-  border-radius: 18px;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,.28);
-  transition: .3s;
-  border: 1px solid rgba(255,255,255,.08);
+    background: #111111;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.35);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+
 .book-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 16px 35px rgba(0,0,0,.32);
+    transform: translateY(-8px);
+
+    box-shadow:
+        0 16px 35px rgba(0, 0, 0, 0.45);
+
+    border-color:
+        rgba(255, 255, 255, 0.15);
 }
+
 
 /* ===========================
    Image
 =========================== */
 
 .book-image {
-  width: 100%;
-  height: 320px;
-  object-fit: contain;
-  background: #34291f;
-  padding: 15px;
-  display: block;
+    width: 100%;
+    height: 320px;
+
+    object-fit: contain;
+
+    background: #1f2937;
+
+    padding: 15px;
+
+    display: block;
+
+    box-sizing: border-box;
 }
+
 
 /* ===========================
    Details
 =========================== */
 
 .book-details {
-  padding: 18px;
+    padding: 18px;
 }
+
 
 .book-details h2 {
-  font-size: 22px;
-  color: #f8f4ef;
-  margin-bottom: 12px;
+    font-size: 22px;
+
+    color: #f8fafc;
+
+    margin: 0 0 12px;
+
+    font-weight: 700;
 }
+
 
 .book-details p {
-  margin: 8px 0;
-  color: #d3c4ae;
-  font-size: 15px;
+    margin: 8px 0;
+
+    color: #cbd5e1;
+
+    font-size: 15px;
 }
+
 
 .book-details strong {
-  color: #f8f4ef;
+    color: #f8fafc;
 }
 
+
+/* ===========================
+   Uploader
+=========================== */
+
 .uploader-name {
-  color: #f1c27d;
-  font-weight: 600;
+    color: #94a3b8;
+
+    font-weight: 600;
 }
+
 
 /* ===========================
    Buttons
 =========================== */
 
 .book-buttons {
-  display: flex;
-  gap: 10px;
-  margin-top: 18px;
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 18px;
 }
+
 
 .buy-btn,
 .cart-btn {
-  flex: 1;
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  color: #2a1f14;
-  font-size: 15px;
-  font-weight: bold;
-  transition: .3s;
+    flex: 1;
+
+    padding: 12px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    color: #f8fafc;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    transition: 0.3s;
 }
 
-.buy-btn {
-  background: #d29f68;
-}
-
-.buy-btn:hover {
-  background: #b6864a;
-}
-
-.cart-btn {
-  background: #f1c27d;
-}
-
-.cart-btn:hover {
-  background: #c39652;
-}
 
 /* ===========================
-   Responsive
+   Buy Button
 =========================== */
 
-@media(max-width:768px){
+.buy-btn {
+    background: #27272a;
 
-.heading{
-    font-size:2rem;
+    border: 1px solid #3f3f46;
 }
 
-.book-grid{
-    grid-template-columns:1fr;
+
+.buy-btn:hover {
+    background: #3f3f46;
+
+    border-color: #52525b;
 }
 
-.book-image{
-    height:280px;
+
+/* ===========================
+   Cart Button
+=========================== */
+
+.cart-btn {
+    background: #4b5563;
+
+    border: 1px solid #6b7280;
 }
 
-.book-buttons{
-    flex-direction:column;
+
+.cart-btn:hover {
+    background: #6b7280;
+
+    border-color: #9ca3af;
 }
 
-.buy-btn,
-.cart-btn{
-    width:100%;
+
+/* ===========================
+   Responsive - Tablet
+=========================== */
+
+@media (max-width: 1000px) {
+
+    .books-container {
+        padding: 20px;
+    }
+
+    .book-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 22px;
+    }
+
+    .book-image {
+        height: 300px;
+    }
 }
+
+
+/* ===========================
+   Responsive - Mobile
+=========================== */
+
+@media (max-width: 768px) {
+
+    .books-container {
+        margin: 25px auto;
+
+        padding: 15px;
+    }
+
+
+    .heading {
+        font-size: 2rem;
+
+        margin-bottom: 24px;
+    }
+
+
+    .search-container {
+        max-width: 100%;
+
+        margin-bottom: 28px;
+    }
+
+
+    .search-input {
+        height: 46px;
+
+        font-size: 15px;
+    }
+
+
+    .book-grid {
+        grid-template-columns: 1fr;
+
+        gap: 20px;
+    }
+
+
+    .book-card {
+        max-width: 400px;
+
+        width: 100%;
+
+        margin: 0 auto;
+    }
+
+
+    .book-image {
+        height: 280px;
+    }
+
+
+    .book-details {
+        padding: 16px;
+    }
+
+
+    .book-details h2 {
+        font-size: 20px;
+    }
+
+
+    .book-buttons {
+        flex-direction: column;
+
+        gap: 8px;
+    }
+
+
+    .buy-btn,
+    .cart-btn {
+        width: 100%;
+
+        padding: 12px;
+    }
+}
+
+
+/* ===========================
+   Small Mobile
+=========================== */
+
+@media (max-width: 400px) {
+
+    .books-container {
+        padding: 12px;
+    }
+
+
+    .heading {
+        font-size: 1.7rem;
+    }
+
+
+    .book-image {
+        height: 260px;
+    }
+
+
+    .book-details h2 {
+        font-size: 18px;
+    }
+
+
+    .book-details p {
+        font-size: 14px;
+    }
 }

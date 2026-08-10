@@ -90,9 +90,6 @@ const Books = () => {
               <p>
                 <strong>Price:</strong> ₹{book.price}
               </p>
-              <p>
-                <strong>Uploaded By:</strong> <span className="uploader-name">{book.uploadedBy || "Guest"}</span>
-              </p>
               <div className="book-buttons">
                 <button className="cart-btn" onClick={()=>handleAddToCart(book)}>Add To Cart   <BsBag/></button>
               </div>

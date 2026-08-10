@@ -1,28 +1,66 @@
 const jwt = require("jsonwebtoken");
-require("dotenv").config();
 
 const authMiddleware = (req, res, next) => {
-  const authHeader = req.headers.authorization;
 
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    return res.status(401).json({
-      success: false,
-      message: "Please login to access your cart.",
-    });
-  }
+    try {
 
-  const token = authHeader.split(" ")[1];
+        const authHeader =
+            req.headers.authorization;
 
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded;
-    next();
-  } catch (error) {
-    return res.status(401).json({
-      success: false,
-      message: "Invalid or expired token. Please login again.",
-    });
-  }
+
+        if (!authHeader) {
+
+            return res.status(401).json({
+
+                message: "Token required",
+                success: false
+
+            });
+
+        }
+
+
+        const token =
+            authHeader.split(" ")[1];
+
+
+        if (!token) {
+
+            return res.status(401).json({
+
+                message: "Token required",
+                success: false
+
+            });
+
+        }
+
+
+        const decoded =
+            jwt.verify(
+                token,
+                process.env.JWT_SECRET
+            );
+
+
+        // Store decoded user
+        req.user = decoded;
+
+
+        next();
+
+
+    } catch (error) {
+
+        return res.status(401).json({
+
+            message: "Invalid or expired token",
+            success: false
+
+        });
+
+    }
 };
+
 
 module.exports = authMiddleware;

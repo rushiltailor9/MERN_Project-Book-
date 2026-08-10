@@ -1,155 +1,449 @@
+/* =========================
+   NAVBAR
+========================= */
+
 .navbar {
+    width: 100%;
+    height: 80px;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 32px;
-    background: linear-gradient(135deg, #2f261f 0%, #1d1610 100%);
-    color: #f8f4ef;
-    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.28);
+
+    padding: 0 24px;
+
+    background: #111111;
+    color: #e5e7eb;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.32);
+
     position: sticky;
     top: 0;
     z-index: 1000;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================
+   LOGO
+========================= */
+
+.navbar-logo {
+    display: flex;
+    align-items: center;
+
+    flex-shrink: 0;
 }
 
 .navbar-logo a {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
+
+    height: 42px;
+
     text-decoration: none;
-    color: #f8f4ef;
-    font-size: 1.15rem;
+    color: #e5e7eb;
+
+    font-size: 1.1rem;
     font-weight: 700;
     letter-spacing: 0.3px;
-    padding: 8px 12px;
+
+    padding: 0 10px;
     border-radius: 999px;
+
     transition: all 0.2s ease;
 }
 
 .navbar-logo a:hover {
-    background: rgba(242, 201, 127, 0.18);
-    color: #f6e0b2;
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
 }
 
+
+/* =========================
+   LOGO IMAGE
+========================= */
+
 .logo {
-    width: 44px;
-    height: 44px;
+    width: 34px;
+    height: 34px;
+
     object-fit: contain;
+
     border-radius: 0;
+
     padding: 0;
+    margin: 0;
+
     background: transparent;
     box-shadow: none;
 }
 
+
+/* =========================
+   LOGO TEXT
+========================= */
+
 .logo-text {
     display: flex;
     align-items: center;
-    color: #f1c27d;
-    gap: 8px;
+
+    color: #f8fafc;
+
+    gap: 6px;
+
     font-weight: 800;
-    font-size: 1.05rem;
+    font-size: 1rem;
+
+    white-space: nowrap;
 }
+
+
+/* =========================
+   NAVIGATION LINKS
+========================= */
 
 .navbar-links {
     display: flex;
+    align-items: center;
+    justify-content: center;
+
     list-style: none;
-    gap: 20px;
+
+    gap: 8px;
+
+    margin: 0;
+    padding: 0;
+
+    flex: 1;
+}
+
+.navbar-links li {
     margin: 0;
     padding: 0;
 }
 
 .navbar-links a {
-    color: #e9d7c1;
+    display: flex;
+    align-items: center;
+
+    height: 38px;
+
+    color: #cbd5e1;
+
     text-decoration: none;
-    font-size: 0.98rem;
-    padding: 8px 12px;
+
+    font-size: 0.95rem;
+    font-weight: 500;
+
+    padding: 0 12px;
+
     border-radius: 999px;
+
     transition: all 0.2s ease;
+
+    white-space: nowrap;
 }
 
 .navbar-links a:hover {
-    color: #fff7eb;
-    background: rgba(242, 201, 127, 0.18);
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.12);
 }
+
+
+/* =========================
+   AUTH SECTION
+========================= */
 
 .navbar-auth {
     display: flex;
     align-items: center;
-    gap: 10px;
+
+    gap: 8px;
+
+    flex-shrink: 0;
 }
+
+
+/* =========================
+   LOGIN / REGISTER BUTTON
+========================= */
 
 .auth-icon-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: 84px;
-    height: 40px;
+
+    min-width: 68px;
+    height: 36px;
+
+    padding: 0 12px;
+
     border-radius: 999px;
+
     text-decoration: none;
-    color: #e8cfac;
-    border: 1px solid rgba(232, 207, 172, 0.38);
-    background-color: rgba(255, 255, 255, 0.08);
-    transition: all 0.2s ease;
-    padding: 0 14px;
+
+    color: #cbd5e1;
+
+    border: 1px solid rgba(255, 255, 255, 0.14);
+
+    background-color: rgba(255, 255, 255, 0.04);
+
+    font-size: 0.9rem;
+
+    transition: all 0.18s ease;
+
+    box-sizing: border-box;
 }
 
 .auth-icon-btn:hover {
     background-color: rgba(255, 255, 255, 0.14);
-    color: #fff;
-    border-color: rgba(242, 201, 127, 0.6);
+
+    color: #ffffff;
+
+    border-color: rgba(255, 255, 255, 0.24);
 }
 
+
+/* =========================
+   PRIMARY AUTH BUTTON
+========================= */
+
 .auth-icon-btn--primary {
-    background-color: #d29f69;
-    color: #2a1d11;
-    border-color: #d29f69;
+    background-color: #111111;
+
+    color: #f8fafc;
+
+    border-color: #4b5563;
 }
 
 .auth-icon-btn--primary:hover {
-    background-color: #b6864a;
+    background-color: #27272a;
 }
+
+
+/* =========================
+   ACCOUNT ICON
+========================= */
 
 .account-icon-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 42px;
-    height: 42px;
+
+    width: 36px;
+    height: 36px;
+
+    padding: 0;
+
     border-radius: 50%;
+
     text-decoration: none;
-    color: #f1c27d;
-    border: 1px solid rgba(242, 201, 127, 0.38);
-    background-color: rgba(255, 255, 255, 0.08);
-    transition: all 0.2s ease;
+
+    color: #f8fafc;
+
+    border: 1px solid rgba(255, 255, 255, 0.14);
+
+    background-color: rgba(255, 255, 255, 0.04);
+
+    transition: all 0.18s ease;
+
+    box-sizing: border-box;
 }
 
 .account-icon-btn:hover {
     background-color: rgba(255, 255, 255, 0.14);
-    color: #fff;
-    border-color: rgba(242, 201, 127, 0.6);
+
+    color: #ffffff;
+
+    border-color: rgba(255, 255, 255, 0.24);
 }
 
+
+/* =========================
+   USER NAME
+========================= */
+
 .navbar-user-name {
+    max-width: 140px;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
     font-weight: 600;
-    color: #f8f4ef;
-    font-size: 0.95rem;
-    padding: 7px 12px;
-    background: rgba(255, 255, 255, 0.08);
+
+    color: #f8fafc;
+
+    font-size: 0.9rem;
+
+    padding: 6px 10px;
+
+    background: rgba(255, 255, 255, 0.06);
+
     border-radius: 999px;
 }
 
-@media (max-width: 768px) {
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 900px) {
+
     .navbar {
-        padding: 14px 18px;
-        flex-wrap: wrap;
-        gap: 10px;
+        padding: 0 16px;
     }
 
     .navbar-links {
-        gap: 10px;
-        flex-wrap: wrap;
+        gap: 4px;
     }
+
+    .navbar-links a {
+        padding: 0 9px;
+        font-size: 0.9rem;
+    }
+
+    .navbar-user-name {
+        max-width: 100px;
+    }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+
+    .navbar {
+        min-height: 64px;
+        height: auto;
+
+        padding: 8px 14px;
+
+        flex-wrap: wrap;
+
+        gap: 8px;
+    }
+
+
+    .navbar-logo {
+        height: 42px;
+    }
+
+
+    .navbar-links {
+        order: 3;
+
+        width: 100%;
+
+        flex: none;
+
+        justify-content: center;
+
+        gap: 4px;
+
+        padding-bottom: 4px;
+
+        overflow-x: auto;
+    }
+
+
+    .navbar-links a {
+        height: 34px;
+
+        padding: 0 9px;
+
+        font-size: 0.85rem;
+    }
+
 
     .navbar-auth {
         margin-left: auto;
+
+        gap: 6px;
+    }
+
+
+    .auth-icon-btn {
+        min-width: 60px;
+
+        height: 34px;
+
+        padding: 0 9px;
+
+        font-size: 0.85rem;
+    }
+
+
+    .account-icon-btn {
+        width: 34px;
+        height: 34px;
+    }
+
+
+    .navbar-user-name {
+        display: none;
+    }
+
+
+    .logo {
+        width: 32px;
+        height: 32px;
+    }
+
+
+    .logo-text {
+        font-size: 0.95rem;
+    }
+}
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 480px) {
+
+    .navbar {
+        padding: 7px 10px;
+    }
+
+
+    .navbar-logo a {
+        padding: 0 5px;
+    }
+
+
+    .navbar-links {
+        justify-content: flex-start;
+
+        overflow-x: auto;
+
+        scrollbar-width: none;
+    }
+
+
+    .navbar-links::-webkit-scrollbar {
+        display: none;
+    }
+
+
+    .navbar-links a {
+        font-size: 0.82rem;
+
+        padding: 0 8px;
+    }
+
+
+    .auth-icon-btn {
+        min-width: 55px;
+
+        padding: 0 8px;
     }
 }

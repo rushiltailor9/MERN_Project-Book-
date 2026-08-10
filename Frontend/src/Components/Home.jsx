@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import "../CSS/Home.css";
-import banner from "../assets/banner.avif";
+import heroBanner from "../assets/banner-home.jpg";
 
 const Home = () => {
   return (
     <div className="home-hero">
       <div className="hero-bg-wrapper">
-        <img src={banner} alt="Read Easy banner" className="hero-bg" />
+        <img src={heroBanner} alt="Read Easy banner" className="hero-bg" />
         <div className="hero-overlay" />
       </div>
       <div className="hero-content">
@@ -16,11 +16,8 @@ const Home = () => {
           Discover curated book selections and share your own favorites with a community of readers.
         </p>
         <div className="hero-actions">
-          <Link to="/books" className="hero-btn hero-btn-primary">
+          <Link to="/books" className="hero-btn hero-btn-secondary">
             Explore Books
-          </Link>
-          <Link to="/books-upload" className="hero-btn hero-btn-secondary">
-            Upload Your Book
           </Link>
         </div>
       </div>
@@ -30,8 +27,8 @@ const Home = () => {
           <p>Enjoy book recommendations chosen for your taste.</p>
         </div>
         <div className="feature-card">
-          <h3>Fast Upload</h3>
-          <p>Share your favorite titles in seconds.</p>
+          <h3>Best Books</h3>
+          <p>Buy Your favorite Books From READ-EASY</p>
         </div>
         <div className="feature-card">
           <h3>Community Favorites</h3>

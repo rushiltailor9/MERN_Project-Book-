@@ -1,262 +1,656 @@
+/* ===========================
+   Upload Page
+=========================== */
+
 .upload-page {
+    width: 100%;
+    min-height: calc(100vh - 60px);
+
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px;
-    padding: 30px 20px;
-    min-height: 90vh;
-    background: #1d1710;
-    color: #f8f4ef;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    gap: 32px;
+
+    padding: 35px 20px;
+
+    background: #0c0f14;
+    color: #f8fafc;
+
+    font-family:
+        "Segoe UI",
+        Tahoma,
+        Geneva,
+        Verdana,
+        sans-serif;
+
+    box-sizing: border-box;
 }
 
-/* Form Styling */
+
+/* ===========================
+   Upload Form
+=========================== */
+
 .upload-form {
-    background: #2f2720;
-    padding: 30px 35px;
-    border-radius: 16px;
-    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.32);
     width: 100%;
-    max-width: 480px;
+    max-width: 500px;
+
     display: flex;
     flex-direction: column;
+
     gap: 16px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    padding: 30px;
+
+    background: #111111;
+
     border: 1px solid rgba(255, 255, 255, 0.08);
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.35);
+
+    box-sizing: border-box;
+
+    transition: 0.25s ease;
 }
+
 
 .upload-form:hover {
-    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.36);
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 16px 36px rgba(0, 0, 0, 0.45);
 }
 
+
+/* ===========================
+   Form Heading
+=========================== */
+
 .upload-form h2 {
+    margin: 0 0 5px;
+
     text-align: center;
-    color: #f8f4ef;
-    margin-bottom: 4px;
-    font-size: 1.6rem;
+
+    color: #f8fafc;
+
+    font-size: 1.7rem;
+
     font-weight: 700;
 }
 
+
+/* ===========================
+   Upload User
+=========================== */
+
 .upload-user {
-    text-align: center;
     margin: 0 0 8px;
-    color: #d3b58d;
+
+    text-align: center;
+
+    color: #94a3b8;
+
     font-size: 0.95rem;
 }
 
+
 .upload-user span {
-    color: #f1c27d;
+    color: #f8fafc;
+
     font-weight: 700;
 }
 
+
+/* ===========================
+   Input Group
+=========================== */
+
 .input-group {
+    width: 100%;
+
     display: flex;
     flex-direction: column;
-    gap: 6px;
+
+    gap: 7px;
 }
 
+
 .input-group label {
+    color: #cbd5e1;
+
     font-size: 0.9rem;
+
     font-weight: 600;
-    color: #c7b298;
 }
+
+
+/* ===========================
+   Inputs
+=========================== */
 
 .upload-form input[type="text"],
 .upload-form input[type="number"],
 .upload-form input[type="file"] {
-    padding: 10px 14px;
-    border: 1.5px solid #4c3f34;
-    border-radius: 8px;
+    width: 100%;
+    height: 46px;
+
+    padding: 0 14px;
+
+    background: #1f2937;
+
+    color: #f8fafc;
+
+    border: 1px solid #303033;
+
+    border-radius: 9px;
+
+    outline: none;
+
     font-size: 0.95rem;
-    transition: border-color 0.2s, box-shadow 0.2s;
-    background-color: #2b231c;
-    color: #f4ebdc;
+
+    box-sizing: border-box;
+
+    transition: 0.2s ease;
 }
+
 
 .upload-form input::placeholder {
-    color: #b19b82;
+    color: #94a3b8;
 }
+
 
 .upload-form input:focus {
-    outline: none;
-    border-color: #d29f68;
-    box-shadow: 0 0 0 3px rgba(210, 159, 104, 0.2);
+    border-color: #6b7280;
+
+    box-shadow:
+        0 0 0 3px rgba(156, 163, 175, 0.12);
 }
+
+
+/* File Input */
+
+.upload-form input[type="file"] {
+    height: auto;
+
+    min-height: 46px;
+
+    padding: 10px 12px;
+
+    cursor: pointer;
+}
+
+
+/* ===========================
+   Submit Button
+=========================== */
 
 .submit-btn {
-    margin-top: 10px;
-    padding: 12px;
-    background: #d29f68;
-    color: #2b1f14;
-    border: none;
+    width: 100%;
+    height: 46px;
+
+    margin-top: 8px;
+
+    padding: 0 15px;
+
+    background: #27272a;
+
+    color: #f8fafc;
+
+    border: 1px solid #3f3f46;
+
     border-radius: 8px;
-    font-size: 1rem;
+
+    font-size: 0.95rem;
+
     font-weight: 600;
+
     cursor: pointer;
-    box-shadow: 0 8px 18px rgba(210, 159, 104, 0.24);
-    transition: all 0.2s ease;
+
+    transition: 0.25s ease;
+
+    box-sizing: border-box;
 }
+
 
 .submit-btn:hover {
-    background: #b6864a;
+    background: #3f3f46;
+
+    border-color: #52525b;
+
     transform: translateY(-1px);
-    box-shadow: 0 10px 22px rgba(210, 159, 104, 0.32);
 }
 
-/* Table Section Styling */
+
+/* ===========================
+   Table Section
+=========================== */
+
 .table-section {
     width: 100%;
-    max-width: 950px;
-    background: #2f2720;
+    max-width: 1100px;
+
     padding: 25px;
-    border-radius: 16px;
-    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.32);
+
+    background: #111111;
+
     border: 1px solid rgba(255, 255, 255, 0.08);
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.35);
+
+    box-sizing: border-box;
 }
+
+
+/* ===========================
+   Table Heading
+=========================== */
 
 .table-section h2 {
-    color: #f8f4ef;
-    margin-bottom: 18px;
-    font-size: 1.4rem;
-    font-weight: 700;
-    border-left: 5px solid #d29f68;
+    margin: 0 0 18px;
+
     padding-left: 12px;
+
+    color: #f8fafc;
+
+    font-size: 1.4rem;
+
+    font-weight: 700;
+
+    border-left: 4px solid #cbd5e1;
 }
 
+
+/* ===========================
+   Table Wrapper
+=========================== */
+
 .table-wrapper {
+    width: 100%;
+
     overflow-x: auto;
-    border-radius: 12px;
+
     border: 1px solid rgba(255, 255, 255, 0.08);
+
+    border-radius: 10px;
 }
+
+
+/* ===========================
+   Books Table
+=========================== */
 
 .books-table {
     width: 100%;
+
+    min-width: 850px;
+
     border-collapse: collapse;
-    text-align: left;
-    font-size: 0.95rem;
+
+    background: #111111;
+
+    color: #cbd5e1;
+
+    font-size: 0.9rem;
 }
+
+
+/* ===========================
+   Table Header
+=========================== */
 
 .books-table thead tr {
-    background: #3b2f24;
-    color: #f8f4ef;
+    height: 50px;
+
+    background: #1f2937;
+
+    color: #f8fafc;
 }
+
 
 .books-table th {
-    padding: 14px 16px;
+    padding: 12px 15px;
+
+    color: #cbd5e1;
+
+    font-size: 0.8rem;
+
     font-weight: 600;
+
     text-transform: uppercase;
-    font-size: 0.82rem;
-    letter-spacing: 0.5px;
-    color: #d9c4a9;
+
+    letter-spacing: 0.4px;
+
+    white-space: nowrap;
 }
+
+
+/* ===========================
+   Table Data
+=========================== */
 
 .books-table td {
-    padding: 12px 16px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    color: #d3c7b7;
+    height: 65px;
+
+    padding: 10px 15px;
+
+    border-bottom:
+        1px solid rgba(255, 255, 255, 0.08);
+
+    color: #cbd5e1;
+
     vertical-align: middle;
+
+    white-space: nowrap;
 }
+
 
 .books-table tbody tr {
-    transition: background-color 0.2s ease;
+    transition: 0.2s ease;
 }
+
 
 .books-table tbody tr:hover {
-    background-color: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.04);
 }
+
+
+/* ===========================
+   Book Name
+=========================== */
 
 .book-name-cell {
+    color: #f8fafc;
+
     font-weight: 600;
-    color: #f8f4ef;
 }
 
-.price-badge {
-    background-color: #f4e2b0;
-    color: #6f481d;
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-weight: 700;
-    font-size: 0.9rem;
-    border: 1px solid #d6b377;
-}
 
-.lang-badge {
-    background-color: rgba(255, 255, 255, 0.08);
-    color: #e6d4b2;
-    padding: 4px 10px;
-    border-radius: 12px;
-    font-weight: 600;
-    font-size: 0.85rem;
-}
+/* ===========================
+   Badges
+=========================== */
 
+.price-badge,
+.lang-badge,
 .uploader-badge {
-    background-color: rgba(242, 194, 120, 0.18);
-    color: #f1c27d;
-    padding: 4px 10px;
-    border-radius: 12px;
+    display: inline-flex;
+
+    align-items: center;
+
+    min-height: 28px;
+
+    padding: 3px 10px;
+
+    background: #1f2937;
+
+    color: #e5e7eb;
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    border-radius: 20px;
+
+    font-size: 0.82rem;
+
     font-weight: 600;
-    font-size: 0.85rem;
+
+    box-sizing: border-box;
 }
+
+
+/* ===========================
+   Book Thumbnail
+=========================== */
 
 .book-thumb {
-    width: 50px;
-    height: 50px;
+    width: 55px;
+    height: 65px;
+
     object-fit: cover;
-    border-radius: 6px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+
+    display: block;
+
+    background: #1f2937;
+
+    border-radius: 7px;
+
+    box-shadow:
+        0 3px 8px rgba(0, 0, 0, 0.3);
 }
 
+
+/* ===========================
+   No Image
+=========================== */
+
 .no-img {
-    color: #a38d79;
-    font-size: 0.85rem;
+    color: #94a3b8;
+
+    font-size: 0.8rem;
+
     font-style: italic;
 }
+
+
+/* ===========================
+   Action Cells
+=========================== */
 
 .action-cells {
     display: flex;
-    gap: 8px;
+
     align-items: center;
+
+    gap: 8px;
 }
 
-.btn-edit {
-    padding: 6px 14px;
-    background-color: #d29f68;
-    color: #2b1f14;
-    border: none;
-    border-radius: 6px;
-    font-weight: 600;
-    font-size: 0.85rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
 
-.btn-edit:hover {
-    background-color: #b6864a;
-    transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(210, 159, 104, 0.3);
-}
+/* ===========================
+   Edit / Delete Buttons
+=========================== */
 
+.btn-edit,
 .btn-delete {
-    padding: 6px 14px;
-    background-color: #c24f38;
-    color: #ffffff;
-    border: none;
-    border-radius: 6px;
+    min-width: 65px;
+    height: 34px;
+
+    padding: 0 12px;
+
+    background: #27272a;
+
+    color: #f8fafc;
+
+    border: 1px solid #3f3f46;
+
+    border-radius: 7px;
+
+    font-size: 0.82rem;
+
     font-weight: 600;
-    font-size: 0.85rem;
+
     cursor: pointer;
-    transition: all 0.2s ease;
+
+    transition: 0.2s ease;
 }
 
+
+.btn-edit:hover,
 .btn-delete:hover {
-    background-color: #a23a2b;
+    background: #3f3f46;
+
+    border-color: #52525b;
+
     transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(194, 79, 56, 0.3);
 }
+
+
+/* ===========================
+   Empty Row
+=========================== */
 
 .empty-row {
+    height: 80px;
+
     text-align: center;
-    padding: 24px;
-    color: #9e8e79;
+
+    color: #94a3b8;
+
     font-style: italic;
+}
+
+
+/* ===========================
+   Tablet
+=========================== */
+
+@media (max-width: 900px) {
+
+    .upload-page {
+        padding: 30px 16px;
+    }
+
+
+    .table-section {
+        max-width: 100%;
+
+        padding: 20px;
+    }
+
+
+    .books-table {
+        min-width: 800px;
+    }
+}
+
+
+/* ===========================
+   Mobile
+=========================== */
+
+@media (max-width: 768px) {
+
+    .upload-page {
+        min-height: calc(100vh - 55px);
+
+        gap: 25px;
+
+        padding: 25px 14px;
+    }
+
+
+    .upload-form {
+        max-width: 100%;
+
+        padding: 25px 20px;
+
+        border-radius: 12px;
+    }
+
+
+    .upload-form h2 {
+        font-size: 1.5rem;
+    }
+
+
+    .upload-user {
+        font-size: 0.88rem;
+    }
+
+
+    .upload-form input[type="text"],
+    .upload-form input[type="number"] {
+        height: 44px;
+    }
+
+
+    .submit-btn {
+        height: 44px;
+    }
+
+
+    .table-section {
+        padding: 16px;
+
+        border-radius: 12px;
+    }
+
+
+    .table-section h2 {
+        font-size: 1.2rem;
+    }
+
+
+    .books-table {
+        min-width: 750px;
+    }
+}
+
+
+/* ===========================
+   Small Mobile
+=========================== */
+
+@media (max-width: 480px) {
+
+    .upload-page {
+        padding: 20px 10px;
+    }
+
+
+    .upload-form {
+        padding: 22px 16px;
+    }
+
+
+    .upload-form h2 {
+        font-size: 1.4rem;
+    }
+
+
+    .input-group label {
+        font-size: 0.85rem;
+    }
+
+
+    .upload-form input[type="text"],
+    .upload-form input[type="number"] {
+        height: 42px;
+
+        font-size: 0.9rem;
+    }
+
+
+    .upload-form input[type="file"] {
+        min-height: 42px;
+
+        font-size: 0.85rem;
+    }
+
+
+    .submit-btn {
+        height: 42px;
+
+        font-size: 0.9rem;
+    }
+
+
+    .table-section {
+        padding: 12px;
+    }
+
+
+    .book-thumb {
+        width: 50px;
+        height: 60px;
+    }
+
+
+    .books-table {
+        min-width: 700px;
+    }
 }

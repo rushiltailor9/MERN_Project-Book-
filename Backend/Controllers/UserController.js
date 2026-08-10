@@ -22,7 +22,8 @@ const registerUser = async (req, res) =>{
         firstName,
         lastName,
         email,
-        password: hashedPassword
+        password: hashedPassword,
+        role:"user"
     });
     await userModel.save(); //Save the user data in MongoDB
     
@@ -74,7 +75,9 @@ const loginUser = async (req, res) =>{
     const jwtToken = jwt.sign(
         {
             _id: user._id,
-            email: user.email
+            email: user.email,
+            role: user.role
+
         },
         process.env.JWT_SECRET,
         { expiresIn: '24h'}
@@ -86,7 +89,8 @@ const loginUser = async (req, res) =>{
             success:true,
             jwtToken,
             email: user.email,
-            name: `${user.firstName} ${user.lastName}`.trim() || user.firstName || user.name || user.email
+            name: `${user.firstName} ${user.lastName}`.trim(),
+            role: user.role
         });
     }catch(error){
         console.log(error);
