@@ -100,7 +100,7 @@
     width: 42px;
     height: 42px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #3f3f46, #111111);
+    background: rgb(51, 30, 120);
     color: #f8fafc;
     display: flex;
     align-items: center;

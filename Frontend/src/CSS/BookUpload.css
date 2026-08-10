@@ -442,11 +442,11 @@
 =========================== */
 
 .action-cells {
-    display: flex;
+    /* display: flex; */
 
     align-items: center;
 
-    gap: 8px;
+    gap: 9px;
 }
 
 
@@ -456,7 +456,7 @@
 
 .btn-edit,
 .btn-delete {
-    min-width: 65px;
+    min-width: 74px;
     height: 34px;
 
     padding: 0 12px;

@@ -17,6 +17,10 @@ import AboutUs from "./Components/About-Us";
 import ProtectedAdminRoute from "./Components/ProtectedAdminRoute";
 import AdminDashboard from "./Admin/AdminDashboard";
 import BookUpload from "./Admin/BookUpload";
+import AdminBooks from "./Admin/AdminBooks";
+import AdminUsers from "./Components/AdminUsers";
+import AdminOrders from "./Admin/AdminOrders";
+import AdminFeedback from "./Admin/AdminFeedback";
 
 function App() {
     const [isLogin, setIsLogin] = useState(() => Boolean(localStorage.getItem("token")));
@@ -50,6 +54,22 @@ function App() {
                     <Route 
                         path="/admin/book"
                         element={<BookUpload/>}
+                    />
+                    <Route 
+                        path="/admin/books"
+                        element={<AdminBooks/>}
+                    />
+                    <Route 
+                        path="/admin/users"
+                        element={<AdminUsers/>}
+                    />
+                    <Route 
+                        path="/admin/orders"
+                        element={<AdminOrders/>}
+                    />
+                    <Route 
+                        path="/admin/feedback"
+                        element={<AdminFeedback/>}
                     />
                 </Route>
             </Routes>
