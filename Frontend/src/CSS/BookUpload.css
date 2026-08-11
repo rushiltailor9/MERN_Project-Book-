@@ -43,7 +43,7 @@
 
     padding: 30px;
 
-    background: #111111;
+    background: rgb(39, 41, 45);
 
     border: 1px solid rgba(255, 255, 255, 0.08);
 
@@ -140,7 +140,7 @@
 
     padding: 0 14px;
 
-    background: #1f2937;
+    background: #353535;
 
     color: #f8fafc;
 
@@ -196,9 +196,9 @@
 
     padding: 0 15px;
 
-    background: #27272a;
+    background: white;
 
-    color: #f8fafc;
+    color: black;
 
     border: 1px solid #3f3f46;
 

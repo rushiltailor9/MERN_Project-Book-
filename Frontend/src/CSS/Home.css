@@ -55,7 +55,9 @@
 }
 
 .readEasy {
-  color: #f8fafc;
+  color: gray;
+  font-weight: 800;
+  font-size: 80px;
 }
 
 .hero-description {
