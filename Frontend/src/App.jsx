@@ -21,6 +21,7 @@ import AdminBooks from "./Admin/AdminBooks";
 import AdminUsers from "./Admin/AdminUsers";
 import AdminOrders from "./Admin/AdminOrders";
 import AdminFeedback from "./Admin/AdminFeedback";
+import Checkout from "./Components/Checkout";
 
 function App() {
     const [isLogin, setIsLogin] = useState(() => Boolean(localStorage.getItem("token")));
@@ -46,6 +47,7 @@ function App() {
                 <Route path="/contact" element={protectedRoutes({ element: <Contact loggedInUser={loggedInUser} /> })}/>
                 <Route path="/feedback" element={protectedRoutes({ element: <Feedback loggedInUser={loggedInUser} /> })}/>
                 <Route path="/about" element={<AboutUs/>}/>
+                <Route path="/checkout" element={<Checkout/>}/>
                 <Route element={<ProtectedAdminRoute/>}>
                     <Route 
                         path="/admin/dashboard"
