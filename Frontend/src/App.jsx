@@ -18,7 +18,7 @@ import ProtectedAdminRoute from "./Components/ProtectedAdminRoute";
 import AdminDashboard from "./Admin/AdminDashboard";
 import BookUpload from "./Admin/BookUpload";
 import AdminBooks from "./Admin/AdminBooks";
-import AdminUsers from "./Components/AdminUsers";
+import AdminUsers from "./Admin/AdminUsers";
 import AdminOrders from "./Admin/AdminOrders";
 import AdminFeedback from "./Admin/AdminFeedback";
 

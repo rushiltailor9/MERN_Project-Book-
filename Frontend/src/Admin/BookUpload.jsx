@@ -37,20 +37,25 @@ const BookUpload = ({ loggedInUser = "" }) => {
         language: ""
     });
     const [editId, setEditId] = useState(null);
+    const [allBooks, setAllBooks] = useState([]);
 
     const fetchBook = async () => {
         try {
             const res = await getBooks();
+            let booksData = [];
             if (res && Array.isArray(res.data)) {
-                setBooks(res.data);
+                booksData = res.data;
             } else if (Array.isArray(res)) {
-                setBooks(res);
+                booksData = res;
             } else {
-                setBooks([]);
+                booksData = [];
             }
+            setBooks(booksData);
+            setAllBooks(booksData);
         } catch (error) {
             console.log(error);
             setBooks([]);
+            setAllBooks([]);
         }
     };
 
@@ -136,7 +141,20 @@ const BookUpload = ({ loggedInUser = "" }) => {
             handleError("Failed to save book. Please check input values.");
         }
     };
-
+    const handleSearch = (e) => {
+        const term = e.target.value.toLowerCase();
+        if (term === "") {
+            setBooks(allBooks);
+            return;
+        }
+        const result = allBooks.filter((item) =>
+            item.bookName.toLowerCase().includes(term) ||
+            item.authorName.toLowerCase().includes(term) ||
+            item.language.toLowerCase().includes(term) ||
+            item.price.toString().includes(term)
+        );
+        setBooks(result);
+    }
     return (
         <div className="admin-container">
             <AdminSidebar/> 
@@ -208,6 +226,8 @@ const BookUpload = ({ loggedInUser = "" }) => {
 
                         <button type="submit" className="submit-btn">{editId ? "Update Book" : "Upload Book"}</button>
                     </form>
+
+                    <input type="text" placeholder="Search Here..." onChange={handleSearch} className="search-input"/>
 
                     <div className="table-section">
                         <h2>Uploaded Books Directory</h2>

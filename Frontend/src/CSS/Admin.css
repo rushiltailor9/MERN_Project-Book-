@@ -100,7 +100,7 @@
     width: 42px;
     height: 42px;
     border-radius: 50%;
-    background: rgb(51, 30, 120);
+    background: #3a3a3e;
     color: #f8fafc;
     display: flex;
     align-items: center;
@@ -256,35 +256,35 @@
 .table-wrapper {
     overflow-x: auto;
     border-radius: 12px;
-    border: 1px solid #e5e7eb;
+    border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .books-table {
     width: 100%;
     border-collapse: collapse;
-    background: white;
+    background: #1f2126;
 }
 
 .books-table thead tr {
-    background: #f9fafb;
+    background: #181a1f;
 }
 
 .books-table th,
 .books-table td {
     padding: 12px 14px;
     text-align: left;
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .books-table th {
-    color: #6b7280;
+    color: #9ca3af;
     font-size: 0.82rem;
     text-transform: uppercase;
     letter-spacing: 0.04em;
 }
 
 .books-table tbody tr:hover {
-    background: #fffaf1;
+    background: rgba(255, 255, 255, 0.04);
 }
 
 .price-badge,
@@ -297,13 +297,13 @@
 }
 
 .price-badge {
-    background: #fef3c7;
-    color: #92400e;
+    background: #2a2a2e;
+    color: #d1d5db;
 }
 
 .lang-badge {
-    background: #ede9fe;
-    color: #5b21b6;
+    background: #3a3a3e;
+    color: #e5e7eb;
 }
 
 .book-thumb {
@@ -311,7 +311,7 @@
     height: 52px;
     object-fit: cover;
     border-radius: 8px;
-    border: 1px solid #e5e7eb;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .btn-edit,

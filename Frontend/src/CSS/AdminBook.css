@@ -1,0 +1,135 @@
+/* =========================
+   Admin Books Page
+========================= */
+
+.admin-books {
+    padding: 25px;
+    width: 100%;
+    color: #e5e7eb;
+}
+
+.books-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.books-header h2 {
+    margin: 0;
+    font-size: 28px;
+    color: #f8fafc;
+}
+
+.books-header span {
+    background: #1f2126;
+    color: #f8fafc;
+    font-weight: 700;
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.books-table-container {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+}
+
+.books-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #1f2126;
+}
+
+.books-table th,
+.books-table td {
+    padding: 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    text-align: left;
+}
+
+.books-table th {
+    background: #181a1f;
+    font-weight: 600;
+    color: #9ca3af;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.books-table td {
+    color: #d1d5db;
+    font-size: 14px;
+}
+
+.books-table tbody tr {
+    transition: background 0.2s;
+}
+
+.books-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.books-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.admin-book-image {
+    width: 60px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.edit-btn,
+.delete-btn {
+    border: none;
+    padding: 8px 12px;
+    margin-right: 6px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.edit-btn {
+    background: #3a3a3e;
+    color: #ffffff;
+}
+
+.edit-btn:hover {
+    background: #4b4b50;
+    transform: translateY(-1px);
+}
+
+.delete-btn {
+    background: #2a2a2e;
+    color: #d1d5db;
+}
+
+.delete-btn:hover {
+    background: #3a3a3e;
+    transform: translateY(-1px);
+}
+
+.loading {
+    padding: 30px;
+    color: #9ca3af;
+}
+
+.error {
+    color: #ef4444;
+}
+
+.no-books {
+    padding: 40px;
+    text-align: center;
+    background: #1f2126;
+    color: #6b7280;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}

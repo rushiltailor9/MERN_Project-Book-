@@ -49,6 +49,27 @@ const registerUser = async (req, res) =>{
     }
 }
 
+const fetchUser = async(req, res) =>{
+    try{
+        const data = await UserModel.find({});
+        res.status(200)
+            .json({
+                message:"User Is Fetch",
+                success:true,
+                data
+            });
+    }catch(error){
+        console.error("Error fetching books:", error);
+        res.status(500)
+            .json({
+                message:"User Is Not Fetch",
+                error: error.message,
+                success:false
+            });
+    }
+}
+
+
 //Login Logic
 const loginUser = async (req, res) =>{
     try{
@@ -104,5 +125,6 @@ const loginUser = async (req, res) =>{
 
 module.exports = {
     registerUser,
+    fetchUser,
     loginUser
 }

@@ -1,0 +1,270 @@
+/* =========================
+   Admin Users Page
+========================= */
+
+.users-page {
+    padding: 30px;
+    width: 100%;
+    box-sizing: border-box;
+    color: #e5e7eb;
+}
+
+
+/* =========================
+   Header
+========================= */
+
+.users-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.users-header h1 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+    color: #f8fafc;
+}
+
+.users-header p {
+    margin: 6px 0 0;
+    color: #9ca3af;
+    font-size: 14px;
+}
+
+
+/* =========================
+   Total Users
+========================= */
+
+.total-users {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    padding: 14px 22px;
+
+    background: #1f2126;
+
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+}
+
+.total-users > span {
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #2a2a2e;
+
+    border-radius: 10px;
+
+    font-size: 22px;
+}
+
+.total-users small {
+    display: block;
+    color: #9ca3af;
+    font-size: 12px;
+}
+
+.total-users strong {
+    display: block;
+    margin-top: 2px;
+
+    font-size: 24px;
+    color: #f8fafc;
+}
+
+
+/* =========================
+   Table Container
+========================= */
+
+.users-table-container {
+    width: 100%;
+
+    background: #1f2126;
+
+    border-radius: 14px;
+
+    overflow-x: auto;
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================
+   Table
+========================= */
+
+.users-table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    min-width: 650px;
+}
+
+.users-table thead {
+    background: #181a1f;
+}
+
+.users-table th {
+    padding: 16px 18px;
+
+    text-align: left;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: #9ca3af;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.users-table td {
+    padding: 16px 18px;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+
+    font-size: 14px;
+
+    color: #d1d5db;
+}
+
+.users-table tbody tr {
+    transition: 0.2s;
+}
+
+.users-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.users-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* =========================
+   User Details
+========================= */
+
+.user-details {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-avatar {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #3a3a3e;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    color: white;
+
+    flex-shrink: 0;
+}
+
+.user-details strong {
+    color: #f8fafc;
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   No Users
+========================= */
+
+.no-users {
+    text-align: center;
+
+    padding: 70px 20px;
+
+    background: #1f2126;
+
+    border-radius: 14px;
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+}
+
+.no-users h2 {
+    margin-bottom: 8px;
+    color: #f8fafc;
+}
+
+.no-users p {
+    margin: 0;
+
+    color: #6b7280;
+}
+
+
+/* =========================
+   Loading
+========================= */
+
+.user-loading {
+    min-height: 400px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+.user-loading h2 {
+    color: #9ca3af;
+}
+
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 768px) {
+
+    .users-page {
+        padding: 20px;
+    }
+
+    .users-header {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 20px;
+    }
+
+    .total-users {
+        width: 100%;
+
+        box-sizing: border-box;
+    }
+
+}

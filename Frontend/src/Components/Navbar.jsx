@@ -34,8 +34,8 @@ const Navbar = ({ isLogin, loggedInUser }) => {
             </ul>
 
             <div className="navbar-auth">
-                <Link to="/cart"  className="cart-link">
-                            <FaShoppingCart className="cart-icon"/>
+                <Link to="/cart" className="cart-link">
+                    <FaShoppingCart className="cart-icon" />
                 </Link>
                 <Link to="/account" className="account-icon-btn" title="Account">
                     <svg
@@ -54,7 +54,7 @@ const Navbar = ({ isLogin, loggedInUser }) => {
                         <circle cx="12" cy="7" r="4"></circle>
                     </svg>
                 </Link>
-                
+
 
                 {isLogin && user ? (
                     <span className="navbar-user-name">{user}</span>

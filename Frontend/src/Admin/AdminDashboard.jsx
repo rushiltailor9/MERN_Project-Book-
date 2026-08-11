@@ -3,11 +3,15 @@ import AdminHeader from "./AdminHeader"
 import AdminSidebar from "./AdminSidebar"
 import "../CSS/Admin.css";
 import { useEffect, useState } from "react";
+import { getBooks } from "../API/bookApi";
+import { getUsers } from "../API/userApi";
 
 const AdminDashboard = () => {
 
     const [dashboard, setDashboard] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [books, setBooks] = useState([]);
+    const [users, setUsers] = useState([]);
 
     const fetchDashboard = async() =>{
         try{
@@ -35,9 +39,31 @@ const AdminDashboard = () => {
             setLoading(false);
         }
     };
+    const fetchBooks = async() =>{
+        try{
+            const response = await getBooks();
+            setBooks(response.data);
+        }catch(error){
+        console.log(error)
+        }finally{
+            setLoading(false);
+        }
+    }
+    const fetchUser = async() =>{
+        try{
+            const response = await getUsers();
+            setUsers(response.data);
+        }catch(error){
+            console.log(error);
+        }finally{
+            setLoading(false);
+        }
+    }
 
     useEffect(()=>{
-        fetchDashboard();
+        fetchDashboard(),
+        fetchBooks(),
+        fetchUser()
     },[]);
 
     if(loading){
@@ -87,7 +113,7 @@ const AdminDashboard = () => {
                             </h3>
 
                             <h2>
-                                0
+                                {users.length}
                             </h2>
 
                         </div>
@@ -100,7 +126,7 @@ const AdminDashboard = () => {
                             </h3>
 
                             <h2>
-                                0
+                                {books.length}
                             </h2>
 
                         </div>
