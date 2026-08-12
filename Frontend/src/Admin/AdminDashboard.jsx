@@ -60,11 +60,22 @@ const AdminDashboard = () => {
         }
     }
 
-    useEffect(()=>{
-        fetchDashboard(),
-        fetchBooks(),
-        fetchUser()
-    },[]);
+  useEffect(() => {
+    const loadData = async () => {
+        try {
+        await Promise.all([
+            fetchDashboard(),
+            fetchBooks(),
+            fetchUser()
+        ]);
+        } catch (error) {
+        console.error('Failed to load data:', error);
+        }
+    };
+
+    loadData();
+}, []);
+
 
     if(loading){
         return (

@@ -76,8 +76,11 @@ const BookUpload = ({ loggedInUser = "" }) => {
         }
     };
 
-    useEffect(() => {  
-        fetchBook();
+    useEffect(() => {
+        const loadData = async () => {
+            await fetchBook();
+        };
+    loadData();
     }, []);
 
     const handleChange = (e) => {
