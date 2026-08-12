@@ -15,8 +15,6 @@ const Books = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [activeLanguage, setActiveLanguage] = useState("All");
 
-  
-
   useEffect(() => {
     const fetchBooks = async () => {
     try {
