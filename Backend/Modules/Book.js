@@ -22,6 +22,11 @@ const bookSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    category:{
+        type:[String],
+        required:true,
+        default:[]
+    },
     uploadedBy:{
         type:String,
         required:true,

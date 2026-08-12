@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { sendContact } from "../API/contactapi";
 import "../CSS/Contact-Us.css";
+import { handleSuccess, handleError } from "../utils";
 
 const getUserDetails = (loggedInUser = "") => {
     if (loggedInUser) {
@@ -62,7 +63,7 @@ const ContactUs = ({ loggedInUser = "" }) => {
 
             const response = await sendContact(fromData);
 
-            alert(response.data.message || "Message Sent Successfully");
+            handleSuccess(response.data.message || "Message Sent Successfully");
 
             setFromData({
                 name: "",
@@ -72,7 +73,7 @@ const ContactUs = ({ loggedInUser = "" }) => {
                 message:""
             })
         }catch(error){
-            alert("Something went wrong...",error);
+            handleError(error.response?.data?.message || "Something went wrong...");
         }finally{
             setLoading(false);
         }

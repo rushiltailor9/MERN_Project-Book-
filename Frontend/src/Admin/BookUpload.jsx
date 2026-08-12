@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "../CSS/BookUpload.css";
+import "../CSS/Category.css";
 import {
     getBooks,
     addBook,
@@ -26,6 +27,21 @@ const getDisplayName = (loggedInUser = "") => {
     }
 };
 
+const CATEGORY_OPTION = [
+    "Academic",
+    "Bestseller",
+    "Biography",
+    "Comics",
+    "Fiction",
+    "Kids",
+    "Mystery/Thriller",
+    "Non-Fiction",
+    "Poetry",
+    "Religious/Spiritual",
+    "Romance",
+    "Self-Help"
+];
+
 const BookUpload = ({ loggedInUser = "" }) => {
     const [books, setBooks] = useState([]);
     const [uploadedBy] = useState(() => getDisplayName(loggedInUser));
@@ -34,7 +50,8 @@ const BookUpload = ({ loggedInUser = "" }) => {
         authorName: "",
         price: "",
         bookImg: null,
-        language: ""
+        language: "",
+        category:[]
     });
     const [editId, setEditId] = useState(null);
     const [allBooks, setAllBooks] = useState([]);
@@ -59,7 +76,7 @@ const BookUpload = ({ loggedInUser = "" }) => {
         }
     };
 
-    useEffect(() => {
+    useEffect(() => {  
         fetchBook();
     }, []);
 
@@ -83,6 +100,16 @@ const BookUpload = ({ loggedInUser = "" }) => {
             });
         }
     };
+    const handleCategoryToggle = (categoryName) => {
+    setBook((prevBook) => {
+        const currentCategories = Array.isArray(prevBook.category) ? prevBook.category : [];
+        const alreadySelected = currentCategories.includes(categoryName);
+        const updatedCategories = alreadySelected
+            ? currentCategories.filter((c) => c !== categoryName)
+            : [...currentCategories, categoryName];
+        return { ...prevBook, category: updatedCategories };
+    });
+};
 
     const handleEdit = (item) => {
         setEditId(item._id);
@@ -91,7 +118,8 @@ const BookUpload = ({ loggedInUser = "" }) => {
             authorName: item.authorName || "",
             price: item.price || "",
             bookImg: item.bookImg || "",
-            language: item.language || ""
+            language: item.language || "",
+            category: Array.isArray(item?.category)? item.category : []
         });
     };
 
@@ -109,6 +137,11 @@ const BookUpload = ({ loggedInUser = "" }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if(!book.category || book.category.length === 0){
+            handleError("Please select at least on category");
+            return;
+        }
+
         try {
             const bookData = {
                 bookName: book.bookName,
@@ -116,6 +149,7 @@ const BookUpload = ({ loggedInUser = "" }) => {
                 price: Number(book.price),
                 bookImg: book.bookImg || "",
                 language: book.language,
+                category: book.category,
                 uploadedBy: uploadedBy
             };
 
@@ -132,7 +166,8 @@ const BookUpload = ({ loggedInUser = "" }) => {
                 authorName: "",
                 price: "",
                 bookImg: "",
-                language: ""
+                language: "",
+                category: []
             });
             setEditId(null);
             fetchBook();
@@ -223,6 +258,21 @@ const BookUpload = ({ loggedInUser = "" }) => {
                                 required
                             />
                         </div>
+                        <div className="input-name">
+                            <label>Category</label>
+                            <div className="category-checkbox-group">
+                               {CATEGORY_OPTION.map((cat)=>(
+                                <label key={cat} className="category-checkbox">
+                                    <input
+                                        type="checkbox"
+                                        checked={Array.isArray(book.category) && book.category.includes(cat)}
+                                        onChange={() => handleCategoryToggle(cat)}
+                                    />
+                                    {cat}
+                                </label>
+                               ))} 
+                            </div>
+                        </div>
 
                         <button type="submit" className="submit-btn">{editId ? "Update Book" : "Upload Book"}</button>
                     </form>
@@ -241,6 +291,7 @@ const BookUpload = ({ loggedInUser = "" }) => {
                                         <th>Price</th>
                                         <th>Cover</th>
                                         <th>Language</th>
+                                        <th>Category</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -260,6 +311,18 @@ const BookUpload = ({ loggedInUser = "" }) => {
                                                         )}
                                                     </td>
                                                     <td><span className="lang-badge">{item.language}</span></td>
+                                                    <td>
+                                                        {Array.isArray(item.category) && item.category.length > 0 ? (
+                                                            item.category.map((c)=>(
+                                                                <span key={c} className="lang-badge">
+                                                                    {c}
+                                                                </span>
+                                                            ))
+                                                        ):(
+                                                            <span className="no-img">None</span>
+                                                        )
+                                                        }
+                                                    </td>
                                                     <td className="action-cells">
                                                         <button className="btn-edit" onClick={() => handleEdit(item)}>
                                                             Edit
@@ -273,7 +336,7 @@ const BookUpload = ({ loggedInUser = "" }) => {
                                             ))
                                         ) : (
                                             <tr>
-                                                <td colSpan="6" className="empty-row">No books found. Add one above!</td>
+                                                <td colSpan="7" className="empty-row">No books found. Add one above!</td>
                                             </tr>
                                         )
                                     }

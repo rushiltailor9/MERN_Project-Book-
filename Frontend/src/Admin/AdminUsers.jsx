@@ -11,7 +11,9 @@ const AdminUsers = () => {
   const [loading, setLoading] = useState(true);
   const [allUsers, setAllUsers] = useState([]);
 
-    const fetchUser = async() =>{
+    
+    useEffect(()=>{
+      const fetchUser = async() =>{
         try{
             const response = await getUsers();
             console.log(response.data)
@@ -25,7 +27,6 @@ const AdminUsers = () => {
             setLoading(false);
         }
     }
-    useEffect(()=>{
       fetchUser();
     },[])
     if(loading){

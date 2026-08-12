@@ -11,19 +11,21 @@ const Books = () => {
   const [allBooks, setAllBooks] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchBooks = async() =>{
-    try{
-      const response = await getBooks();
-      // console.log(response.data);
-      setBooks(response.data);
-      setAllBooks(response.data);
-    }catch(error){
-      console.log(error)
-    }finally{
-      setLoading(false);
-    }
-  }
+  
   useEffect(()=>{
+    const fetchBooks = async() =>{
+      try{
+        const response = await getBooks();
+        // console.log(response.data);
+        setBooks(response.data);
+        setAllBooks(response.data);
+      }catch(error){
+        console.log(error)
+      }finally{
+        setLoading(false);
+      }
+    }
+
     fetchBooks();
   },[]);
   if(loading){

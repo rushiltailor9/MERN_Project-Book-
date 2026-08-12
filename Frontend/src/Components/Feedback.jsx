@@ -1,6 +1,7 @@
 import "../CSS/Feedback.css";
 import { sendFeedback } from "../API/feedbackApi"
 import { useEffect, useState } from "react";
+import { handleSuccess, handleError } from "../utils";
 
 const getUserDetails = (loggedInUser = "") => {
     if (loggedInUser) {
@@ -62,7 +63,7 @@ const Feedback = ({ loggedInUser = "" }) => {
     
                 const response = await sendFeedback(fromData);
     
-                alert(response.data.message || "Message Sent Successfully");
+                handleSuccess(response.data.message || "Feedback Sent Successfully");
     
                 setFromData({
                     name: "",
@@ -72,7 +73,7 @@ const Feedback = ({ loggedInUser = "" }) => {
                     message:""
                 })
             }catch(error){
-                alert("Something went wrong...",error);
+                handleError(error.response?.data?.message || "Something went wrong...");
             }finally{
                 setLoading(false);
             }

@@ -18,7 +18,10 @@ export const getCart = () => API.get("/");
 
 export const deleteCart = (id) => API.delete(`/delete/${id}`);
 
+export const deleteCartItem = deleteCart;
+
 export const updateQuantity = (id, quantity) =>
   API.put(`/update/${id}`, { quantity });
 
 export const clearCart = () => API.delete("/delete");
+

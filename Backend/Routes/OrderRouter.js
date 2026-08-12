@@ -1,7 +1,20 @@
 const express = require("express");
-const {placeOrder} = require("../Controllers/OrderController");
+const authMiddleware = require("../Middleware/AuthMiddleware");
+const {
+    placeOrder,
+    getUserOrders,
+    getAllOrders,
+    updateOrderStatus
+} = require("../Controllers/OrderController");
+
 const router = express.Router();
 
-router.post("/",placeOrder);
+// Apply auth middleware to protect order routes
+router.use(authMiddleware);
 
-module.exports = router;
+router.post("/", placeOrder);
+router.get("/my-orders", getUserOrders);
+router.get("/all", getAllOrders);
+router.put("/status/:id", updateOrderStatus);
+
+module.exports = router;

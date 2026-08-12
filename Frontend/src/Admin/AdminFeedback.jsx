@@ -9,19 +9,18 @@ const AdminFeedback = () => {
     const [feedbacks, setFeedbacks] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const fetchFeedbacks = async () => {
-        try {
-            const response = await getFeedback();
-            console.log("Feedback Data:", response);
-            setFeedbacks(response.contacts);
-        } catch (error) {
-            console.log("Error:", error);
-        } finally {
-            setLoading(false);
-        }
-    };
-
     useEffect(() => {
+        const fetchFeedbacks = async () => {
+            try {
+                const response = await getFeedback();
+                console.log("Feedback Data:", response);
+                setFeedbacks(response.contacts);
+            } catch (error) {
+                console.log("Error:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
         fetchFeedbacks();
     }, []);
 
