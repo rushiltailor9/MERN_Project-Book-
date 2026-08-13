@@ -1,88 +1,131 @@
+/* =========================
+   AUTH CONTAINER & FORM
+========================= */
+
 .auth-container {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 88vh;
-    background-color: #111111;
+    background-color: var(--color-canvas); /* Pure White */
+    padding: 24px; /* Added padding to prevent touching screen edges on mobile */
 }
 
 .auth-form {
-    background: #18191d;
+    background-color: var(--color-surface); /* Very soft cool slate */
     padding: 40px;
-    border-radius: 16px;
-    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.35);
+    border-radius: var(--radius-card); /* 16px */
+    box-shadow: var(--shadow-ambient); /* Soft ambient micro-shadow */
     width: 100%;
     max-width: 420px;
     display: flex;
     flex-direction: column;
-    gap: 18px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    gap: 20px;
+    border: 1px solid var(--color-border); /* Subtle 1px structural border */
 }
 
 .auth-form h2 {
     text-align: center;
-    margin-bottom: 6px;
-    color: #f8fafc;
+    margin-bottom: 8px;
+    color: var(--text-primary); /* Deep Slate Black */
+    font-weight: 700;
+    letter-spacing: -0.02em;
 }
+
+/* =========================
+   INPUT FIELDS
+========================= */
 
 .auth-form input {
     padding: 14px 16px;
-    border: 1px solid #303033;
-    border-radius: 10px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-btn); /* 8px */
     font-size: 1rem;
     font-family: inherit;
-    background: #121214;
-    color: #e5e7eb;
+    background-color: var(--color-canvas); /* White inputs inside off-white card for depth */
+    color: var(--text-primary);
+    transition: var(--transition-smooth);
 }
 
 .auth-form input::placeholder {
-    color: #94a3b8;
+    color: #94A3B8; /* Lighter muted gray specifically for placeholders */
 }
 
 .auth-form input:focus {
     outline: none;
-    border-color: #f8fafc;
-    box-shadow: 0 0 0 3px rgba(248, 250, 252, 0.12);
+    border-color: var(--accent-primary);
+    /* Modern focus ring using the Royal Blue accent */
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15); 
 }
+
+/* =========================
+   SUBMIT BUTTON
+========================= */
 
 .auth-form button {
     padding: 14px;
-    background-color: #111111;
-    color: #f8fafc;
-    border: 1px solid #4b5563;
-    border-radius: 10px;
+    background-color: var(--accent-primary); /* Vibrant Royal Blue */
+    color: #FFFFFF;
+    border: none;
+    border-radius: var(--radius-btn); /* 8px */
     font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.2s ease;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.24);
+    transition: var(--transition-smooth);
+    margin-top: 4px;
 }
 
-.auth-form button:hover {
-    background-color: #27272a;
+.auth-form button:hover:not(:disabled) {
+    background-color: var(--accent-primary-hover);
     transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2); /* Subtle blue glow on hover */
 }
 
 .auth-form button:disabled {
-    background-color: #27272a;
-    color: #94a3b8;
+    background-color: #E2E8F0; /* Light gray */
+    color: #94A3B8; /* Muted gray */
     cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
 }
+
+/* =========================
+   SWITCH LINKS (Login <-> Register)
+========================= */
 
 .auth-switch {
     text-align: center;
     font-size: 0.9rem;
-    color: #cbd5e1;
+    color: var(--text-muted); /* Medium Gray */
+    margin-top: 4px;
 }
 
 .auth-switch a {
-    color: #f8fafc;
+    color: var(--accent-primary);
     text-decoration: none;
+    font-weight: 500;
+    margin-left: 4px;
+    transition: var(--transition-smooth);
 }
 
+.auth-switch a:hover {
+    color: var(--accent-primary-hover);
+    text-decoration: underline;
+}
+
+/* =========================
+   ERROR STATE
+========================= */
+
 .auth-error {
-    background-color: rgba(248, 113, 113, 0.12);
-    color: #f8d7da;
-    padding: 10px 14px;
-    border-radius: 8px;
+    background-color: rgba(239, 68, 68, 0.1); /* Very soft transparent red */
+    color: #B91C1C; /* Deep, highly legible red for light mode */
+    padding: 12px 16px;
+    border-radius: var(--radius-btn);
     font-size: 0.9rem;
+    font-weight: 500;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }

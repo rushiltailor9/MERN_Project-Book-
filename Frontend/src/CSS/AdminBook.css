@@ -1,135 +1,207 @@
 /* =========================
-   Admin Books Page
+   ADMIN BOOKS PAGE
 ========================= */
 
 .admin-books {
-    padding: 25px;
     width: 100%;
-    color: #e5e7eb;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    box-sizing: border-box;
+    color: var(--text-primary);
 }
+
+/* =========================
+   HEADER & COUNTER BADGE
+========================= */
 
 .books-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 25px;
+    margin-bottom: 32px;
+    gap: 20px;
 }
 
 .books-header h2 {
     margin: 0;
-    font-size: 28px;
-    color: #f8fafc;
+    font-size: 1.85rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
 }
 
 .books-header span {
-    background: #1f2126;
-    color: #f8fafc;
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 16px;
+    background-color: var(--color-surface);
+    color: var(--text-primary);
     font-weight: 700;
-    padding: 10px 16px;
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 0.875rem;
+    border-radius: var(--radius-card);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-ambient);
 }
+
+/* =========================
+   BOOKS TABLE CONTAINER
+========================= */
 
 .books-table-container {
     width: 100%;
+    background-color: var(--color-surface);
+    border-radius: var(--radius-card);
     overflow-x: auto;
-    border-radius: 14px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-ambient);
 }
+
+/* =========================
+   BOOKS TABLE
+========================= */
 
 .books-table {
     width: 100%;
     border-collapse: collapse;
-    background: #1f2126;
+    min-width: 650px;
+    background-color: var(--color-canvas);
 }
 
-.books-table th,
-.books-table td {
-    padding: 14px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    text-align: left;
+.books-table thead {
+    background-color: #F1F5F9;
 }
 
 .books-table th {
-    background: #181a1f;
-    font-weight: 600;
-    color: #9ca3af;
-    font-size: 13px;
+    padding: 14px 20px;
+    text-align: left;
+    font-size: 0.775rem;
+    font-weight: 700;
+    color: var(--text-muted);
     text-transform: uppercase;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--color-border);
 }
 
 .books-table td {
-    color: #d1d5db;
-    font-size: 14px;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--color-border);
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    vertical-align: middle;
 }
 
 .books-table tbody tr {
-    transition: background 0.2s;
+    transition: var(--transition-smooth);
 }
 
 .books-table tbody tr:hover {
-    background: rgba(255, 255, 255, 0.04);
+    background-color: #F8FAFC;
 }
 
 .books-table tbody tr:last-child td {
     border-bottom: none;
 }
 
+/* =========================
+   BOOK COVER THUMBNAIL
+========================= */
+
 .admin-book-image {
-    width: 60px;
-    height: 80px;
+    width: 52px;
+    height: 72px;
     object-fit: cover;
-    border-radius: 5px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    border: 1px solid var(--color-border);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
+
+/* =========================
+   ACTION BUTTONS
+========================= */
 
 .edit-btn,
 .delete-btn {
-    border: none;
-    padding: 8px 12px;
+    border: 1px solid transparent;
+    padding: 8px 14px;
     margin-right: 6px;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
+    font-size: 0.825rem;
     font-weight: 600;
-    transition: background 0.2s, transform 0.2s;
+    transition: var(--transition-smooth);
 }
 
 .edit-btn {
-    background: #3a3a3e;
-    color: #ffffff;
+    background-color: #EFF6FF;
+    color: var(--accent-primary);
+    border-color: rgba(37, 99, 235, 0.2);
 }
 
 .edit-btn:hover {
-    background: #4b4b50;
+    background-color: #DBEAFE;
     transform: translateY(-1px);
 }
 
 .delete-btn {
-    background: #2a2a2e;
-    color: #d1d5db;
+    background-color: #FEF2F2;
+    color: #DC2626;
+    border-color: rgba(220, 38, 38, 0.2);
 }
 
 .delete-btn:hover {
-    background: #3a3a3e;
+    background-color: #FEE2E2;
     transform: translateY(-1px);
 }
 
+/* =========================
+   EMPTY, LOADING & ERROR
+========================= */
+
 .loading {
-    padding: 30px;
-    color: #9ca3af;
+    padding: 40px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    font-weight: 500;
 }
 
 .error {
-    color: #ef4444;
+    color: #DC2626;
+    font-weight: 600;
+    padding: 16px;
+    background-color: #FEF2F2;
+    border-radius: var(--radius-card);
+    border: 1px solid rgba(220, 38, 38, 0.2);
 }
 
 .no-books {
-    padding: 40px;
     text-align: center;
-    background: #1f2126;
-    color: #6b7280;
-    border-radius: 14px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 60px 20px;
+    background-color: var(--color-surface);
+    color: var(--text-muted);
+    border-radius: var(--radius-card);
+    border: 2px dashed var(--color-border);
+    box-shadow: var(--shadow-ambient);
+    font-size: 0.95rem;
+}
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
+@media (max-width: 768px) {
+    .admin-books {
+        padding: 24px 16px;
+    }
+
+    .books-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .books-header span {
+        align-self: flex-start;
+    }
 }

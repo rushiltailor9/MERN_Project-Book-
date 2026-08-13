@@ -1,163 +1,147 @@
 /* =========================
-   Admin Users Page
+   ADMIN USERS PAGE
 ========================= */
 
 .users-page {
-    padding: 30px;
     width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px;
     box-sizing: border-box;
-    color: #e5e7eb;
+    color: var(--text-primary);
 }
 
-
 /* =========================
-   Header
+   HEADER & STAT BADGE
 ========================= */
 
 .users-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 32px;
+    gap: 20px;
 }
 
 .users-header h1 {
     margin: 0;
-    font-size: 28px;
+    font-size: 1.85rem;
     font-weight: 700;
-    color: #f8fafc;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
 }
 
 .users-header p {
     margin: 6px 0 0;
-    color: #9ca3af;
-    font-size: 14px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
 }
 
-
-/* =========================
-   Total Users
-========================= */
+/* Total Users Metric Card */
 
 .total-users {
     display: flex;
     align-items: center;
-    gap: 14px;
-
-    padding: 14px 22px;
-
-    background: #1f2126;
-
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    gap: 16px;
+    padding: 14px 24px;
+    background-color: var(--color-surface);
+    border-radius: var(--radius-card);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-ambient);
 }
 
 .total-users > span {
-    width: 45px;
-    height: 45px;
-
+    width: 44px;
+    height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
-
-    background: #2a2a2e;
-
-    border-radius: 10px;
-
-    font-size: 22px;
+    background-color: #EFF6FF;
+    border: 1px solid rgba(37, 99, 235, 0.2);
+    border-radius: 12px;
+    font-size: 1.25rem;
+    color: var(--accent-primary);
 }
 
 .total-users small {
     display: block;
-    color: #9ca3af;
-    font-size: 12px;
+    color: var(--text-muted);
+    font-size: 0.775rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
 }
 
 .total-users strong {
     display: block;
     margin-top: 2px;
-
-    font-size: 24px;
-    color: #f8fafc;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1;
 }
 
-
 /* =========================
-   Table Container
+   USERS TABLE CONTAINER
 ========================= */
 
 .users-table-container {
     width: 100%;
-
-    background: #1f2126;
-
-    border-radius: 14px;
-
+    background-color: var(--color-surface);
+    border-radius: var(--radius-card);
     overflow-x: auto;
-
-    border: 1px solid rgba(255, 255, 255, 0.08);
-
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-ambient);
 }
 
-
 /* =========================
-   Table
+   USERS TABLE
 ========================= */
 
 .users-table {
     width: 100%;
-
     border-collapse: collapse;
-
     min-width: 650px;
+    background-color: var(--color-canvas);
 }
 
 .users-table thead {
-    background: #181a1f;
+    background-color: #F1F5F9;
 }
 
 .users-table th {
-    padding: 16px 18px;
-
+    padding: 14px 20px;
     text-align: left;
-
-    font-size: 14px;
-
-    font-weight: 600;
-
-    color: #9ca3af;
-
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 0.775rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--color-border);
 }
 
 .users-table td {
-    padding: 16px 18px;
-
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-
-    font-size: 14px;
-
-    color: #d1d5db;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--color-border);
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    vertical-align: middle;
 }
 
 .users-table tbody tr {
-    transition: 0.2s;
+    transition: var(--transition-smooth);
 }
 
 .users-table tbody tr:hover {
-    background: rgba(255, 255, 255, 0.04);
+    background-color: #F8FAFC;
 }
 
 .users-table tbody tr:last-child td {
     border-bottom: none;
 }
 
-
 /* =========================
-   User Details
+   USER DETAILS & AVATAR
 ========================= */
 
 .user-details {
@@ -167,104 +151,82 @@
 }
 
 .user-avatar {
-    width: 42px;
-    height: 42px;
-
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-
     border-radius: 50%;
-
-    background: #3a3a3e;
-
-    font-size: 16px;
-
+    background-color: #EFF6FF;
+    border: 1px solid rgba(37, 99, 235, 0.2);
+    font-size: 0.95rem;
     font-weight: 700;
-
-    color: white;
-
+    color: var(--accent-primary);
     flex-shrink: 0;
 }
 
 .user-details strong {
-    color: #f8fafc;
-
-    font-size: 14px;
+    color: var(--text-primary);
+    font-size: 0.925rem;
+    font-weight: 600;
 }
 
-
 /* =========================
-   No Users
+   EMPTY & LOADING STATES
 ========================= */
 
 .no-users {
     text-align: center;
-
-    padding: 70px 20px;
-
-    background: #1f2126;
-
-    border-radius: 14px;
-
-    border: 1px solid rgba(255, 255, 255, 0.08);
-
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+    padding: 60px 20px;
+    background-color: var(--color-surface);
+    border-radius: var(--radius-card);
+    border: 2px dashed var(--color-border);
+    box-shadow: var(--shadow-ambient);
 }
 
 .no-users h2 {
     margin-bottom: 8px;
-    color: #f8fafc;
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    font-weight: 700;
 }
 
 .no-users p {
     margin: 0;
-
-    color: #6b7280;
+    color: var(--text-muted);
+    font-size: 0.9rem;
 }
 
-
-/* =========================
-   Loading
-========================= */
-
 .user-loading {
-    min-height: 400px;
-
+    min-height: 350px;
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 }
 
 .user-loading h2 {
-    color: #9ca3af;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    font-weight: 600;
 }
 
-
 /* =========================
-   Responsive
+   RESPONSIVE DESIGN
 ========================= */
 
 @media (max-width: 768px) {
-
     .users-page {
-        padding: 20px;
+        padding: 24px 16px;
     }
 
     .users-header {
         flex-direction: column;
-
         align-items: flex-start;
-
-        gap: 20px;
+        gap: 16px;
     }
 
     .total-users {
         width: 100%;
-
         box-sizing: border-box;
     }
-
 }

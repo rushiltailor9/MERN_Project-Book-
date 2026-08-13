@@ -1,719 +1,464 @@
 /* ===========================
-   Upload Page
+   UPLOAD PAGE & CONTAINER
 =========================== */
 
 .upload-page {
     width: 100%;
     min-height: calc(100vh - 60px);
-
     display: flex;
     flex-direction: column;
     align-items: center;
-
     gap: 32px;
-
-    padding: 35px 20px;
-
-    background: #0c0f14;
-    color: #f8fafc;
-
-    font-family:
-        "Segoe UI",
-        Tahoma,
-        Geneva,
-        Verdana,
-        sans-serif;
-
+    padding: 40px 20px;
+    background-color: var(--color-canvas); /* Pure White */
+    color: var(--text-primary);
     box-sizing: border-box;
 }
 
-
 /* ===========================
-   Upload Form
+   UPLOAD FORM CARD
 =========================== */
 
 .upload-form {
     width: 100%;
-    max-width: 500px;
-
+    max-width: 520px;
     display: flex;
     flex-direction: column;
-
-    gap: 16px;
-
-    padding: 30px;
-
-    background: rgb(39, 41, 45);
-
-    border: 1px solid rgba(255, 255, 255, 0.08);
-
-    border-radius: 14px;
-
-    box-shadow:
-        0 12px 30px rgba(0, 0, 0, 0.35);
-
+    gap: 18px;
+    padding: 36px;
+    background-color: var(--color-surface); /* Soft cool slate off-white */
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card); /* 16px */
+    box-shadow: var(--shadow-ambient);
     box-sizing: border-box;
-
-    transition: 0.25s ease;
+    transition: var(--transition-smooth);
 }
-
 
 .upload-form:hover {
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 16px 36px rgba(0, 0, 0, 0.45);
+    box-shadow: var(--shadow-hover);
+    border-color: #CBD5E1;
 }
-
-
-/* ===========================
-   Form Heading
-=========================== */
 
 .upload-form h2 {
-    margin: 0 0 5px;
-
+    margin: 0 0 4px;
     text-align: center;
-
-    color: #f8fafc;
-
-    font-size: 1.7rem;
-
+    color: var(--text-primary);
+    font-size: 1.65rem;
     font-weight: 700;
+    letter-spacing: -0.02em;
 }
-
-
-/* ===========================
-   Upload User
-=========================== */
 
 .upload-user {
-    margin: 0 0 8px;
-
+    margin: 0 0 10px;
     text-align: center;
-
-    color: #94a3b8;
-
-    font-size: 0.95rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
 }
 
-
 .upload-user span {
-    color: #f8fafc;
-
+    color: var(--text-primary);
     font-weight: 700;
 }
 
-
 /* ===========================
-   Input Group
+   INPUT GROUPS & CONTROLS
 =========================== */
 
 .input-group {
     width: 100%;
-
     display: flex;
     flex-direction: column;
-
-    gap: 7px;
+    gap: 8px;
 }
-
 
 .input-group label {
-    color: #cbd5e1;
-
-    font-size: 0.9rem;
-
+    color: var(--text-primary);
+    font-size: 0.875rem;
     font-weight: 600;
 }
-
-
-/* ===========================
-   Inputs
-=========================== */
 
 .upload-form input[type="text"],
 .upload-form input[type="number"],
 .upload-form input[type="file"] {
     width: 100%;
     height: 46px;
-
     padding: 0 14px;
-
-    background: #353535;
-
-    color: #f8fafc;
-
-    border: 1px solid #303033;
-
-    border-radius: 9px;
-
+    background-color: var(--color-canvas); /* Pure white input background for depth */
+    color: var(--text-primary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-btn); /* 8px */
     outline: none;
-
     font-size: 0.95rem;
-
+    font-family: inherit;
     box-sizing: border-box;
-
-    transition: 0.2s ease;
+    transition: var(--transition-smooth);
 }
-
 
 .upload-form input::placeholder {
-    color: #94a3b8;
+    color: #94A3B8;
 }
-
 
 .upload-form input:focus {
-    border-color: #6b7280;
-
-    box-shadow:
-        0 0 0 3px rgba(156, 163, 175, 0.12);
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
-
-/* File Input */
+/* File Input Customization */
 
 .upload-form input[type="file"] {
     height: auto;
-
     min-height: 46px;
-
-    padding: 10px 12px;
-
+    padding: 8px 12px;
     cursor: pointer;
+    font-size: 0.875rem;
+    color: var(--text-muted);
 }
 
+.upload-form input[type="file"]::file-selector-button {
+    background-color: #F1F5F9;
+    color: var(--text-primary);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: 6px 12px;
+    margin-right: 12px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
 
-/* ===========================
-   Submit Button
-=========================== */
+.upload-form input[type="file"]::file-selector-button:hover {
+    background-color: #E2E8F0;
+    color: var(--accent-primary);
+}
+
+/* Submit Button */
 
 .submit-btn {
     width: 100%;
-    height: 46px;
-
-    margin-top: 8px;
-
-    padding: 0 15px;
-
-    background: white;
-
-    color: black;
-
-    border: 1px solid #3f3f46;
-
-    border-radius: 8px;
-
+    height: 48px;
+    margin-top: 10px;
+    padding: 0 20px;
+    background-color: var(--accent-primary); /* Royal Blue */
+    color: #FFFFFF;
+    border: none;
+    border-radius: var(--radius-btn);
     font-size: 0.95rem;
-
     font-weight: 600;
-
     cursor: pointer;
-
-    transition: 0.25s ease;
-
+    transition: var(--transition-smooth);
     box-sizing: border-box;
 }
 
-
 .submit-btn:hover {
-    background: #3f3f46;
-
-    border-color: #52525b;
-
+    background-color: var(--accent-primary-hover);
     transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
 }
 
-
 /* ===========================
-   Table Section
+   TABLE SECTION & CONTAINER
 =========================== */
 
 .table-section {
     width: 100%;
     max-width: 1100px;
-
-    padding: 25px;
-
-    background: #111111;
-
-    border: 1px solid rgba(255, 255, 255, 0.08);
-
-    border-radius: 14px;
-
-    box-shadow:
-        0 12px 30px rgba(0, 0, 0, 0.35);
-
+    padding: 28px;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-ambient);
     box-sizing: border-box;
 }
 
-
-/* ===========================
-   Table Heading
-=========================== */
-
 .table-section h2 {
-    margin: 0 0 18px;
-
+    margin: 0 0 20px;
     padding-left: 12px;
-
-    color: #f8fafc;
-
-    font-size: 1.4rem;
-
+    color: var(--text-primary);
+    font-size: 1.35rem;
     font-weight: 700;
-
-    border-left: 4px solid #cbd5e1;
+    border-left: 4px solid var(--accent-primary);
+    letter-spacing: -0.01em;
 }
-
-
-/* ===========================
-   Table Wrapper
-=========================== */
 
 .table-wrapper {
     width: 100%;
-
     overflow-x: auto;
-
-    border: 1px solid rgba(255, 255, 255, 0.08);
-
-    border-radius: 10px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-btn);
+    background-color: var(--color-canvas);
 }
 
-
 /* ===========================
-   Books Table
+   BOOKS TABLE
 =========================== */
 
 .books-table {
     width: 100%;
-
     min-width: 850px;
-
     border-collapse: collapse;
-
-    background: #111111;
-
-    color: #cbd5e1;
-
+    background-color: var(--color-canvas);
+    color: var(--text-primary);
     font-size: 0.9rem;
 }
 
-
-/* ===========================
-   Table Header
-=========================== */
-
 .books-table thead tr {
-    height: 50px;
-
-    background: #1f2937;
-
-    color: #f8fafc;
+    height: 48px;
+    background-color: #F1F5F9;
+    border-bottom: 1px solid var(--color-border);
 }
-
 
 .books-table th {
-    padding: 12px 15px;
-
-    color: #cbd5e1;
-
-    font-size: 0.8rem;
-
-    font-weight: 600;
-
+    padding: 12px 16px;
+    color: var(--text-muted);
+    font-size: 0.775rem;
+    font-weight: 700;
     text-transform: uppercase;
-
-    letter-spacing: 0.4px;
-
+    letter-spacing: 0.05em;
+    text-align: left;
     white-space: nowrap;
 }
-
-
-/* ===========================
-   Table Data
-=========================== */
 
 .books-table td {
-    height: 65px;
-
-    padding: 10px 15px;
-
-    border-bottom:
-        1px solid rgba(255, 255, 255, 0.08);
-
-    color: #cbd5e1;
-
+    height: 64px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--color-border);
+    color: var(--text-primary);
     vertical-align: middle;
-
     white-space: nowrap;
 }
 
-
 .books-table tbody tr {
-    transition: 0.2s ease;
+    transition: var(--transition-smooth);
 }
-
 
 .books-table tbody tr:hover {
-    background: rgba(255, 255, 255, 0.04);
+    background-color: #F8FAFC;
 }
 
-
-/* ===========================
-   Book Name
-=========================== */
-
 .book-name-cell {
-    color: #f8fafc;
-
+    color: var(--text-primary);
     font-weight: 600;
 }
 
-
-/* ===========================
-   Badges
-=========================== */
+/* Badges */
 
 .price-badge,
 .lang-badge,
 .uploader-badge {
     display: inline-flex;
-
     align-items: center;
-
-    min-height: 28px;
-
-    padding: 3px 10px;
-
-    background: #1f2937;
-
-    color: #e5e7eb;
-
-    border: 1px solid rgba(255, 255, 255, 0.08);
-
-    border-radius: 20px;
-
-    font-size: 0.82rem;
-
+    min-height: 26px;
+    padding: 2px 10px;
+    background-color: #F1F5F9;
+    color: var(--text-primary);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    font-size: 0.8rem;
     font-weight: 600;
-
     box-sizing: border-box;
 }
 
-
-/* ===========================
-   Book Thumbnail
-=========================== */
-
-.book-thumb {
-    width: 55px;
-    height: 65px;
-
-    object-fit: cover;
-
-    display: block;
-
-    background: #1f2937;
-
-    border-radius: 7px;
-
-    box-shadow:
-        0 3px 8px rgba(0, 0, 0, 0.3);
+.price-badge {
+    background-color: #EFF6FF;
+    color: var(--accent-primary);
+    border-color: rgba(37, 99, 235, 0.2);
 }
 
+/* Thumbnail */
 
-/* ===========================
-   No Image
-=========================== */
+.book-thumb {
+    width: 48px;
+    height: 60px;
+    object-fit: cover;
+    display: block;
+    background-color: #F1F5F9;
+    border-radius: 6px;
+    border: 1px solid var(--color-border);
+}
 
 .no-img {
-    color: #94a3b8;
-
+    color: var(--text-muted);
     font-size: 0.8rem;
-
     font-style: italic;
 }
 
-
 /* ===========================
-   Action Cells
+   TABLE ACTIONS
 =========================== */
 
 .action-cells {
-    /* display: flex; */
-
+    display: flex;
     align-items: center;
-
-    gap: 9px;
+    gap: 8px;
 }
-
-
-/* ===========================
-   Edit / Delete Buttons
-=========================== */
 
 .btn-edit,
 .btn-delete {
-    min-width: 74px;
+    min-width: 68px;
     height: 34px;
-
     padding: 0 12px;
-
-    background: #27272a;
-
-    color: #f8fafc;
-
-    border: 1px solid #3f3f46;
-
-    border-radius: 7px;
-
-    font-size: 0.82rem;
-
+    border-radius: 6px;
+    font-size: 0.825rem;
     font-weight: 600;
-
     cursor: pointer;
-
-    transition: 0.2s ease;
+    transition: var(--transition-smooth);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
+.btn-edit {
+    background-color: var(--color-canvas);
+    color: var(--text-primary);
+    border: 1px solid var(--color-border);
+}
 
-.btn-edit:hover,
+.btn-edit:hover {
+    background-color: #F1F5F9;
+    border-color: #CBD5E1;
+    color: var(--accent-primary);
+}
+
+.btn-delete {
+    background-color: transparent;
+    color: #DC2626;
+    border: 1px solid rgba(220, 38, 38, 0.2);
+}
+
 .btn-delete:hover {
-    background: #3f3f46;
-
-    border-color: #52525b;
-
-    transform: translateY(-1px);
+    background-color: rgba(220, 38, 38, 0.08);
+    border-color: #DC2626;
 }
-
-
-/* ===========================
-   Empty Row
-=========================== */
 
 .empty-row {
     height: 80px;
-
     text-align: center;
-
-    color: #94a3b8;
-
+    color: var(--text-muted);
     font-style: italic;
 }
 
+/* ===========================
+   SEARCH BAR
+=========================== */
+
+.search-container {
+    position: relative;
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto 32px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 18px;
+    pointer-events: none;
+}
+
+.search-input {
+    width: 100%;
+    height: 48px;
+    padding: 0 18px 0 48px;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    outline: none;
+    font-size: 0.95rem;
+    font-family: inherit;
+    transition: var(--transition-smooth);
+    background-color: var(--color-surface);
+    color: var(--text-primary);
+    box-sizing: border-box;
+    box-shadow: var(--shadow-ambient);
+}
+
+.search-input:focus {
+    background-color: var(--color-canvas);
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.search-input::placeholder {
+    color: #94A3B8;
+}
 
 /* ===========================
-   Tablet
+   RESPONSIVE DESIGN
 =========================== */
 
 @media (max-width: 900px) {
-
     .upload-page {
         padding: 30px 16px;
     }
 
-
     .table-section {
         max-width: 100%;
-
         padding: 20px;
     }
-
 
     .books-table {
         min-width: 800px;
     }
 }
 
-
-/* ===========================
-   Mobile
-=========================== */
-
 @media (max-width: 768px) {
-
     .upload-page {
         min-height: calc(100vh - 55px);
-
-        gap: 25px;
-
-        padding: 25px 14px;
+        gap: 24px;
+        padding: 24px 14px;
     }
-
 
     .upload-form {
         max-width: 100%;
-
-        padding: 25px 20px;
-
-        border-radius: 12px;
+        padding: 24px 20px;
     }
-
 
     .upload-form h2 {
-        font-size: 1.5rem;
+        font-size: 1.45rem;
     }
-
-
-    .upload-user {
-        font-size: 0.88rem;
-    }
-
-
-    .upload-form input[type="text"],
-    .upload-form input[type="number"] {
-        height: 44px;
-    }
-
-
-    .submit-btn {
-        height: 44px;
-    }
-
 
     .table-section {
         padding: 16px;
-
-        border-radius: 12px;
     }
-
 
     .table-section h2 {
         font-size: 1.2rem;
     }
-
 
     .books-table {
         min-width: 750px;
     }
 }
 
-
-/* ===========================
-   Small Mobile
-=========================== */
-
 @media (max-width: 480px) {
-
     .upload-page {
         padding: 20px 10px;
     }
 
-
     .upload-form {
-        padding: 22px 16px;
+        padding: 20px 16px;
     }
-
-
-    .upload-form h2 {
-        font-size: 1.4rem;
-    }
-
-
-    .input-group label {
-        font-size: 0.85rem;
-    }
-
 
     .upload-form input[type="text"],
-    .upload-form input[type="number"] {
-        height: 42px;
-
-        font-size: 0.9rem;
-    }
-
-
-    .upload-form input[type="file"] {
-        min-height: 42px;
-
-        font-size: 0.85rem;
-    }
-
-
+    .upload-form input[type="number"],
     .submit-btn {
-        height: 42px;
-
+        height: 44px;
         font-size: 0.9rem;
     }
-
 
     .table-section {
         padding: 12px;
     }
 
-
     .book-thumb {
-        width: 50px;
-        height: 60px;
+        width: 42px;
+        height: 52px;
     }
-
 
     .books-table {
         min-width: 700px;
     }
-}
-/* search */
-
-.search-container {
-    position: relative;
-
-    width: 100%;
-    max-width: 500px;
-
-    margin: 0 auto 35px;
-}
-
-
-.search-icon {
-    position: absolute;
-
-    left: 18px;
-    top: 50%;
-
-    transform: translateY(-50%);
-
-    color: #94a3b8;
-
-    font-size: 18px;
-
-    pointer-events: none;
-}
-
-
-.search-input {
-    width: 100%;
-    height: 48px;
-
-    padding: 0 18px 0 48px;
-
-    border: 2px solid #303033;
-
-    border-radius: 30px;
-
-    outline: none;
-
-    font-size: 16px;
-
-    transition: 0.3s;
-
-    background: #111111;
-
-    color: #f8fafc;
-
-    box-sizing: border-box;
-}
-
-
-.search-input:focus {
-    border-color: #6b7280;
-
-    box-shadow:
-        0 0 10px rgba(156, 163, 175, 0.18);
-}
-
-
-.search-input::placeholder {
-    color: #94a3b8;
 }

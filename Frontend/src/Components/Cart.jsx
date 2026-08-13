@@ -119,7 +119,7 @@ const Cart = () => {
                         <button
                             onClick={handleClearCart}
                             className="remove-btn"
-                            style={{ background: "#ef4444" }}
+                            style={{ background: "#ef4444", color:"#FFFFFF" }}
                         >
                             Clear Cart
                         </button>
@@ -184,12 +184,12 @@ const Cart = () => {
                         })}
                     </div>
 
-                    <div className="cart-footer" style={{ marginTop: "30px", display: "flex", justifyContent: "space-between", alignItems: "center", background: "#111", padding: "20px", borderRadius: "12px" }}>
+                    <div className="cart-footer" style={{ marginTop: "30px", display: "flex", justifyContent: "space-between", alignItems: "center", background: "#FFFFFF", padding: "20px",  border:"1px solid #E2E8F0",borderRadius:"12px" }}>
                         <div>
-                            <span style={{ fontSize: "1.2rem", fontWeight: "600", color: "#cbd5e1" }}>
+                            <span style={{ fontSize: "1.2rem", fontWeight: "600", color: "#000000" }}>
                                 Total Amount:
                             </span>
-                            <span style={{ fontSize: "1.5rem", fontWeight: "700", color: "#38bdf8", marginLeft: "10px" }}>
+                            <span style={{ fontSize: "1.5rem", fontWeight: "700", color: "#2563EB", marginLeft: "10px" }}>
                                 ₹{calculateTotal()}
                             </span>
                         </div>

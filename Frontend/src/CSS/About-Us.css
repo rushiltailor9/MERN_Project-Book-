@@ -1,79 +1,126 @@
+/* =========================
+   ABOUT US PAGE
+========================= */
+
 .about-us-page {
-  min-height: 100vh;
-  padding: 3rem 1.5rem;
-  background: #0c0f14;
-  color: #e5e7eb;
+    width: 100%;
+    min-height: 85vh;
+    padding: 60px 20px;
+    box-sizing: border-box;
+    background-color: var(--color-canvas, #f8fafc);
+    color: var(--text-primary, #0f172a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+/* =========================
+   HERO GRID LAYOUT
+========================= */
+
 .about-hero {
-  max-width: 1100px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 2rem;
-  align-items: center;
-  padding: 2rem;
-  border-radius: 24px;
-  background: rgba(255, 255, 255, 0.05);
-  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 32px;
+    align-items: start;
+    padding: 40px;
+    box-sizing: border-box;
+    border-radius: var(--radius-card, 16px);
+    background-color: var(--color-surface, #ffffff);
+    box-shadow: var(--shadow-ambient, 0 4px 20px rgba(0, 0, 0, 0.05));
+    border: 1px solid var(--color-border, #e2e8f0);
+}
+
+/* =========================
+   LEFT MAIN CONTENT
+========================= */
+
+.about-tag {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background-color: #eff6ff;
+    color: var(--accent-primary, #2563eb);
+    border: 1px solid rgba(37, 99, 235, 0.2);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 0.775rem;
 }
 
 .about-content h1 {
-  font-size: 2.4rem;
-  margin: 0.4rem 0 1rem;
-  color: #f8fafc;
-}
-
-.about-tag {
-  display: inline-block;
-  padding: 0.4rem 0.8rem;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.08);
-  color: #cbd5e1;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  font-size: 0.8rem;
+    font-size: 2.1rem;
+    font-weight: 800;
+    line-height: 1.25;
+    margin: 12px 0 16px;
+    color: var(--text-primary, #0f172a);
+    letter-spacing: -0.02em;
 }
 
 .about-content p {
-  font-size: 1rem;
-  line-height: 1.8;
-  margin-bottom: 1rem;
-  color: #d1d5db;
+    font-size: 0.975rem;
+    line-height: 1.7;
+    margin: 0 0 16px;
+    color: var(--text-muted, #64748b);
 }
 
+.about-content p:last-child {
+    margin-bottom: 0;
+}
+
+/* =========================
+   RIGHT HIGHLIGHT CARDS
+========================= */
+
 .about-highlights {
-  display: grid;
-  gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 .highlight-card {
-  padding: 1.2rem;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 20px 24px;
+    border-radius: var(--radius-card, 12px);
+    background-color: var(--color-canvas, #f8fafc);
+    border: 1px solid var(--color-border, #e2e8f0);
+    transition: var(--transition-smooth, all 0.2s ease);
+}
+
+.highlight-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover, 0 10px 25px rgba(0, 0, 0, 0.06));
+    border-color: #cbd5e1;
 }
 
 .highlight-card h3 {
-  margin: 0 0 0.5rem;
-  color: #f8fafc;
+    margin: 0 0 6px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-primary, #0f172a);
 }
 
 .highlight-card p {
-  margin: 0;
-  color: #cbd5e1;
-  line-height: 1.6;
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--text-muted, #64748b);
+    line-height: 1.6;
 }
 
-@media (max-width: 768px) {
-  .about-hero {
-    grid-template-columns: 1fr;
-    padding: 1.4rem;
-  }
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
 
-  .about-content h1 {
-    font-size: 1.8rem;
-  }
+@media (max-width: 900px) {
+    .about-hero {
+        grid-template-columns: 1fr;
+        padding: 28px 20px;
+        gap: 24px;
+    }
+
+    .about-content h1 {
+        font-size: 1.75rem;
+    }
 }

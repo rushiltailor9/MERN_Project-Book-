@@ -1,29 +1,29 @@
 /* =========================
-   NAVBAR
+   NAVBAR (Redesigned - Light Theme)
 ========================= */
 
 .navbar {
     width: 100%;
     height: 80px;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     padding: 0 24px;
-
-    background: #111111;
-    color: #e5e7eb;
-
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.32);
-
+    
+    /* High-end floating effect with frosted glass */
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: var(--shadow-ambient);
+    
     position: sticky;
     top: 0;
     z-index: 1000;
-
     box-sizing: border-box;
 }
-
 
 /* =========================
    LOGO
@@ -32,7 +32,6 @@
 .navbar-logo {
     display: flex;
     align-items: center;
-
     flex-shrink: 0;
 }
 
@@ -40,27 +39,16 @@
     display: flex;
     align-items: center;
     gap: 8px;
-
     height: 42px;
-
     text-decoration: none;
-    color: #e5e7eb;
-
-    font-size: 1.1rem;
-    font-weight: 700;
-    letter-spacing: 0.3px;
-
-    padding: 0 10px;
+    padding: 0 12px;
     border-radius: 999px;
-
-    transition: all 0.2s ease;
+    transition: var(--transition-smooth);
 }
 
 .navbar-logo a:hover {
-    background: rgba(255, 255, 255, 0.12);
-    color: #ffffff;
+    background: var(--color-surface);
 }
-
 
 /* =========================
    LOGO IMAGE
@@ -69,18 +57,13 @@
 .logo {
     width: 34px;
     height: 34px;
-
     object-fit: contain;
-
     border-radius: 0;
-
     padding: 0;
     margin: 0;
-
     background: transparent;
     box-shadow: none;
 }
-
 
 /* =========================
    LOGO TEXT
@@ -89,17 +72,13 @@
 .logo-text {
     display: flex;
     align-items: center;
-
-    color: #f8fafc;
-
+    color: var( --accent-primary);
     gap: 6px;
-
-    font-weight: 800;
-    font-size: 1rem;
-
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: -0.01em;
     white-space: nowrap;
 }
-
 
 /* =========================
    NAVIGATION LINKS
@@ -109,14 +88,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
     list-style: none;
-
     gap: 8px;
-
     margin: 0;
     padding: 0;
-
     flex: 1;
 }
 
@@ -128,30 +103,21 @@
 .navbar-links a {
     display: flex;
     align-items: center;
-
     height: 38px;
-
-    color: #cbd5e1;
-
+    color: var(--text-muted);
     text-decoration: none;
-
     font-size: 0.95rem;
     font-weight: 500;
-
-    padding: 0 12px;
-
+    padding: 0 16px;
     border-radius: 999px;
-
-    transition: all 0.2s ease;
-
+    transition: var(--transition-smooth);
     white-space: nowrap;
 }
 
 .navbar-links a:hover {
-    color: #ffffff;
-    background: rgba(255, 255, 255, 0.12);
+    color: var(--accent-primary);
+    background-color: var(--color-surface);
 }
-
 
 /* =========================
    AUTH SECTION
@@ -160,69 +126,56 @@
 .navbar-auth {
     display: flex;
     align-items: center;
-
-    gap: 8px;
-
+    gap: 12px;
     flex-shrink: 0;
 }
 
-
 /* =========================
-   LOGIN / REGISTER BUTTON
+   LOGIN / REGISTER BUTTON (Secondary)
 ========================= */
 
 .auth-icon-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-
     min-width: 68px;
-    height: 36px;
-
-    padding: 0 12px;
-
-    border-radius: 999px;
-
+    height: 38px;
+    padding: 0 16px;
+    border-radius: var(--radius-btn);
     text-decoration: none;
-
-    color: #cbd5e1;
-
-    border: 1px solid rgba(255, 255, 255, 0.14);
-
-    background-color: rgba(255, 255, 255, 0.04);
-
+    
+    color: var(--text-primary);
+    background-color: var(--color-canvas);
+    border: 1px solid var(--color-border);
+    
     font-size: 0.9rem;
-
-    transition: all 0.18s ease;
-
+    font-weight: 500;
+    transition: var(--transition-smooth);
     box-sizing: border-box;
 }
 
 .auth-icon-btn:hover {
-    background-color: rgba(255, 255, 255, 0.14);
-
-    color: #ffffff;
-
-    border-color: rgba(255, 255, 255, 0.24);
+    background-color: var(--color-surface);
+    border-color: #CBD5E1;
+    transform: translateY(-1px);
 }
-
 
 /* =========================
    PRIMARY AUTH BUTTON
 ========================= */
 
 .auth-icon-btn--primary {
-    background-color: #111111;
-
-    color: #f8fafc;
-
-    border-color: #4b5563;
+    background-color: var(--accent-primary);
+    color: #FFFFFF;
+    border: none;
 }
 
 .auth-icon-btn--primary:hover {
-    background-color: #27272a;
+    background-color: var(--accent-primary-hover);
+    border: none;
+    color: #FFFFFF;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
 }
-
 
 /* =========================
    ACCOUNT ICON
@@ -232,35 +185,26 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
-    width: 36px;
-    height: 36px;
-
+    width: 38px;
+    height: 38px;
     padding: 0;
-
     border-radius: 50%;
-
     text-decoration: none;
-
-    color: #f8fafc;
-
-    border: 1px solid rgba(255, 255, 255, 0.14);
-
-    background-color: rgba(255, 255, 255, 0.04);
-
-    transition: all 0.18s ease;
-
+    
+    color: var(--text-primary);
+    background-color: var(--color-canvas);
+    border: 1px solid var(--color-border);
+    
+    transition: var(--transition-smooth);
     box-sizing: border-box;
 }
 
 .account-icon-btn:hover {
-    background-color: rgba(255, 255, 255, 0.14);
-
-    color: #ffffff;
-
-    border-color: rgba(255, 255, 255, 0.24);
+    background-color: var(--color-surface);
+    border-color: #CBD5E1;
+    color: var(--accent-primary);
+    transform: translateY(-1px);
 }
-
 
 /* =========================
    USER NAME
@@ -268,182 +212,134 @@
 
 .navbar-user-name {
     max-width: 140px;
-
     overflow: hidden;
-
     text-overflow: ellipsis;
-
     white-space: nowrap;
-
+    
     font-weight: 600;
-
-    color: #f8fafc;
-
+    color: var(--text-primary);
     font-size: 0.9rem;
-
-    padding: 6px 10px;
-
-    background: rgba(255, 255, 255, 0.06);
-
+    padding: 6px 12px;
+    
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
     border-radius: 999px;
 }
-
 
 /* =========================
    TABLET
 ========================= */
 
 @media (max-width: 900px) {
-
     .navbar {
         padding: 0 16px;
     }
-
     .navbar-links {
         gap: 4px;
     }
-
     .navbar-links a {
-        padding: 0 9px;
+        padding: 0 12px;
         font-size: 0.9rem;
     }
-
     .navbar-user-name {
         max-width: 100px;
     }
 }
-
 
 /* =========================
    MOBILE
 ========================= */
 
 @media (max-width: 768px) {
-
     .navbar {
-        min-height: 64px;
+        min-height: 70px;
         height: auto;
-
-        padding: 8px 14px;
-
+        padding: 12px 16px;
         flex-wrap: wrap;
-
-        gap: 8px;
+        gap: 12px;
     }
-
 
     .navbar-logo {
         height: 42px;
     }
 
-
     .navbar-links {
         order: 3;
-
         width: 100%;
-
         flex: none;
-
-        justify-content: center;
-
-        gap: 4px;
-
+        justify-content: flex-start;
+        gap: 8px;
+        padding-top: 8px;
         padding-bottom: 4px;
-
+        border-top: 1px solid var(--color-border);
         overflow-x: auto;
+        
+        /* Hide scrollbar for cleaner look */
+        scrollbar-width: none;
     }
-
-
-    .navbar-links a {
-        height: 34px;
-
-        padding: 0 9px;
-
-        font-size: 0.85rem;
-    }
-
-
-    .navbar-auth {
-        margin-left: auto;
-
-        gap: 6px;
-    }
-
-
-    .auth-icon-btn {
-        min-width: 60px;
-
-        height: 34px;
-
-        padding: 0 9px;
-
-        font-size: 0.85rem;
-    }
-
-
-    .account-icon-btn {
-        width: 34px;
-        height: 34px;
-    }
-
-
-    .navbar-user-name {
+    
+    .navbar-links::-webkit-scrollbar {
         display: none;
     }
 
+    .navbar-links a {
+        height: 36px;
+        padding: 0 12px;
+        font-size: 0.875rem;
+        background-color: var(--color-surface); /* Slight background for mobile scrollability */
+    }
+
+    .navbar-auth {
+        margin-left: auto;
+        gap: 8px;
+    }
+
+    .auth-icon-btn {
+        min-width: 60px;
+        height: 36px;
+        padding: 0 12px;
+        font-size: 0.85rem;
+    }
+
+    .account-icon-btn {
+        width: 36px;
+        height: 36px;
+    }
+
+    .navbar-user-name {
+        display: none; /* Keep hidden on mobile to save space */
+    }
 
     .logo {
-        width: 32px;
-        height: 32px;
+        width: 30px;
+        height: 30px;
     }
-
 
     .logo-text {
-        font-size: 0.95rem;
+        font-size: 1rem;
     }
 }
-
 
 /* =========================
    SMALL MOBILE
 ========================= */
 
 @media (max-width: 480px) {
-
     .navbar {
-        padding: 7px 10px;
+        padding: 10px 12px;
     }
-
 
     .navbar-logo a {
-        padding: 0 5px;
+        padding: 0 4px;
     }
-
-
-    .navbar-links {
-        justify-content: flex-start;
-
-        overflow-x: auto;
-
-        scrollbar-width: none;
-    }
-
-
-    .navbar-links::-webkit-scrollbar {
-        display: none;
-    }
-
 
     .navbar-links a {
-        font-size: 0.82rem;
-
-        padding: 0 8px;
+        font-size: 0.85rem;
+        padding: 0 10px;
     }
-
 
     .auth-icon-btn {
         min-width: 55px;
-
-        padding: 0 8px;
+        padding: 0 10px;
     }
 }

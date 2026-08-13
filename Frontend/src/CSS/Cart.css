@@ -1,383 +1,251 @@
 /* ===========================
-   Cart Link
+   CART NAVBAR LINK & BADGE
 =========================== */
 
 .cart-link {
     display: flex;
     align-items: center;
     justify-content: center;
-
     gap: 8px;
-
-    min-width: 90px;
-    height: 40px;
-
-    padding: 0 14px;
-
+    min-width: 36px;
+    height: 38.5px;
+    padding: 0 16px;
     text-decoration: none;
-
-    color: #f8fafc;
-
-    font-size: 16px;
+    color: var(--text-primary);
+    font-size: 0.95rem;
     font-weight: 600;
-
-    border-radius: 30px;
-
-    transition: all 0.3s ease;
-
+    border-radius: 999px;
+    transition: var(--transition-smooth);
     position: relative;
-
-    background: rgba(255, 255, 255, 0.06);
-
-    border: 1px solid rgba(255, 255, 255, 0.08);
-
+    background-color: var(--color-canvas);
+    border: 1px solid var(--color-border);
     box-sizing: border-box;
 }
 
-
 .cart-link:hover {
-    background: rgba(255, 255, 255, 0.12);
-
-    color: #ffffff;
-
-    border-color: rgba(255, 255, 255, 0.16);
+    background-color: #F1F5F9;
+    color: var(--accent-primary);
+    border-color: #CBD5E1;
 }
-
-
-/* ===========================
-   Cart Icon
-=========================== */
 
 .cart-icon {
-    font-size: 22px;
-
-    color: #cbd5e1;
-
-    transition: transform 0.3s ease;
+    font-size: 20px;
+    color: var(--text-muted);
+    transition: transform 0.2s ease, color 0.2s ease;
 }
-
 
 .cart-link:hover .cart-icon {
     transform: scale(1.1);
-
-    color: #ffffff;
+    color: var(--accent-primary);
 }
-
-
-/* ===========================
-   Cart Text
-=========================== */
 
 .cart-text {
-    font-size: 15px;
-
+    font-size: 0.95rem;
     white-space: nowrap;
 }
-
-
-/* ===========================
-   Cart Count
-=========================== */
 
 .cart-count {
     min-width: 20px;
     height: 20px;
-
-    padding: 0 5px;
-
+    padding: 0 6px;
     display: flex;
     align-items: center;
     justify-content: center;
-
-    border-radius: 50%;
-
-    background: #4b5563;
-
-    color: #f8fafc;
-
-    font-size: 11px;
-
+    border-radius: 999px;
+    background-color: var(--accent-primary); /* Vibrant Royal Blue badge */
+    color: #FFFFFF;
+    font-size: 0.75rem;
     font-weight: 700;
-
     box-sizing: border-box;
 }
 
-
 /* ===========================
-   Cart Page
+   CART PAGE CONTAINER
 =========================== */
 
 .cart-page {
     width: 100%;
-    max-width: 900px;
-
+    max-width: 960px;
     margin: 40px auto;
-
     padding: 24px;
-
-    color: #f8fafc;
-
-    background: #0c0f14;
-
+    color: var(--text-primary);
+    background-color: var(--color-canvas); /* Pure White */
     box-sizing: border-box;
 }
 
-
 /* ===========================
-   Cart Header
+   CART HEADER
 =========================== */
 
 .cart-header {
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
-
-    margin-bottom: 24px;
-
-    gap: 15px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--color-border);
+    gap: 16px;
 }
-
 
 .cart-title {
     font-size: 2rem;
-
+    font-weight: 700;
     margin: 0;
-
-    color: #f8fafc;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
 }
 
-
 .cart-total {
-    font-size: 1.1rem;
-
-    font-weight: 600;
-
-    color: #cbd5e1;
-
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-primary);
     white-space: nowrap;
 }
 
-
 /* ===========================
-   Cart List
+   CART LIST & ITEMS
 =========================== */
 
 .cart-list {
     display: grid;
-
-    gap: 16px;
+    gap: 20px;
 }
-
-
-/* ===========================
-   Cart Item
-=========================== */
 
 .cart-item {
     display: flex;
-
     align-items: center;
-
-    gap: 18px;
-
+    gap: 20px;
     width: 100%;
-
-    background: #111111;
-
-    border: 1px solid rgba(255, 255, 255, 0.08);
-
-    border-radius: 14px;
-
-    padding: 16px;
-
-    box-shadow:
-        0 10px 25px rgba(0, 0, 0, 0.28);
-
+    background-color: var(--color-surface); /* Soft cool slate off-white */
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card); /* 16px */
+    padding: 20px;
+    box-shadow: var(--shadow-ambient);
+    transition: var(--transition-smooth);
     box-sizing: border-box;
 }
 
-
-/* ===========================
-   Cart Item Image
-=========================== */
+.cart-item:hover {
+    box-shadow: var(--shadow-hover);
+    border-color: #CBD5E1;
+}
 
 .cart-item-image {
     width: 110px;
     height: 145px;
-
     flex-shrink: 0;
-
-    object-fit: cover;
-
-    border-radius: 10px;
-
-    background: #1f2937;
+    object-fit: contain;
+    border-radius: var(--radius-btn);
+    background-color: #F1F5F9; /* Clean neutral image frame */
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid var(--color-border);
 }
-
-
-/* ===========================
-   Cart Item Details
-=========================== */
 
 .cart-item-details {
     flex: 1;
-
     min-width: 0;
 }
 
-
 .cart-item-details h3 {
     margin: 0 0 8px;
-
-    color: #f8fafc;
-
-    font-size: 18px;
-
+    color: var(--text-primary);
+    font-size: 1.15rem;
+    font-weight: 700;
     line-height: 1.3;
 }
 
-
 .cart-item-details p {
-    margin: 5px 0;
-
-    color: #cbd5e1;
-
-    font-size: 14px;
+    margin: 6px 0;
+    color: var(--text-muted);
+    font-size: 0.925rem;
 }
 
-
 /* ===========================
-   Empty Cart
-=========================== */
-
-.cart-empty {
-    padding: 30px 20px;
-
-    text-align: center;
-
-    background: #111111;
-
-    border: 1px dashed #4b5563;
-
-    border-radius: 12px;
-
-    color: #94a3b8;
-
-    font-size: 15px;
-}
-
-
-/* ===========================
-   Cart Actions
+   CART ACTIONS (QTY & REMOVE)
 =========================== */
 
 .cart-actions {
     display: flex;
-
     align-items: center;
-
-    gap: 8px;
-
-    margin: 12px 0;
+    gap: 12px;
+    margin: 16px 0 0;
 }
-
-
-/* ===========================
-   Quantity Button
-=========================== */
 
 .qty-btn {
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
-    width: 30px;
-    height: 30px;
-
-    border: 1px solid #303033;
-
-    background: #1f2937;
-
-    border-radius: 7px;
-
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-canvas);
+    border-radius: 6px;
     cursor: pointer;
-
-    color: #f8fafc;
-
-    font-size: 16px;
-
-    transition: 0.2s;
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-weight: 600;
+    transition: var(--transition-smooth);
 }
-
 
 .qty-btn:hover {
-    background: #374151;
-
-    border-color: #4b5563;
+    background-color: #F1F5F9;
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
 }
-
-
-/* ===========================
-   Quantity Value
-=========================== */
 
 .qty-value {
     min-width: 28px;
-
     text-align: center;
-
     font-weight: 600;
-
-    color: #f8fafc;
+    color: var(--text-primary);
+    font-size: 0.95rem;
 }
-
-
-/* ===========================
-   Remove Button
-=========================== */
 
 .remove-btn {
-    background: #3f3f46;
-
-    color: #ffffff;
-
-    border: none;
-
-    border-radius: 8px;
-
-    padding: 8px 12px;
-
+    background-color: transparent;
+    color: #DC2626; /* Warning/Danger Red */
+    border: 1px solid rgba(220, 38, 38, 0.2);
+    border-radius: var(--radius-btn);
+    padding: 6px 14px;
     cursor: pointer;
-
-    font-size: 13px;
-
-    transition: 0.2s;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: var(--transition-smooth);
+    margin-left: auto; /* Push remove button to right alignment */
 }
-
 
 .remove-btn:hover {
-    background: #52525b;
+    background-color: rgba(220, 38, 38, 0.08);
+    border-color: #DC2626;
 }
 
+/* ===========================
+   EMPTY CART STATE
+=========================== */
+
+.cart-empty {
+    padding: 48px 24px;
+    text-align: center;
+    background-color: var(--color-surface);
+    border: 2px dashed var(--color-border);
+    border-radius: var(--radius-card);
+    color: var(--text-muted);
+    font-size: 1rem;
+}
 
 /* ===========================
-   Tablet
+   RESPONSIVE DESIGN - TABLET
 =========================== */
 
 @media (max-width: 900px) {
-
     .cart-page {
         max-width: 100%;
-
         padding: 20px;
     }
 
     .cart-item {
-        gap: 15px;
+        gap: 16px;
     }
 
     .cart-item-image {
@@ -386,147 +254,97 @@
     }
 }
 
-
 /* ===========================
-   Mobile
+   RESPONSIVE DESIGN - MOBILE
 =========================== */
 
 @media (max-width: 768px) {
-
-    /* Cart Navbar Link */
-
+    /* Navbar Cart Link Mobile */
     .cart-text {
         display: none;
     }
 
     .cart-link {
         min-width: 40px;
-
         width: 40px;
         height: 40px;
-
         padding: 0;
     }
 
     .cart-icon {
-        font-size: 23px;
+        font-size: 22px;
     }
 
-
-    /* Cart Page */
-
+    /* Cart Page Mobile */
     .cart-page {
-        margin: 25px auto;
-
+        margin: 20px auto;
         padding: 16px;
     }
 
-
-    /* Header */
-
     .cart-header {
-        flex-direction: column;
-
-        align-items: flex-start;
-
-        gap: 6px;
-
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
         margin-bottom: 20px;
     }
 
-
     .cart-title {
-        font-size: 1.7rem;
+        font-size: 1.6rem;
     }
-
 
     .cart-total {
         font-size: 1rem;
     }
 
-
-    /* Cart Item */
-
     .cart-item {
         flex-direction: column;
-
         align-items: stretch;
-
-        gap: 14px;
-
-        padding: 14px;
+        gap: 16px;
+        padding: 16px;
     }
-
 
     .cart-item-image {
         width: 100%;
-
-        height: 240px;
-
+        height: 220px;
         object-fit: contain;
-
-        background: #1f2937;
-
-        border-radius: 10px;
+        background-color: #F1F5F9;
+        border-radius: var(--radius-btn);
     }
-
 
     .cart-item-details h3 {
-        font-size: 17px;
+        font-size: 1.1rem;
     }
-
-
-    .cart-item-details p {
-        font-size: 14px;
-    }
-
 
     .cart-actions {
         margin-top: 12px;
     }
 
-
     .remove-btn {
+        margin-left: 0;
         width: 100%;
-
-        height: 38px;
+        padding: 10px;
+        text-align: center;
     }
 }
 
-
 /* ===========================
-   Small Mobile
+   SMALL MOBILE
 =========================== */
 
 @media (max-width: 400px) {
-
     .cart-page {
         padding: 12px;
     }
 
-
     .cart-title {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
     }
-
 
     .cart-item {
-        padding: 12px;
+        padding: 14px;
     }
-
 
     .cart-item-image {
-        height: 220px;
-    }
-
-
-    .cart-actions {
-        gap: 6px;
-    }
-
-
-    .qty-btn {
-        width: 28px;
-        height: 28px;
+        height: 200px;
     }
 }

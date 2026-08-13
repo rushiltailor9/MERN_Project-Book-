@@ -1,165 +1,222 @@
-﻿/* Home.css */
+﻿/* =========================
+   HOME HERO SECTION
+========================= */
 
 .home-hero {
-  position: relative;
-  min-height: 100vh;
-  overflow: hidden;
-  color: #f8fafc;
-  background: #111111;
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+    color: var(--text-primary);
+    background-color: var(--color-canvas);
 }
 
+/* =========================
+   BACKGROUND & OVERLAY
+========================= */
+
 .hero-bg-wrapper {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
 }
 
 .hero-bg {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  /* opacity: 0.7; */
-  /* filter: saturate(0.9) brightness(0.65) contrast(1.05); */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Softened the image slightly for the light theme */
+    opacity: 0.8; 
 }
 
+/* Replaced the dark gradient with a premium frosted white/light-slate wash */
 .hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(160deg, rgba(17, 17, 17, 0.82) 0%, rgba(17, 17, 17, 0.35) 35%, rgba(17, 17, 17, 0.76) 100%);
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.92) 0%, rgba(248, 250, 252, 0.85) 50%, rgba(255, 255, 255, 0.98) 100%);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
 }
+
+/* =========================
+   HERO CONTENT
+========================= */
 
 .hero-content {
-  position: relative;
-  z-index: 1;
-  max-width: 760px;
-  margin: 0;
-  padding: 100px 64px 40px;
-  text-align: left;
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+    margin: 0;
+    padding: 120px 64px 40px;
+    text-align: left;
 }
 
 .hero-label {
-  display: inline-block;
-  margin-bottom: 24px;
-  letter-spacing: 0.35em;
-  text-transform: uppercase;
-  color: #d1d5db;
-  font-size: 0.85rem;
+    display: inline-block;
+    margin-bottom: 24px;
+    letter-spacing: 0.25em; /* Slightly tighter for better readability */
+    text-transform: uppercase;
+    color: var(--accent-primary); /* Royal Blue for high-end accent */
+    font-size: 0.85rem;
+    font-weight: 700;
 }
 
 .hero-title {
-  font-size: clamp(3rem, 5vw, 5.5rem);
-  line-height: 0.95;
-  max-width: 900px;
-  margin: 0 0 24px;
-  color: #ffffff;
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    line-height: 1.05; /* Slightly relaxed for light mode sans-serif */
+    max-width: 900px;
+    margin: 0 0 24px;
+    color: var(--text-primary);
+    letter-spacing: -0.03em;
 }
 
+/* Emphasized brand/highlight word */
 .readEasy {
-  color: gray;
-  font-weight: 800;
-  font-size: 80px;
+    color: var(--accent-primary);
+    font-weight: 800;
+    font-size: clamp(3.5rem, 6vw, 6rem); /* Made responsive instead of fixed 80px */
+    letter-spacing: -0.04em;
 }
 
 .hero-description {
-  font-size: 1.2rem;
-  max-width: 700px;
-  color: #d1d5db;
-  line-height: 1.8;
-  margin-bottom: 36px;
+    font-size: 1.2rem;
+    max-width: 600px;
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 40px;
 }
 
+/* =========================
+   HERO ACTIONS (Buttons)
+========================= */
+
 .hero-actions {
-  display: flex;
-  gap: 18px;
-  flex-wrap: wrap;
-  justify-content: flex-start;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
 }
 
 .hero-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 180px;
-  padding: 14px 28px;
-  border-radius: 999px;
-  font-size: 1rem;
-  font-weight: 700;
-  text-decoration: none;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 180px;
+    padding: 14px 28px;
+    border-radius: var(--radius-btn); /* Applied our 8px standard */
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition-smooth);
 }
 
 .hero-btn-primary {
-  background: #111111;
-  color: #f8fafc;
-  box-shadow: 0 18px 35px rgba(0, 0, 0, 0.4);
+    background-color: var(--accent-primary);
+    color: #FFFFFF;
+    border: none;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25);
+}
+
+.hero-btn-primary:hover {
+    background-color: var(--accent-primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
 }
 
 .hero-btn-secondary {
-  background: rgba(255, 255, 255, 0.08);
-  color: #f8fafc;
-  border: 1px solid rgba(255, 255, 255, 0.16);
+    background-color: var(--color-canvas);
+    color: var(--text-primary);
+    border: 1px solid var(--color-border);
 }
 
-.hero-btn:hover {
-  transform: translateY(-2px);
+.hero-btn-secondary:hover {
+    background-color: var(--color-surface);
+    border-color: #CBD5E1;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-ambient);
 }
+
+/* =========================
+   HERO FEATURES (Grid)
+========================= */
 
 .hero-features {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 24px;
-  max-width: 1080px;
-  margin: 60px auto 80px;
-  padding: 0 32px;
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    max-width: 1080px;
+    margin: 40px auto 80px;
+    padding: 0 32px;
 }
 
 .feature-card {
-  background: gray(17, 24, 39, 0.88);
-  border: 1px solid rgba(243, 241, 241, 0.08);
-  border-radius: 24px;
-  padding: 28px;
-  backdrop-filter: blur(14px);
-  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.32);
+    background-color: var(--color-surface); /* Very soft cool slate */
+    border: 1px solid var(--color-border); /* Subtle 1px structural border */
+    border-radius: var(--radius-card); /* 16px */
+    padding: 32px 28px;
+    box-shadow: var(--shadow-ambient); /* Removed harsh black shadow */
+    transition: var(--transition-smooth);
+}
+
+.feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+    background-color: var(--color-canvas); /* Brightens up on hover for interactive feel */
 }
 
 .feature-card h3 {
-  margin-bottom: 12px;
-  font-size: 1.1rem;
-  color: #f8fafc;
+    margin-bottom: 12px;
+    font-size: 1.2rem;
+    color: var( --accent-primary);
 }
 
 .feature-card p {
-  margin: 0;
-  color: #d1d5db;
-  line-height: 1.7;
+    margin: 0;
+    color: var(--text-muted);
+    line-height: 1.6;
+    font-size: 0.95rem;
 }
 
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
 @media (max-width: 1024px) {
-  .hero-features {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+    .hero-features {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
 @media (max-width: 768px) {
-  .hero-content {
-    padding: 82px 20px 30px;
-    text-align: left;
-  }
+    .hero-content {
+        padding: 100px 24px 30px;
+        text-align: left;
+    }
 
-  .hero-title {
-    font-size: 3rem;
-  }
+    .hero-title {
+        font-size: 2.8rem;
+    }
 
-  .hero-description {
-    font-size: 1rem;
-    margin-bottom: 28px;
-  }
+    .hero-description {
+        font-size: 1.05rem;
+        margin-bottom: 32px;
+    }
 
-  .hero-features {
-    grid-template-columns: 1fr;
-    margin: 45px auto 60px;
-    padding: 0 18px;
-  }
+    .hero-features {
+        grid-template-columns: 1fr;
+        margin: 20px auto 60px;
+        padding: 0 24px;
+        gap: 16px;
+    }
+    
+    .hero-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .hero-btn {
+        width: 100%; /* Full width buttons on mobile */
+    }
 }

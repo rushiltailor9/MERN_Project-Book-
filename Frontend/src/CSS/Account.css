@@ -1,75 +1,88 @@
-.account-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 60px 20px;
-    gap: 24px;
-    min-height: 86vh;
-    background: #1d1710;
-}
-
-.account-welcome-heading {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #f8f4ef;
-    margin: 0;
-}
-
-.account-logout-btn {
-    padding: 12px 32px;
-    background-color: #d29f68;
-    color: #2a1f14;
-    border: none;
-    border-radius: 10px;
-    font-size: 1rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.1s ease;
-    box-shadow: 0 10px 20px rgba(210, 159, 104, 0.24);
-}
-
-.account-logout-btn:hover {
-    background-color: #b6864a;
-}
+/* =========================
+   ACCOUNT PAGE
+========================= */
 
 .account-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    min-height: 80vh;
     padding: 60px 20px;
-    gap: 24px;
-    min-height: 86vh;
-    background: #0c0f14;
-    color: #e5e7eb;
+    gap: 28px;
+    background-color: var(--color-canvas, #f8fafc);
+    color: var(--text-primary, #0f172a);
+    text-align: center;
+}
+
+/* =========================
+   ACCOUNT CARD / WRAPPER
+========================= */
+
+.account-card {
+    background-color: var(--color-surface, #ffffff);
+    padding: 48px 40px;
+    border-radius: var(--radius-card, 16px);
+    border: 1px solid var(--color-border, #e2e8f0);
+    box-shadow: var(--shadow-ambient, 0 4px 20px rgba(0, 0, 0, 0.05));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    max-width: 440px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .account-welcome-heading {
-    font-size: 2rem;
+    font-size: 1.85rem;
     font-weight: 700;
-    color: #f8fafc;
+    color: var(--text-primary, #0f172a);
     margin: 0;
+    letter-spacing: -0.02em;
 }
+
+/* =========================
+   ACTION BUTTONS
+========================= */
 
 .account-logout-btn {
     padding: 12px 32px;
-    background-color: #27272a;
-    color: #f8fafc;
-    border: none;
+    background-color: #ef4444;
+    color: #ffffff;
+    border: 1px solid transparent;
     border-radius: 10px;
-    font-size: 1rem;
-    font-weight: 700;
+    font-size: 0.95rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.1s ease;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.24);
+    transition: var(--transition-smooth, all 0.2s ease);
+    box-shadow: 0 4px 14px rgba(239, 68, 68, 0.25);
 }
 
 .account-logout-btn:hover {
-    background-color: #3f3f46;
+    background-color: #dc2626;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(239, 68, 68, 0.35);
 }
 
 .account-logout-btn:active {
-    transform: scale(0.98);
+    transform: translateY(0) scale(0.98);
 }
 
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
+@media (max-width: 640px) {
+    .account-container {
+        padding: 32px 16px;
+    }
+
+    .account-card {
+        padding: 32px 20px;
+    }
+
+    .account-welcome-heading {
+        font-size: 1.5rem;
+    }
+}
