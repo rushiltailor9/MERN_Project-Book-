@@ -69,7 +69,7 @@ const AdminOrders = () => {
                   <thead>
                     <tr>
                       <th>Order ID</th>
-                      <th>Customer / Phone</th>
+                      <th>Customer / Phone / City</th>
                       <th>Items</th>
                       <th>Amount</th>
                       <th>Payment</th>
@@ -81,9 +81,9 @@ const AdminOrders = () => {
                       <tr key={order._id}>
                         <td className="order-id">#{order._id.substring(0, 10)}...</td>
                         <td className="customer-info">
-                          <strong>{order.address?.name || "N/A"}</strong>
-                          <span className="info-sub"> ☎ {order.address?.phone || "N/A"}</span>
-                          <span className="info-sub">📍 {order.address?.city || "N/A"}</span>
+                          <strong>{order.address?.name || "N/A"}</strong><br/>
+                          <span className="info-sub">  {order.address?.phone || "N/A"}</span>
+                          <span className="info-sub"> | {order.address?.city || "N/A"}</span>
                         </td>
                         <td className="order-items">
                           {order.items?.map((item, idx) => (

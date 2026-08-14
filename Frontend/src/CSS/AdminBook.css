@@ -187,6 +187,30 @@
 }
 
 /* =========================
+   STOCK STATUS
+========================= */
+
+.admin-in-stock {
+    display: inline-block;
+    padding: 5px 9px;
+    border-radius: 6px;
+    background-color: #DCFCE7;
+    color: #15803D;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.admin-out-stock {
+    display: inline-block;
+    padding: 5px 9px;
+    border-radius: 6px;
+    background-color: #FEE2E2;
+    color: #DC2626;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+/* =========================
    RESPONSIVE DESIGN
 ========================= */
 

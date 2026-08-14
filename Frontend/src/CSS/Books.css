@@ -308,3 +308,127 @@
         flex-direction: column; /* Stack only on very small screens */
     }
 }
+
+/*=============================
+ STOCK OUT OF STOCK
+==============================*/
+
+/* ===========================
+   STOCK STATUS
+=========================== */
+
+.stock-status {
+    margin-top: 10px;
+    margin-bottom: 8px;
+}
+
+.in-stock,
+.out-stock {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.in-stock {
+    background-color: #DCFCE7;
+    color: #15803D;
+}
+
+.out-stock {
+    background-color: #FEE2E2;
+    color: #DC2626;
+}
+
+/* ===========================
+   STOCK STATUS
+=========================== */
+
+.stock-status {
+    margin-top: 10px;
+    margin-bottom: 8px;
+}
+
+.in-stock,
+.out-stock {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.in-stock {
+    background-color: #DCFCE7;
+    color: #15803D;
+}
+
+.out-stock {
+    background-color: #FEE2E2;
+    color: #DC2626;
+}
+
+/* ===========================
+   DISABLED CART BUTTON
+=========================== */
+
+.disabled-cart-btn {
+    background-color: #E5E7EB !important;
+    color: #6B7280 !important;
+    border-color: #D1D5DB !important;
+    cursor: not-allowed !important;
+    opacity: 0.8;
+}
+
+.disabled-cart-btn:hover {
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+.book-card {
+    position: relative;
+}
+
+
+.favorite-btn {
+    position: absolute;
+
+    top: 12px;
+    right: 12px;
+
+    width: 40px;
+    height: 40px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+
+    color: #9ca3af;
+
+    cursor: pointer;
+
+    z-index: 5;
+
+    box-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.15);
+
+    transition: 0.2s ease;
+}
+
+
+.favorite-btn:hover {
+    transform: scale(1.1);
+}
+
+
+.favorite-active {
+    color: #ef4444;
+}

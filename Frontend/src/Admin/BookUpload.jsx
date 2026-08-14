@@ -51,7 +51,8 @@ const BookUpload = ({ loggedInUser = "" }) => {
         price: "",
         bookImg: null,
         language: "",
-        category:[]
+        category:[],
+        stock:0
     });
     const [editId, setEditId] = useState(null);
     const [allBooks, setAllBooks] = useState([]);
@@ -122,7 +123,8 @@ const BookUpload = ({ loggedInUser = "" }) => {
             price: item.price || "",
             bookImg: item.bookImg || "",
             language: item.language || "",
-            category: Array.isArray(item?.category)? item.category : []
+            category: Array.isArray(item?.category)? item.category : [],
+            stock: item.stock ?? 0
         });
     };
 
@@ -153,6 +155,7 @@ const BookUpload = ({ loggedInUser = "" }) => {
                 bookImg: book.bookImg || "",
                 language: book.language,
                 category: book.category,
+                stock: Number(book.stock),
                 uploadedBy: uploadedBy
             };
 
@@ -170,7 +173,8 @@ const BookUpload = ({ loggedInUser = "" }) => {
                 price: "",
                 bookImg: "",
                 language: "",
-                category: []
+                category: [],
+                stock:0
             });
             setEditId(null);
             fetchBook();
@@ -249,7 +253,18 @@ const BookUpload = ({ loggedInUser = "" }) => {
                                 onChange={handleChange}
                             />
                         </div>
-
+                            <div className="input-group">
+                            <label>Stock Quantity</label>
+                            <input 
+                                type="number" 
+                                name="stock" 
+                                value={book.stock ?? 0}
+                                min= "0" 
+                                placeholder="Enter Stock Quantity" 
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
                         <div className="input-group">
                             <label>Language</label>
                             <input 
@@ -261,6 +276,7 @@ const BookUpload = ({ loggedInUser = "" }) => {
                                 required
                             />
                         </div>
+                        
                         <div className="input-name">
                             <label>Category</label>
                             <div className="category-checkbox-group">

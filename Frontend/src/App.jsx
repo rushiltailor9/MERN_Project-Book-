@@ -24,6 +24,7 @@ import AdminFeedback from "./Admin/AdminFeedback";
 import Checkout from "./Components/Checkout";
 import OrderSuccess from "./Components/OrderSuccess";
 import MyOrders from "./Components/MyOrders";
+import Favorites from "./Components/Favorite";
 
 function App() {
     const [isLogin, setIsLogin] = useState(() => Boolean(localStorage.getItem("token")));
@@ -52,6 +53,7 @@ function App() {
                 <Route path="/checkout" element={protectedRoutes({ element: <Checkout /> })}/>
                 <Route path="/order-success" element={protectedRoutes({ element: <OrderSuccess /> })}/>
                 <Route path="/my-orders" element={protectedRoutes({ element: <MyOrders /> })}/>
+                <Route path="/account/favorites" element={ protectedRoutes({ element: <Favorites />})}/>
                 <Route element={<ProtectedAdminRoute/>}>
                     <Route 
                         path="/admin/dashboard"
@@ -77,6 +79,10 @@ function App() {
                         path="/admin/feedback"
                         element={<AdminFeedback/>}
                     />
+                    <Route
+                        path="/account/favorites"
+                        element={<Favorites />}
+                    />
                 </Route>
             </Routes>
             {!isAdminRoute && <Footer isLogin={isLogin} loggedInUser={loggedInUser} />}
@@ -84,4 +90,4 @@ function App() {
     );
 }
 
-export default App;
+export default App;

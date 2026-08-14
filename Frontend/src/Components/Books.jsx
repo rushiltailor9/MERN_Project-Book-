@@ -6,6 +6,15 @@ import { FaSearch } from "react-icons/fa";
 import { addToCart } from "../API/cartApi";
 import { BsBag } from "react-icons/bs";
 import { handleSuccess, handleError } from "../utils";
+import {
+    FaHeart
+} from "react-icons/fa";
+
+import {
+    addFavorite,
+    removeFavorite,
+    getFavorites
+} from "../api/favoriteApi";
 
 const Books = () => {
   const [books, setBooks] = useState([]);
@@ -14,6 +23,7 @@ const Books = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
   const [activeLanguage, setActiveLanguage] = useState("All");
+  const [favoriteIds, setFavoriteIds] = useState([]);
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -114,6 +124,10 @@ const Books = () => {
   };
 
   const handleAddToCart = async (book) => {
+    if(book.stock <= 0){
+      handleError("This Book Is Out of Stock");
+      return;
+    }
     try {
       const response = await addToCart({
         bookId: book._id,
@@ -135,7 +149,141 @@ const Books = () => {
       handleError(message);
     }
   };
+  useEffect(() => {
 
+    const fetchFavorites = async () => {
+
+        const token =
+            localStorage.getItem("token");
+
+
+        // User is not logged in
+        if (!token) {
+            setFavoriteIds([]);
+            return;
+        }
+
+
+        try {
+
+            const response =
+                await getFavorites();
+
+
+            const favorites =
+                response.data.favorite || [];
+
+
+            const ids =
+                favorites
+                    .filter((item) => item.bookId)
+                    .map((item) => item.bookId._id);
+
+
+            setFavoriteIds(ids);
+
+        } catch (error) {
+
+            console.error(
+                "Favorite fetch error:",
+                error.response?.data ||
+                error.message
+            );
+
+            // Don't show error for expired/not logged in
+            if (error.response?.status === 401) {
+                setFavoriteIds([]);
+            }
+        }
+    };
+
+
+    fetchFavorites();
+
+}, []);
+const handleFavorite = async (bookId) => {
+
+    const token =
+        localStorage.getItem("token");
+
+
+    // User not logged in
+    if (!token) {
+        handleError(
+            "Please login to add favorites."
+        );
+
+        return;
+    }
+
+
+    try {
+
+        // ==================================
+        // REMOVE
+        // ==================================
+
+        if (favoriteIds.includes(bookId)) {
+
+            await removeFavorite(bookId);
+
+
+            setFavoriteIds((prev) =>
+                prev.filter(
+                    (id) => id !== bookId
+                )
+            );
+
+
+            handleSuccess(
+                "Removed from favorites"
+            );
+
+            return;
+        }
+
+
+        // ==================================
+        // ADD
+        // ==================================
+
+        await addFavorite(bookId);
+
+
+        setFavoriteIds((prev) => [
+            ...prev,
+            bookId
+        ]);
+
+
+        handleSuccess(
+            "Added to favorites"
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Favorite Error:",
+            error.response?.data ||
+            error.message
+        );
+
+
+        if (error.response?.status === 401) {
+
+            handleError(
+                "Please login first."
+            );
+
+        } else {
+
+            handleError(
+                error.response?.data?.message ||
+                "Favorite operation failed"
+            );
+        }
+    }
+};
   return (
     <div className="books-page-layout">
       <aside className="filter-sidebar">
@@ -214,6 +362,24 @@ const Books = () => {
           <div className="book-grid">
             {books.map((book) => (
               <div className="book-card" key={book._id}>
+                <button
+                  type="button"
+                  className={`favorite-btn ${
+                      favoriteIds.includes(book._id)
+                          ? "favorite-active"
+                          : ""
+                  }`}
+                  onClick={() =>
+                      handleFavorite(book._id)
+                  }
+                  aria-label={
+                      favoriteIds.includes(book._id)
+                          ? "Remove from favorites"
+                          : "Add to favorites"
+                  }
+              >
+                  <FaHeart />
+              </button>
                 <img
                   src={book.bookImg}
                   alt={book.bookName}
@@ -231,14 +397,39 @@ const Books = () => {
                   <p>
                     <strong>Price:</strong> ₹{book.price}
                   </p>
+                  <div className="stock-status">
+                    {
+                      book.stock > 0 ? (
+                        <span className="in-stock">
+                          IN STOCK
+                        </span>
+                      ) : (
+                        <span className="out-stock">
+                          OUT OF STOCK
+                        </span>
+                      )
+                    }
+                  </div>
                   {Array.isArray(book.category) && book.category.length > 0 && (
                     <p>
                       <strong>Category:</strong> {book.category.join(", ")}
                     </p>
                   )}
                   <div className="book-buttons">
-                    <button className="cart-btn" onClick={() => handleAddToCart(book)}>
-                      Add To Cart <BsBag />
+                    <button 
+                      className={`cart-btn ${book.stock <= 0 ? "disabled-cart-btn" : "" }`} 
+                      onClick={() => handleAddToCart(book)}
+                      disabled={book.stock <= 0}
+                    >
+                      {
+                        book.stock > 0 ? (
+                          <>
+                            Add To Cart <BsBag />
+                          </>
+                        ) : (
+                          "Out Of Stock"
+                        )
+                      }
                     </button>
                   </div>
                 </div>

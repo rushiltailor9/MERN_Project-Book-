@@ -1,18 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { handleSuccess } from "../utils";
 import "../CSS/Account.css";
 
 const Account = ({ setIsLogin, setLoggedInUser }) => {
-  const [userName, setUserName] = useState("");
-  const navigate = useNavigate();
-
-  useEffect(() => {
+  const [userName] = useState(() => {
     const name = localStorage.getItem("name");
-    if (name && name !== "undefined") {
-      setUserName(name);
-    }
-  }, []);
+    return (name && name !== "undefined") ? name : "";
+  });
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -44,6 +40,9 @@ const Account = ({ setIsLogin, setLoggedInUser }) => {
           }}
         >
            My Orders
+        </Link>
+        <Link to="/account/favorites">
+            ❤️ Favorites
         </Link>
         <button 
           onClick={handleLogout} 

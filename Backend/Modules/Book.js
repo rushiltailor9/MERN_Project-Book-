@@ -27,6 +27,12 @@ const bookSchema = new mongoose.Schema({
         required:true,
         default:[]
     },
+    stock:{
+        type:String,
+        required:true,
+        default:0,
+        min:0
+    },
     uploadedBy:{
         type:String,
         required:true,

@@ -1,5 +1,6 @@
 const OrderModel = require("../Modules/Order");
 const CartModel = require("../Modules/Cart");
+const BookModel = require("../Modules/Book");
 
 // ======================
 // Place Order
@@ -35,7 +36,13 @@ const placeOrder = async (req, res) => {
             });
         }
 
-        if (!address || !address.name || !address.phone || !address.address || !address.city || !address.pincode) {
+        if (!address || 
+            !address.name ||
+            !address.phone || 
+            !address.address || 
+            !address.city || 
+            !address.pincode
+        ) {
             return res.status(400).json({
                 success: false,
                 message: "All address details (name, phone, address, city, pincode) are required"
@@ -49,6 +56,32 @@ const placeOrder = async (req, res) => {
             });
         }
 
+        for( const item of items){
+            const book = await BookModel.findById(item.bookId);
+
+            if(!book){
+                return res.status(400).json({
+                    success:false,
+                    message: `Book "${item.bookName} Is Not Found"`
+                });
+            }
+            const quantity = Number(item.quantity);
+
+            if (!Number.isInteger(quantity) || quantity <= 0) {
+                return res.status(400).json({
+                    success: false,
+                    message: `Invalid quantity for ${book.bookName}`
+                });
+            }
+
+            if (Number(book.stock) < quantity) {
+                return res.status(400).json({
+                    success: false,
+                    message: `"${book.bookName}" has only ${book.stock} copies available`
+                });
+            }
+        }
+
         const order = new OrderModel({
             userId,
             items,
@@ -59,6 +92,34 @@ const placeOrder = async (req, res) => {
         });
 
         const savedOrder = await order.save();
+
+        for (const item of items){
+
+
+            const quantity = Number(item.quantity);
+
+            const book = await BookModel.findById(item.bookId);
+
+            if (!book) {
+                return res.status(404).json({
+                    success: false,
+                    message: "Book not found"
+                });
+            }
+
+            const currentStock = Number(book.stock);
+
+            if (currentStock < quantity) {
+                return res.status(400).json({
+                    success: false,
+                    message: `${book.bookName} has only ${currentStock} copies available`
+                });
+            }
+
+            book.stock = currentStock - quantity;
+
+            await book.save();
+        }
 
         // Clear user's cart in DB after successful order placement
         await CartModel.deleteMany({ userId });
@@ -171,4 +232,4 @@ module.exports = {
     getUserOrders,
     getAllOrders,
     updateOrderStatus
-};
+};
