@@ -33,6 +33,11 @@ const bookSchema = new mongoose.Schema({
         default:0,
         min:0
     },
+    description:{
+        type:String,
+        required:true,
+        default:""
+    },
     uploadedBy:{
         type:String,
         required:true,

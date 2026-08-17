@@ -292,7 +292,6 @@
     align-items: center;
     gap: 8px;
 }
-
 .btn-edit,
 .btn-delete {
     min-width: 68px;

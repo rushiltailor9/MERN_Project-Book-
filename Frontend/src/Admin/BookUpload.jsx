@@ -10,6 +10,7 @@ import {
 import { handleSuccess, handleError } from "../utils";
 import AdminSidebar from "./AdminSidebar";
 import AdminHeader from "./AdminHeader";
+import { FaSearch } from "react-icons/fa";
 
 const getDisplayName = (loggedInUser = "") => {
     if (loggedInUser) return loggedInUser;
@@ -51,6 +52,7 @@ const BookUpload = ({ loggedInUser = "" }) => {
         price: "",
         bookImg: null,
         language: "",
+        description:"",
         category:[],
         stock:0
     });
@@ -123,6 +125,7 @@ const BookUpload = ({ loggedInUser = "" }) => {
             price: item.price || "",
             bookImg: item.bookImg || "",
             language: item.language || "",
+            description: item.description || "",
             category: Array.isArray(item?.category)? item.category : [],
             stock: item.stock ?? 0
         });
@@ -154,6 +157,7 @@ const BookUpload = ({ loggedInUser = "" }) => {
                 price: Number(book.price),
                 bookImg: book.bookImg || "",
                 language: book.language,
+                description: book.description,
                 category: book.category,
                 stock: Number(book.stock),
                 uploadedBy: uploadedBy
@@ -276,6 +280,17 @@ const BookUpload = ({ loggedInUser = "" }) => {
                                 required
                             />
                         </div>
+                        <div className="input-group">
+                            <label>Description</label>
+                            <textarea 
+                                name="description" 
+                                value={book.description ?? ""}
+                                placeholder="Enter Desciption"
+                                rows={4}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
                         
                         <div className="input-name">
                             <label>Category</label>
@@ -296,7 +311,15 @@ const BookUpload = ({ loggedInUser = "" }) => {
                         <button type="submit" className="submit-btn">{editId ? "Update Book" : "Upload Book"}</button>
                     </form>
 
-                    <input type="text" placeholder="Search Here..." onChange={handleSearch} className="search-input"/>
+                    <div className="search-container">
+                        <FaSearch className="search-icon"/>
+                            <input
+                              type="text"
+                              className="search-input" 
+                              placeholder="Search orders..."
+                              onChange={handleSearch}
+                            />
+                    </div>
 
                     <div className="table-section">
                         <h2>Uploaded Books Directory</h2>
@@ -310,10 +333,12 @@ const BookUpload = ({ loggedInUser = "" }) => {
                                         <th>Price</th>
                                         <th>Cover</th>
                                         <th>Language</th>
+                                        <th>Description</th>
                                         <th>Category</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
+
                                 <tbody>
                                     {
                                         Array.isArray(books) && books.length > 0 ? (
@@ -329,7 +354,20 @@ const BookUpload = ({ loggedInUser = "" }) => {
                                                             <span className="no-img">{item.bookImg || "No image"}</span>
                                                         )}
                                                     </td>
-                                                    <td><span className="lang-badge">{item.language}</span></td>
+                                                    <td>
+                                                        <span className="lang-badge">{item.language}</span>
+                                                    </td>
+                                                    <td className="book-desc-cell">
+                                                        {
+                                                            item.description 
+                                                                ? (item.description.length > 60) 
+                                                                    ?(`${item.description.slice(0,60)}...`)
+                                                                    : item.description
+                                                                : <span className="no-img">No Description</span>
+
+                                                            
+                                                        }
+                                                    </td>
                                                     <td>
                                                         {Array.isArray(item.category) && item.category.length > 0 ? (
                                                             item.category.map((c)=>(
@@ -355,7 +393,7 @@ const BookUpload = ({ loggedInUser = "" }) => {
                                             ))
                                         ) : (
                                             <tr>
-                                                <td colSpan="7" className="empty-row">No books found. Add one above!</td>
+                                                <td colSpan="8" className="empty-row">No books found. Add one above!</td>
                                             </tr>
                                         )
                                     }

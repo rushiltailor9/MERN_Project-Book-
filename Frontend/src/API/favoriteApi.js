@@ -1,54 +1,33 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/favorite";
+const API = axios.create({
+    baseURL: "http://localhost:5000/favorite",
+});
 
-const getToken = () => {
-    return localStorage.getItem("token");
-};
+API.interceptors.request.use((config) => {
+    const token = localStorage.getItem("token");
+    if (token && token !== "admin-token") {
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+});
 
-const getConfig = () => {
-    const token = getToken();
-
-    return {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    };
-};
-
-
-// ADD FAVORITE
+// ADD FAVORITE — POST /favorite
 export const addFavorite = async (bookId) => {
-    return await axios.post(
-        `${API_URL}/add`,
-        { bookId },
-        getConfig()
-    );
+    return API.post("/", { bookId });
 };
 
-
-// GET FAVORITES
+// GET FAVORITES — GET /favorite
 export const getFavorites = async () => {
-    return await axios.get(
-        API_URL,
-        getConfig()
-    );
+    return API.get("/");
 };
 
-
-// CHECK FAVORITE
+// CHECK FAVORITE — GET /favorite/:bookId
 export const checkFavorite = async (bookId) => {
-    return await axios.get(
-        `${API_URL}/check/${bookId}`,
-        getConfig()
-    );
+    return API.get(`/${bookId}`);
 };
 
-
-// REMOVE FAVORITE
+// REMOVE FAVORITE — DELETE /favorite/:bookId
 export const removeFavorite = async (bookId) => {
-    return await axios.delete(
-        `${API_URL}/${bookId}`,
-        getConfig()
-    );
+    return API.delete(`/${bookId}`);
 };

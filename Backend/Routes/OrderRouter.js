@@ -1,5 +1,6 @@
 const express = require("express");
 const authMiddleware = require("../Middleware/AuthMiddleware");
+const adminMiddleware = require("../Middleware/AdminMiddleware");
 const {
     placeOrder,
     getUserOrders,
@@ -14,7 +15,7 @@ router.use(authMiddleware);
 
 router.post("/", placeOrder);
 router.get("/my-orders", getUserOrders);
-router.get("/all", getAllOrders);
-router.put("/status/:id", updateOrderStatus);
+router.get("/all", adminMiddleware, getAllOrders);
+router.put("/status/:id", adminMiddleware, updateOrderStatus);
 
 module.exports = router;

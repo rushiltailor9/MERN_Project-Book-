@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "../CSS/Navbar.css";
-import { FaShoppingCart } from "react-icons/fa";
+import { FaShoppingCart, FaHeart } from "react-icons/fa";
 
 
 const Navbar = ({ isLogin, loggedInUser }) => {
@@ -34,6 +34,9 @@ const Navbar = ({ isLogin, loggedInUser }) => {
             </ul>
 
             <div className="navbar-auth">
+                <Link to="/account/favorites" className="favorite-link" title="Favorites">
+                    <FaHeart className="favorite-icon" />
+                </Link>
                 <Link to="/cart" className="cart-link">
                     <FaShoppingCart className="cart-icon" />
                 </Link>

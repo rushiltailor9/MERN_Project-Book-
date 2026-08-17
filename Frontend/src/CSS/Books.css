@@ -393,33 +393,21 @@
 
 .favorite-btn {
     position: absolute;
-
     top: 12px;
     right: 12px;
-
     width: 40px;
     height: 40px;
-
     border: none;
     border-radius: 50%;
-
     background: white;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     font-size: 18px;
-
     color: #9ca3af;
-
     cursor: pointer;
-
     z-index: 5;
-
-    box-shadow:
-        0 3px 10px rgba(0, 0, 0, 0.15);
-
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
     transition: 0.2s ease;
 }
 
@@ -430,5 +418,105 @@
 
 
 .favorite-active {
-    color: #ef4444;
+    color: var(--accent-primary);
+}
+
+/* Quick view and book details dialog */
+.quick-view-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 4;
+    padding: 12px 20px;
+    border: 0;
+    border-radius: 8px;
+    background: var(--accent-primary);
+    color: #fff;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    opacity: 0;
+    transform: translate(-50%, -35%);
+    pointer-events: none;
+    transition: opacity .2s ease, transform .2s ease, background .2s ease;
+}
+
+.book-card:hover .quick-view-btn,
+.quick-view-btn:focus-visible {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+    pointer-events: auto;
+}
+
+.quick-view-btn:hover { background: var(--accent-primary-hover); }
+
+.book-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    overflow-y: auto;
+    background: rgba(15, 23, 42, .72);
+}
+
+.book-modal {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(190px, 32%) 1fr;
+    width: min(780px, 100%);
+    max-height: calc(100vh - 48px);
+    overflow: auto;
+    border-radius: 16px;
+    background: #fff;
+    color: #0f172a;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .35);
+}
+
+.book-modal-image {
+    width: 100%;
+    height: 100%;
+    min-height: 380px;
+    object-fit: contain;
+    padding: 30px;
+    box-sizing: border-box;
+    background: #f1f5f9;
+}
+
+.book-modal-content { padding: 36px; }
+.book-modal-heading { display: flex; justify-content: space-between; gap: 18px; padding-right: 30px; }
+.book-modal-heading h2 { margin: 0; font-size: 1.75rem; line-height: 1.2; }
+.book-modal-author { margin: 7px 0 0; color: #64748b; }
+.book-modal-favorite { position: static; flex: 0 0 auto; }
+.book-modal-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border: 0;
+    border-radius: 50%;
+    background: #e2e8f0;
+    color: #334155;
+    cursor: pointer;
+}
+.book-modal-description { margin: 24px 0; color: #475569; line-height: 1.65; }
+.book-modal-data { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 0; }
+.book-modal-data div { padding: 12px; border-radius: 8px; background: #f8fafc; }
+.book-modal-data dt { color: #64748b; font-size: .8rem; font-weight: 700; text-transform: uppercase; }
+.book-modal-data dd { margin: 5px 0 0; font-weight: 700; }
+.book-modal-actions { display: flex; gap: 12px; margin-top: 28px; }
+.book-modal-actions button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+
+@media (max-width: 620px) {
+    .book-modal-backdrop { padding: 12px; }
+    .book-modal { grid-template-columns: 1fr; max-height: calc(100vh - 24px); }
+    .book-modal-image { height: 220px; min-height: 220px; padding: 20px; }
+    .book-modal-content { padding: 24px; }
+    .book-modal-data { grid-template-columns: 1fr; gap: 8px; }
+    .book-modal-actions { flex-direction: column; }
 }

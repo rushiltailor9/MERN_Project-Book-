@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { handleSuccess } from "../utils";
 import "../CSS/Account.css";
+import { RiLogoutBoxLine  } from "react-icons/ri";
+import { MdFavoriteBorder } from "react-icons/md";
 
 const Account = ({ setIsLogin, setLoggedInUser }) => {
   const [userName] = useState(() => {
@@ -33,7 +35,7 @@ const Account = ({ setIsLogin, setLoggedInUser }) => {
             display: "inline-block", 
             padding: "12px 24px", 
             background: "#38bdf8", 
-            color: "#0f172a", 
+            color: "white", 
             fontWeight: "600", 
             borderRadius: "8px", 
             textDecoration: "none" 
@@ -41,15 +43,37 @@ const Account = ({ setIsLogin, setLoggedInUser }) => {
         >
            My Orders
         </Link>
-        <Link to="/account/favorites">
-            ❤️ Favorites
+        <Link 
+          to="/account/favorites"
+          style={{ 
+            display: "inline-block", 
+            padding: "12px 24px", 
+            background: "#2563EB", 
+            color: "white", 
+            fontWeight: "600", 
+            borderRadius: "8px", 
+            textDecoration: "none" 
+          }}
+        >
+            Favorites <MdFavoriteBorder/>
         </Link>
         <button 
           onClick={handleLogout} 
-          className="account-logout-btn" 
-          style={{ padding: "12px 24px", borderRadius: "8px" }}
+          style={{ 
+            display: "inline-block", 
+            padding: "12px 24px", 
+            background: "#DC2626",
+            cursor:"pointer", 
+            height: "50px",
+            width:"120px",
+            color: "white", 
+            fontWeight: "600", 
+            borderRadius: "8px", 
+            textDecoration: "none",
+            border: "none"
+          }}
         >
-          Logout
+          Logout <RiLogoutBoxLine />
         </button>
       </div>
     </div>

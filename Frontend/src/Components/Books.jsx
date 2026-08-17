@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom";
 import { getBooks } from "../API/bookApi";
 import "../CSS/Books.css";
 import "../CSS/Category.css";
@@ -6,15 +7,13 @@ import { FaSearch } from "react-icons/fa";
 import { addToCart } from "../API/cartApi";
 import { BsBag } from "react-icons/bs";
 import { handleSuccess, handleError } from "../utils";
-import {
-    FaHeart
-} from "react-icons/fa";
-
+import { FaHeart } from "react-icons/fa";
+import { FaTimes } from "react-icons/fa";
 import {
     addFavorite,
     removeFavorite,
     getFavorites
-} from "../api/favoriteApi";
+} from "../API/favoriteApi";
 
 const Books = () => {
   const [books, setBooks] = useState([]);
@@ -24,6 +23,8 @@ const Books = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [activeLanguage, setActiveLanguage] = useState("All");
   const [favoriteIds, setFavoriteIds] = useState([]);
+  const [selectedBook, setSelectedBook] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -40,10 +41,6 @@ const Books = () => {
   };
     fetchBooks();
   }, []);
-
-  if (loading) {
-    <h2>Loading...</h2>
-  }
 
   const allCategories = [
     "All",
@@ -126,7 +123,7 @@ const Books = () => {
   const handleAddToCart = async (book) => {
     if(book.stock <= 0){
       handleError("This Book Is Out of Stock");
-      return;
+      throw new Error("Out of stock");
     }
     try {
       const response = await addToCart({
@@ -147,6 +144,17 @@ const Books = () => {
           ? "Please login to add books to your cart."
           : error.response?.data?.message || "Failed to add book...";
       handleError(message);
+      throw error;
+    }
+  };
+
+  const handleBuyNow = async (book) => {
+    try {
+      await handleAddToCart(book);
+      setSelectedBook(null);
+      navigate("/checkout");
+    } catch {
+      // The add-to-cart handler already displays the error message.
     }
   };
   useEffect(() => {
@@ -157,118 +165,79 @@ const Books = () => {
             localStorage.getItem("token");
 
 
-        // User is not logged in
-        if (!token) {
+        // User is not logged in (admin token is not a JWT)
+        if (!token || token === "admin-token") {
             setFavoriteIds([]);
             return;
         }
-
-
         try {
-
             const response =
                 await getFavorites();
-
-
             const favorites =
                 response.data.favorite || [];
-
-
             const ids =
                 favorites
                     .filter((item) => item.bookId)
                     .map((item) => item.bookId._id);
-
-
             setFavoriteIds(ids);
-
         } catch (error) {
-
             console.error(
                 "Favorite fetch error:",
                 error.response?.data ||
                 error.message
             );
-
             // Don't show error for expired/not logged in
             if (error.response?.status === 401) {
                 setFavoriteIds([]);
             }
         }
     };
-
-
     fetchFavorites();
-
 }, []);
 const handleFavorite = async (bookId) => {
-
     const token =
         localStorage.getItem("token");
-
-
-    // User not logged in
-    if (!token) {
+    // User not logged in (admin token is not a JWT)
+    if (!token || token === "admin-token") {
         handleError(
             "Please login to add favorites."
         );
-
         return;
     }
-
-
     try {
-
         // ==================================
         // REMOVE
         // ==================================
-
         if (favoriteIds.includes(bookId)) {
-
-            await removeFavorite(bookId);
-
-
+            await removeFavorite(bookId)
             setFavoriteIds((prev) =>
                 prev.filter(
                     (id) => id !== bookId
                 )
             );
 
-
             handleSuccess(
                 "Removed from favorites"
             );
-
             return;
         }
-
-
         // ==================================
         // ADD
         // ==================================
-
         await addFavorite(bookId);
-
-
         setFavoriteIds((prev) => [
             ...prev,
             bookId
         ]);
-
-
         handleSuccess(
             "Added to favorites"
         );
-
     } catch (error) {
-
         console.error(
             "Favorite Error:",
             error.response?.data ||
             error.message
         );
-
-
         if (error.response?.status === 401) {
 
             handleError(
@@ -276,7 +245,6 @@ const handleFavorite = async (bookId) => {
             );
 
         } else {
-
             handleError(
                 error.response?.data?.message ||
                 "Favorite operation failed"
@@ -284,6 +252,7 @@ const handleFavorite = async (bookId) => {
         }
     }
 };
+  if (loading) return <h2>Loading...</h2>;
   return (
     <div className="books-page-layout">
       <aside className="filter-sidebar">
@@ -377,17 +346,23 @@ const handleFavorite = async (bookId) => {
                           ? "Remove from favorites"
                           : "Add to favorites"
                   }
-              >
+                >
                   <FaHeart />
-              </button>
+                </button>
                 <img
                   src={book.bookImg}
                   alt={book.bookName}
                   className="book-image"
                 />
+                <button
+                  type="button"
+                  className="quick-view-btn"
+                  onClick={() => setSelectedBook(book)}
+                >
+                  Quick view
+                </button>
                 <div className="book-details">
                   <h2>{book.bookName}</h2>
-
                   <p>
                     <strong>Author:</strong> {book.authorName}
                   </p>
@@ -438,6 +413,64 @@ const handleFavorite = async (bookId) => {
           </div>
         )}
       </main>
+
+      {selectedBook && (
+        <div className="book-modal-backdrop" role="presentation" onMouseDown={() => setSelectedBook(null)}>
+          <section
+            className="book-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="book-modal-title"
+            onMouseDown={(event) => event.stopPropagation()}
+          >
+            <button type="button" className="book-modal-close" onClick={() => setSelectedBook(null)} aria-label="Close book details">
+              <FaTimes />
+            </button>
+            <img src={selectedBook.bookImg} alt={selectedBook.bookName} className="book-modal-image" />
+            <div className="book-modal-content">
+              <div className="book-modal-heading">
+                <div>
+                  <h2 id="book-modal-title">{selectedBook.bookName}</h2>
+                  <p className="book-modal-author">by {selectedBook.authorName}</p>
+                </div>
+                <button
+                  type="button"
+                  className={`favorite-btn book-modal-favorite ${favoriteIds.includes(selectedBook._id) ? "favorite-active" : ""}`}
+                  onClick={() => handleFavorite(selectedBook._id)}
+                  aria-label={favoriteIds.includes(selectedBook._id) ? "Remove from favorites" : "Add to favorites"}
+                >
+                  <FaHeart />
+                </button>
+              </div>
+              <p className="book-modal-description">{selectedBook.description || "No description is available for this book."}</p>
+              <dl className="book-modal-data">
+                <div><dt>Price</dt><dd>₹{selectedBook.price}</dd></div>
+                <div><dt>Language</dt><dd>{selectedBook.language}</dd></div>
+                <div><dt>Category</dt><dd>{selectedBook.category?.join(", ") || "—"}</dd></div>
+                <div><dt>Availability</dt><dd>{selectedBook.stock > 0 ? `${selectedBook.stock} in stock` : "Out of stock"}</dd></div>
+              </dl>
+              <div className="book-modal-actions">
+                <button 
+                  type="button" 
+                  className={`cart-btn ${selectedBook.stock <= 0 ? "disabled-cart-btn" : ""}`} 
+                  onClick={() => handleAddToCart(selectedBook)} 
+                  disabled={selectedBook.stock <= 0}
+                >
+                  Add to cart <BsBag />
+                </button>
+                <button 
+                  type="button" 
+                  className="buy-btn" 
+                  onClick={() => handleBuyNow(selectedBook)} 
+                  disabled={selectedBook.stock <= 0}
+                >
+                  Buy now
+                </button>
+              </div>
+            </div>
+          </section>
+        </div>
+      )}
     </div>
   );
 };

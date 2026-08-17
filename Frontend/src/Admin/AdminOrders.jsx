@@ -4,10 +4,12 @@ import AdminSidebar from "./AdminSidebar";
 import { getAllOrders, updateOrderStatus } from "../API/orderApi";
 import { handleSuccess, handleError } from "../utils";
 import "../CSS/Admin.css";
+import { FaSearch } from "react-icons/fa";
 
 const AdminOrders = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [allOrders, setAllOrders] = useState([]);
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -16,6 +18,7 @@ const AdminOrders = () => {
         const response = await getAllOrders();
         if (response.success && response.orders) {
           setOrders(response.orders);
+          setAllOrders(response.orders);
         }
       } catch (error) {
         console.error("Error fetching admin orders:", error);
@@ -32,9 +35,16 @@ const AdminOrders = () => {
       const response = await updateOrderStatus(orderId, newStatus);
       if (response.success) {
         handleSuccess(`Order status updated to "${newStatus}"`);
+        const updatedOrder = response.order || { _id: orderId, orderStatus: newStatus };
+
         setOrders((prev) =>
           prev.map((order) =>
-            order._id === orderId ? { ...order, orderStatus: newStatus } : order
+            order._id === orderId ? { ...order, orderStatus: updatedOrder.orderStatus || newStatus } : order
+          )
+        );
+        setAllOrders((prev) =>
+          prev.map((order) =>
+            order._id === orderId ? { ...order, orderStatus: updatedOrder.orderStatus || newStatus } : order
           )
         );
       }
@@ -44,13 +54,56 @@ const AdminOrders = () => {
     }
   };
 
+  const handleSearch = (e) => {
+    const term = e.target.value.trim().toLowerCase();
+
+    if (term === "") {
+      setOrders(allOrders);
+      return;
+    }
+
+    const result = allOrders.filter((order) => {
+      const customerName = (order.address?.name || "").toLowerCase();
+      const customerPhone = (order.address?.phone || "").toLowerCase();
+      const customerCity = (order.address?.city || "").toLowerCase();
+      const paymentMethod = (order.paymentMethod || "").toLowerCase();
+      const status = (order.orderStatus || "").toLowerCase();
+      const orderId = String(order._id || "").toLowerCase();
+      const itemsText = (order.items || [])
+        .map((item) => `${item.bookName || ""} ${item.quantity || ""}`)
+        .join(" ")
+        .toLowerCase();
+
+      return (
+        orderId.includes(term) ||
+        customerName.includes(term) ||
+        customerPhone.includes(term) ||
+        customerCity.includes(term) ||
+        paymentMethod.includes(term) ||
+        status.includes(term) ||
+        itemsText.includes(term) ||
+        String(order.totalAmount || "").includes(term)
+      );
+    });
+
+    setOrders(result);
+  };
+
   return (
     <div className="admin-container">
       <AdminSidebar />
       <div className="admin-main">
         <AdminHeader />
-
         <div className="admin-content">
+          <div className="search-container">
+                <FaSearch className="search-icon" />
+                <input
+                  type="text"
+                  className="search-input"
+                  placeholder="Search orders..."
+                  onChange={handleSearch}
+                />
+          </div>
           <div className="page-header">
             <h1>Manage Customer Orders</h1>
             <p className="welcome-text">Track, manage, and update live customer fulfillment statuses.</p>

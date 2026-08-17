@@ -3,6 +3,7 @@ import AdminHeader from "./AdminHeader"
 import AdminSidebar from "./AdminSidebar"
 import { getUsers } from "../API/userApi";
 import "../CSS/AdminUser.css";
+import { FaSearch } from "react-icons/fa";
 
 
 const AdminUsers = () => {
@@ -57,9 +58,17 @@ const AdminUsers = () => {
       <div className="admin-main">
 
         <AdminHeader />
-        <input type="text" placeholder="Search Here..." onChange={handleSearch} className="search-input"/>
-
         <div className="users-page">
+          <div className="search-container">
+            <FaSearch className="search-icon"/>
+            <input
+              type="text"
+              className="search-input"
+              placeholder="Search orders..."
+              onChange={handleSearch}
+            />
+          </div>
+
           {/* Header */}
           <div className="users-header">
               <div>

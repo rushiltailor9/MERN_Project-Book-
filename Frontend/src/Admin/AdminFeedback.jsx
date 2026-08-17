@@ -3,11 +3,13 @@ import AdminHeader from "./AdminHeader";
 import AdminSidebar from "./AdminSidebar";
 import { getFeedback } from "../API/feedbackApi";
 import "../CSS/AdminFeedback.css";
+import { FaSearch } from "react-icons/fa";
 
 const AdminFeedback = () => {
 
     const [feedbacks, setFeedbacks] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [allFeedbacks, setAllFeedbacks] = useState([]);
 
     useEffect(() => {
         const fetchFeedbacks = async () => {
@@ -15,6 +17,7 @@ const AdminFeedback = () => {
                 const response = await getFeedback();
                 console.log("Feedback Data:", response);
                 setFeedbacks(response.contacts);
+                setAllFeedbacks(response.contacts);
             } catch (error) {
                 console.log("Error:", error);
             } finally {
@@ -39,6 +42,31 @@ const AdminFeedback = () => {
         );
     }
 
+    const handleSearch = (e) => {
+        const term = e.target.value.trim().toLowerCase();
+
+        if (term === "") {
+            setFeedbacks(allFeedbacks);
+            return;
+        }
+
+        const result = allFeedbacks.filter((item) => {
+            const name = (item.name || "").toLowerCase();
+            const email = (item.email || "").toLowerCase();
+            const feedback = (item.feedback || "").toLowerCase();
+            const rating = String(item.rating || "").toLowerCase();
+
+            return (
+                name.includes(term) ||
+                email.includes(term) ||
+                feedback.includes(term) ||
+                rating.includes(term)
+            );
+        });
+
+        setFeedbacks(result);
+    };
+
 
     return (
         <div className="admin-container">
@@ -46,6 +74,15 @@ const AdminFeedback = () => {
             <div className="admin-main">
                 <AdminHeader />
                 <div className="feedback-page">
+                    <div className="search-container">
+                        <FaSearch className="search-icon"/>
+                        <input
+                            type="text"
+                            className="search-input"
+                            placeholder="Search feedback..."
+                            onChange={handleSearch}
+                        />
+                    </div>
                     {/* Page Header */}
                     <div className="feedback-title">
                         <div>

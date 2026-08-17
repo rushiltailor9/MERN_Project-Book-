@@ -57,6 +57,39 @@
     /* Modern focus ring using the Royal Blue accent */
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15); 
 }
+/* =========================
++   PASSWORD FIELD (show/hide toggle)
++========================= */
+
+.password-field {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-field input {
+    width: 100%;
+    padding-right: 44px; /* room for the icon */
+}
+
+.password-toggle-icon {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-muted, #64748B);
+    font-size: 1.1rem;
+    transition: var(--transition-smooth);
+    user-select: none;
+}
+
+.password-toggle-icon:hover {
+    color: var(--accent-primary);
+}
 
 /* =========================
    SUBMIT BUTTON

@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "../CSS/LoginRegister.css";
 import { useState } from "react";
 import { handleError, handleSuccess } from "../utils";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
 const Register = () => {
     const [registerInfo, setRegisterInfo] = useState({
@@ -10,6 +11,7 @@ const Register = () => {
         email:"",
         password:""
     });
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
 //Get value from inputbox
@@ -81,13 +83,29 @@ const handleRegister = async(e) =>{
                     value={registerInfo.email}
                 />
 
-                <input 
+                <div className="password-field">
+                    <input 
                     type="password" 
                     name="password" 
                     placeholder="Password" 
                     onChange={handleChange}
                     value={registerInfo.password}
                 />
+                <span
+                    className="password-toggle-icon"
+                    onClick={()=>setShowPassword((prev)=>!prev)}
+                    role="button"
+                    tabIndex={0}
+                    aria-label={showPassword ? "Hide password" : "Show password"}
+                    onKeyDown={(e)=>{
+                        if(e.key === "Enter" || e.key === ""){
+                            setShowPassword((prev)=>!prev);
+                        }
+                    }}
+                >
+                    {showPassword ? <FiEyeOff/> : <FiEye/>}
+                </span>
+                </div>
 
                 <button type="submit">Sign Up</button>
 

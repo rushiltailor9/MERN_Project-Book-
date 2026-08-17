@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import "../CSS/LoginRegister.css";
 import { useState } from "react";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 import { handleError, handleSuccess } from "../utils";
 
 const Login = () => {
@@ -8,11 +9,8 @@ const Login = () => {
         email:"",
         password:""
     });
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
-
-    const isAdminLogin = (email, password) => {
-        return email === "admin@gmail.com" && password === "admin";
-    };
 
 //Get value from inputbox
 const handleChange = (e) =>{
@@ -29,15 +27,6 @@ const handleLogin = async(e) =>{
     const { email, password } = loginInfo; //client
     if( !email || !password ){ //validation
         return handleError("All Filed is require...");
-    }
-    if (isAdminLogin(email, password)) {
-        handleSuccess("Admin login successful");
-        localStorage.setItem("token", "admin-token");
-        localStorage.setItem("name", "Admin");
-        setTimeout(() => {
-            navigate("/admin");
-        }, 1000);
-        return;
     }
 
     try{
@@ -84,13 +73,29 @@ const handleLogin = async(e) =>{
                     value={loginInfo.email}
                 />
 
-                <input 
-                    type="password" 
-                    name="password" 
-                    placeholder="Password" 
-                    onChange={handleChange}
-                    value={loginInfo.password}
-                />
+                <div className="password-field">
+                    <input 
+                        type={showPassword ? "text" : "password"} 
+                        name="password" 
+                        placeholder="Password" 
+                        onChange={handleChange}
+                        value={loginInfo.password}
+                    />
+                    <span
+                        className="password-toggle-icon"
+                        onClick={()=>setShowPassword((prev)=>!prev)}
+                        role="button"
+                        tabIndex={0}
+                        aria-label={showPassword ? "Hide password" : "Show password"}
+                        onKeyDown={(e)=>{
+                            if(e.key === "Enter" || e.key === ""){
+                                setShowPassword((prev)=>!prev);
+                            }
+                        }}
+                    >
+                        {showPassword ? <FiEyeOff/> : <FiEye/>}
+                    </span>
+                </div>
 
                 <button type="submit">Login</button>
 
