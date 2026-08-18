@@ -1,4 +1,5 @@
 import "../CSS/Admin.css";
+import NotificationBell from "../Components/NotificationBell";
 
 const AdminHeader = () => {
 
@@ -12,6 +13,8 @@ const AdminHeader = () => {
 
 
             <div className="admin-profile">
+
+                <NotificationBell />
 
                 <div className="admin-avatar">
                     A

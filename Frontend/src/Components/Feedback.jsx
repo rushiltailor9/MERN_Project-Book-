@@ -1,6 +1,6 @@
 import "../CSS/Feedback.css";
 import { sendFeedback } from "../API/feedbackApi"
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { handleSuccess, handleError } from "../utils";
 
 const getUserDetails = (loggedInUser = "") => {
@@ -29,23 +29,14 @@ const getUserDetails = (loggedInUser = "") => {
 };
 
 const Feedback = ({ loggedInUser = "" }) => {
-    const [fromData, setFromData] = useState({
-            name: "",
-            email: "",
-            phone: "",
-            subject:"",
-            message:""
-        });
+    const userDetails = getUserDetails(loggedInUser);
+    const [fromData, setFromData] = useState(() => ({
+            name: userDetails.name,
+            email: userDetails.email,
+            rating: "",
+            feedback: ""
+        }));
         const [loading, setLoading] = useState(false);
-    
-        useEffect(() => {
-            const userDetails = getUserDetails(loggedInUser);
-            setFromData((prev) => ({
-                ...prev,
-                name: userDetails.name || prev.name,
-                email: userDetails.email || prev.email
-            }));
-        }, [loggedInUser]);
     
         const handleOnchange = (e) =>{
             setFromData({
@@ -66,11 +57,10 @@ const Feedback = ({ loggedInUser = "" }) => {
                 handleSuccess(response.data.message || "Feedback Sent Successfully");
     
                 setFromData({
-                    name: "",
-                    email:"",
-                    phone:"",
-                    subject:"",
-                    message:""
+                name: userDetails.name,
+                email: userDetails.email,
+                rating: "",
+                feedback: ""
                 })
             }catch(error){
                 handleError(error.response?.data?.message || "Something went wrong...");
@@ -122,7 +112,7 @@ const Feedback = ({ loggedInUser = "" }) => {
                 placeholder="Enter Feedback"
                 rows="5"
                 onChange={handleOnchange}
-                value={fromData.Feedback}
+                value={fromData.feedback}
                 required
             >
             </textarea>

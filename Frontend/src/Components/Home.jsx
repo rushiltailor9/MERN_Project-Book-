@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import "../CSS/Home.css";
-import book_banner from "../assets/book_banner.jpg";
-
+import book_banner from "../assets/final_banner.png"
 const Home = () => {
   return (
     <div className="home-hero">

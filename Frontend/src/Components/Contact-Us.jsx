@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { sendContact } from "../API/contactapi";
 import "../CSS/Contact-Us.css";
 import { handleSuccess, handleError } from "../utils";
@@ -29,23 +29,15 @@ const getUserDetails = (loggedInUser = "") => {
 };
 
 const ContactUs = ({ loggedInUser = "" }) => {
-    const [fromData, setFromData] = useState({
-        name: "",
-        email: "",
+    const userDetails = getUserDetails(loggedInUser);
+    const [fromData, setFromData] = useState(() => ({
+        name: userDetails.name,
+        email: userDetails.email,
         phone: "",
         subject:"",
         message:""
-    });
+    }));
     const [loading, setLoading] = useState(false);
-
-    useEffect(() => {
-        const userDetails = getUserDetails(loggedInUser);
-        setFromData((prev) => ({
-            ...prev,
-            name: userDetails.name || prev.name,
-            email: userDetails.email || prev.email
-        }));
-    }, [loggedInUser]);
 
     const handleOnchange = (e) =>{
         setFromData({
@@ -66,8 +58,8 @@ const ContactUs = ({ loggedInUser = "" }) => {
             handleSuccess(response.data.message || "Message Sent Successfully");
 
             setFromData({
-                name: "",
-                email:"",
+                name: userDetails.name,
+                email: userDetails.email,
                 phone:"",
                 subject:"",
                 message:""

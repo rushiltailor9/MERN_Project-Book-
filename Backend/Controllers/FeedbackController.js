@@ -1,4 +1,5 @@
 const FeedbackModel = require("../Modules/Feedback");
+const createAdminNotifications = require("../Utils/createAdminNotifications");
 
 const createFeedback = async(req, res) =>{
     try{
@@ -23,16 +24,23 @@ const createFeedback = async(req, res) =>{
             feedback
         });
 
+        await createAdminNotifications({
+            type: "FEEDBACK",
+            title: "New Feedback",
+            message: `${name} has submitted new feedback.`
+        });
+
         res.status(200).json({
             message:"Feedback submitted Successfully",
-            success:false,
+            success:true,
             newFeedback
         });
 
     }catch(error){
-        res.status.json({
+        res.status(500).json({
             message:"Internal Server error",
-            success: false
+            success: false,
+            error: error.message
         });
     }
 };

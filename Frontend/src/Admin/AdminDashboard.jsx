@@ -94,14 +94,6 @@ const AdminDashboard = () => {
         return sum;
     }, 0);
 
-    if (loading) {
-        return (
-            <div className="admin-loading">
-                Loading Dashboard
-            </div>
-        )
-    }
-
     return (
         <div className="admin-container">
             {/* Sidebar */}
@@ -109,6 +101,11 @@ const AdminDashboard = () => {
             {/* Main */}
             <div className="admin-main">
                 <AdminHeader />
+                {loading ? (
+                    <div className="admin-loading">
+                        Loading Dashboard
+                    </div>
+                ) : (
                 <div className="admin-content">
                     <h1>
                         Dashboard
@@ -161,6 +158,7 @@ const AdminDashboard = () => {
                         </p>
                     </div>
                 </div>
+                )}
             </div>
         </div>
     )

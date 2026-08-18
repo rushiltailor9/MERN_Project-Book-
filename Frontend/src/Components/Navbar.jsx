@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import "../CSS/Navbar.css";
 import { FaShoppingCart, FaHeart } from "react-icons/fa";
+import NotificationBell from "./NotificationBell";
 
 
 const Navbar = ({ isLogin, loggedInUser }) => {
@@ -57,7 +58,9 @@ const Navbar = ({ isLogin, loggedInUser }) => {
                         <circle cx="12" cy="7" r="4"></circle>
                     </svg>
                 </Link>
-
+                {isLogin && 
+                    <NotificationBell/>
+                }
 
                 {isLogin && user ? (
                     <span className="navbar-user-name">{user}</span>

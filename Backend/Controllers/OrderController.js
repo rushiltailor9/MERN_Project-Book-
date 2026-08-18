@@ -1,6 +1,8 @@
 const OrderModel = require("../Modules/Order");
 const CartModel = require("../Modules/Cart");
 const BookModel = require("../Modules/Book");
+const NotificationModel = require("../Modules/Notification");
+const createAdminNotifications = require("../Utils/createAdminNotifications");
 
 // ======================
 // Place Order
@@ -124,6 +126,13 @@ const placeOrder = async (req, res) => {
         // Clear user's cart in DB after successful order placement
         await CartModel.deleteMany({ userId });
 
+        await createAdminNotifications({
+            type: "ORDER",
+            title: "New Order",
+            message: `New order #${savedOrder._id.toString().substring(0, 8)} has been placed`,
+            orderId: savedOrder._id
+        });
+
         res.status(201).json({
             success: true,
             message: "Order placed successfully!",
@@ -214,11 +223,114 @@ const updateOrderStatus = async (req, res) => {
             });
         }
 
+        const allowedStatues = [
+            "Pending",
+            "Processing",
+            "Shipped",
+            "Delivered",
+            "Cancelled"
+        ];
+
+        if(!allowedStatues.includes(orderStatus)){
+            return res.status(400).json({
+                success: false,
+                message: "Invalid Order Status"
+            });
+        }
+
+        const order = await OrderModel.findById(id);
+
+        if(!order){
+            return res.status(400).json({
+                success: false,
+                message: "Order Is Not Found"
+            });
+        }
+
+        if(order.orderStatus === orderStatus){
+            res.status(200).json({
+                success: true,
+                message: "Status is already the same",
+                order
+            });
+        }
+
+        // const oldStatus = order.orderStatus;
+
+        order.orderStatus = orderStatus;
+ 
+        const updateOrder = await order.save();
+
+
+        let notificationTitle = "";
+        let notificationMessage = "";
+
+        switch(orderStatus){
+            case "Pending":
+                notificationTitle = "Order Pending";
+                notificationMessage = 
+                    `Your order #${order._id
+                        .toString()
+                        .substring(0,8)}
+                        is pending.`;
+                break;
+
+            case "Processing":
+                notificationTitle = "Order Processing";
+                notificationMessage = 
+                    `Your order #${order._id
+                        .toString()
+                        .substring(0,8)}
+                        is now being processed.`;
+                break;
+
+            case "Shipped":
+                notificationTitle = "Order Processing";
+                notificationMessage = 
+                    `Your order #${order._id
+                        .toString()
+                        .substring(0,8)}
+                        has now been shipped.`;
+                break;
+
+            case "Delivered":
+                notificationTitle = "Order Delivered";
+                notificationMessage = 
+                    `Your order #${order._id
+                        .toString()
+                        .substring(0,8)}
+                        has been Delivered.`;
+                break;
+       
+            case "Cancelled":
+                notificationTitle = "Order Cancelled";
+                notificationMessage = 
+                    `Your order #${order._id
+                        .toString()
+                        .substring(0,8)}
+                        has been cancelled.`;
+                break;
+
+        default:
+            notificationTitle = "Order Updated"
+            notificationMessage = `Your Order status changed to ${orderStatus}`
+        }
+
+        await NotificationModel.create({
+            recevier: order.userId,
+            recevierRole: "user",
+            type: "ORDER",
+            title: notificationTitle,
+            message: notificationMessage,
+            orderId: order._id,
+            isRead: false
+        });
         res.status(200).json({
             success: true,
-            message: "Order status updated successfully",
+            message:`Order status changed from ${oldStatus} to ${orderStatus}`,
             order: updatedOrder
         });
+
     } catch (error) {
         res.status(500).json({
             success: false,

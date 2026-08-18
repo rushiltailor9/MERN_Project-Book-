@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const UserModel = require("../Modules/User");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
+const createAdminNotifications = require("../Utils/createAdminNotifications");
 
 //Register Logic
 const registerUser = async (req, res) =>{
@@ -26,6 +27,12 @@ const registerUser = async (req, res) =>{
         role:"user"
     });
     await userModel.save(); //Save the user data in MongoDB
+
+    await createAdminNotifications({
+        type: "USER",
+        title: "New User Registered",
+        message: `${firstName} ${lastName} has registered on READ-EASY.`
+    });
     
     res.status(201)
         .json({
