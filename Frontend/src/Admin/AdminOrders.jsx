@@ -4,6 +4,7 @@ import AdminSidebar from "./AdminSidebar";
 import { getAllOrders, updateOrderStatus } from "../API/orderApi";
 import { handleSuccess, handleError } from "../utils";
 import "../CSS/Admin.css";
+import "../CSS/AdminOrder.css";
 import { FaSearch } from "react-icons/fa";
 
 const AdminOrders = () => {
@@ -127,6 +128,7 @@ const AdminOrders = () => {
                       <th>Amount</th>
                       <th>Payment</th>
                       <th>Status</th>
+                      <th>Invoice</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -134,9 +136,11 @@ const AdminOrders = () => {
                       <tr key={order._id}>
                         <td className="order-id">#{order._id.substring(0, 10)}...</td>
                         <td className="customer-info">
-                          <strong>{order.address?.name || "N/A"}</strong><br/>
-                          <span className="info-sub">  {order.address?.phone || "N/A"}</span>
-                          <span className="info-sub"> | {order.address?.city || "N/A"}</span>
+                          <span className="customer-name">{order.address?.name || "N/A"}</span>
+                          <span className="info-divider">·</span>
+                          <span className="info-sub">📞 {order.address?.phone || "N/A"}</span>
+                          <span className="info-divider">·</span>
+                          <span className="info-sub">📍 {order.address?.city || "N/A"}</span>
                         </td>
                         <td className="order-items">
                           {order.items?.map((item, idx) => (
@@ -161,6 +165,25 @@ const AdminOrders = () => {
                             <option value="Delivered">Delivered</option>
                             <option value="Cancelled">Cancelled</option>
                           </select>
+                        </td>
+                        <td>
+                          <a
+                            href={`/invoice/${order._id}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{
+                              padding: "4px 10px",
+                              background: "#2563eb",
+                              color: "#ffffff",
+                              borderRadius: "4px",
+                              fontSize: "0.8rem",
+                              fontWeight: "600",
+                              textDecoration: "none",
+                              display: "inline-block"
+                            }}
+                          >
+                            📄 View
+                          </a>
                         </td>
                       </tr>
                     ))}

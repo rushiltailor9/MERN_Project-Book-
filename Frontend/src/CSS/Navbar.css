@@ -232,18 +232,18 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%);
-    border: 1px solid rgba(244, 63, 94, 0.18);
-    box-shadow: 0 6px 18px rgba(244, 63, 94, 0.12);
-    color: #ef476f;
+    background: linear-gradient(135deg, #f1f1ff 0%, #e5e4ff 100%);
+    border: 1px solid rgba(63, 96, 244, 0.18);
+    box-shadow: 0 6px 18px rgba(63, 84, 244, 0.12);
+    color: var(--accent-primary);
     transition: all 0.25s ease;
     text-decoration: none;
 }
 
 .favorite-link:hover {
-    background: linear-gradient(135deg, #ffe4e6 0%, #fecdd3 100%);
+    background: linear-gradient(135deg, #e4e5ff 0%, #cdcdfe 100%);
     transform: translateY(-2px) scale(1.03);
-    box-shadow: 0 10px 22px rgba(239, 71, 111, 0.18);
+    box-shadow: 0 10px 22px rgba(71, 79, 239, 0.18);
 }
 
 .favorite-icon {
@@ -254,7 +254,7 @@
 
 .favorite-link:hover .favorite-icon {
     transform: scale(1.12);
-    color: #e11d48;
+    color: var(--accent-primary-hover);
 }
 
 /* =========================

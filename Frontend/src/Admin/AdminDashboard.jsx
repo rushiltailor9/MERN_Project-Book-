@@ -3,7 +3,7 @@ import AdminSidebar from "./AdminSidebar"
 import "../CSS/Admin.css";
 import { useEffect, useState } from "react";
 import { getBooks } from "../API/bookApi";
-import { getUsers } from "../API/userApi";
+import { getAllUsers } from "../API/userApi";
 import { getAllOrders } from "../API/orderApi";
 
 const AdminDashboard = () => {
@@ -48,7 +48,7 @@ const AdminDashboard = () => {
     }
     const fetchUser = async () => {
         try {
-            const response = await getUsers();
+            const response = await getAllUsers();
             setUsers(response.data || []);
         } catch (error) {
             console.log(error);

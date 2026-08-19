@@ -14,7 +14,9 @@ const placeOrder = async (req, res) => {
             items,
             totalAmount,
             address,
-            paymentMethod
+            paymentMethod,
+            paymentStatus,
+            transactionId
         } = req.body;
 
         if (!userId) {
@@ -58,13 +60,13 @@ const placeOrder = async (req, res) => {
             });
         }
 
-        for( const item of items){
+        for (const item of items) {
             const book = await BookModel.findById(item.bookId);
 
-            if(!book){
+            if (!book) {
                 return res.status(400).json({
-                    success:false,
-                    message: `Book "${item.bookName} Is Not Found"`
+                    success: false,
+                    message: `Book "${item.bookName}" Is Not Found`
                 });
             }
             const quantity = Number(item.quantity);
@@ -84,43 +86,31 @@ const placeOrder = async (req, res) => {
             }
         }
 
+        const normalizedPaymentMethod = paymentMethod || "COD";
+        const isOnline = !["COD", "cod"].includes(normalizedPaymentMethod);
+
         const order = new OrderModel({
             userId,
             items,
             totalAmount,
             address,
-            paymentMethod,
+            paymentMethod: normalizedPaymentMethod,
+            paymentStatus: paymentStatus || (isOnline ? "paid" : "pending"),
+            transactionId: transactionId || (isOnline ? ("TXN_" + Date.now()) : ""),
             orderStatus: "Pending"
         });
 
         const savedOrder = await order.save();
 
-        for (const item of items){
-
-
+        for (const item of items) {
             const quantity = Number(item.quantity);
-
             const book = await BookModel.findById(item.bookId);
 
-            if (!book) {
-                return res.status(404).json({
-                    success: false,
-                    message: "Book not found"
-                });
+            if (book) {
+                const currentStock = Number(book.stock);
+                book.stock = Math.max(0, currentStock - quantity);
+                await book.save();
             }
-
-            const currentStock = Number(book.stock);
-
-            if (currentStock < quantity) {
-                return res.status(400).json({
-                    success: false,
-                    message: `${book.bookName} has only ${currentStock} copies available`
-                });
-            }
-
-            book.stock = currentStock - quantity;
-
-            await book.save();
         }
 
         // Clear user's cart in DB after successful order placement
@@ -140,6 +130,7 @@ const placeOrder = async (req, res) => {
         });
 
     } catch (error) {
+        console.error("Place order error:", error);
         res.status(500).json({
             success: false,
             message: error.message
@@ -210,19 +201,6 @@ const updateOrderStatus = async (req, res) => {
             });
         }
 
-        const updatedOrder = await OrderModel.findByIdAndUpdate(
-            id,
-            { orderStatus },
-            { new: true }
-        );
-
-        if (!updatedOrder) {
-            return res.status(404).json({
-                success: false,
-                message: "Order not found"
-            });
-        }
-
         const allowedStatues = [
             "Pending",
             "Processing",
@@ -231,7 +209,7 @@ const updateOrderStatus = async (req, res) => {
             "Cancelled"
         ];
 
-        if(!allowedStatues.includes(orderStatus)){
+        if (!allowedStatues.includes(orderStatus)) {
             return res.status(400).json({
                 success: false,
                 message: "Invalid Order Status"
@@ -240,98 +218,76 @@ const updateOrderStatus = async (req, res) => {
 
         const order = await OrderModel.findById(id);
 
-        if(!order){
-            return res.status(400).json({
+        if (!order) {
+            return res.status(404).json({
                 success: false,
-                message: "Order Is Not Found"
+                message: "Order not found"
             });
         }
 
-        if(order.orderStatus === orderStatus){
-            res.status(200).json({
+        if (order.orderStatus === orderStatus) {
+            return res.status(200).json({
                 success: true,
                 message: "Status is already the same",
                 order
             });
         }
 
-        // const oldStatus = order.orderStatus;
-
+        const oldStatus = order.orderStatus || "Pending";
         order.orderStatus = orderStatus;
- 
-        const updateOrder = await order.save();
-
+        const updatedOrder = await order.save();
 
         let notificationTitle = "";
         let notificationMessage = "";
 
-        switch(orderStatus){
+        switch (orderStatus) {
             case "Pending":
                 notificationTitle = "Order Pending";
-                notificationMessage = 
-                    `Your order #${order._id
-                        .toString()
-                        .substring(0,8)}
-                        is pending.`;
+                notificationMessage = `Your order #${order._id.toString().substring(0, 8)} is pending.`;
                 break;
-
             case "Processing":
                 notificationTitle = "Order Processing";
-                notificationMessage = 
-                    `Your order #${order._id
-                        .toString()
-                        .substring(0,8)}
-                        is now being processed.`;
+                notificationMessage = `Your order #${order._id.toString().substring(0, 8)} is now being processed.`;
                 break;
-
             case "Shipped":
-                notificationTitle = "Order Processing";
-                notificationMessage = 
-                    `Your order #${order._id
-                        .toString()
-                        .substring(0,8)}
-                        has now been shipped.`;
+                notificationTitle = "Order Shipped";
+                notificationMessage = `Your order #${order._id.toString().substring(0, 8)} has now been shipped.`;
                 break;
-
             case "Delivered":
                 notificationTitle = "Order Delivered";
-                notificationMessage = 
-                    `Your order #${order._id
-                        .toString()
-                        .substring(0,8)}
-                        has been Delivered.`;
+                notificationMessage = `Your order #${order._id.toString().substring(0, 8)} has been delivered.`;
                 break;
-       
             case "Cancelled":
                 notificationTitle = "Order Cancelled";
-                notificationMessage = 
-                    `Your order #${order._id
-                        .toString()
-                        .substring(0,8)}
-                        has been cancelled.`;
+                notificationMessage = `Your order #${order._id.toString().substring(0, 8)} has been cancelled.`;
                 break;
-
-        default:
-            notificationTitle = "Order Updated"
-            notificationMessage = `Your Order status changed to ${orderStatus}`
+            default:
+                notificationTitle = "Order Updated";
+                notificationMessage = `Your order status changed to ${orderStatus}`;
         }
 
-        await NotificationModel.create({
-            recevier: order.userId,
-            recevierRole: "user",
-            type: "ORDER",
-            title: notificationTitle,
-            message: notificationMessage,
-            orderId: order._id,
-            isRead: false
-        });
+        try {
+            await NotificationModel.create({
+                recevier: order.userId,
+                recevierRole: "user",
+                type: "ORDER",
+                title: notificationTitle,
+                message: notificationMessage,
+                orderId: order._id,
+                isRead: false
+            });
+        } catch (notifErr) {
+            console.error("Notification creation error:", notifErr);
+        }
+
         res.status(200).json({
             success: true,
-            message:`Order status changed from ${oldStatus} to ${orderStatus}`,
+            message: `Order status changed from ${oldStatus} to ${orderStatus}`,
             order: updatedOrder
         });
 
     } catch (error) {
+        console.error("Update order status error:", error);
         res.status(500).json({
             success: false,
             message: error.message

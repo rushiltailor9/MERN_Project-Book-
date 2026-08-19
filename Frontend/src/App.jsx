@@ -25,6 +25,9 @@ import Checkout from "./Components/Checkout";
 import OrderSuccess from "./Components/OrderSuccess";
 import MyOrders from "./Components/MyOrders";
 import Favorites from "./Components/Favorite";
+import Payment from "./Components/Payment";
+import OrderComplete from "./Components/OrderComplete";
+import Invoice from "./Components/Invoice";
 
 function App() {
     const [isLogin, setIsLogin] = useState(() => Boolean(localStorage.getItem("token")));
@@ -51,7 +54,10 @@ function App() {
                 <Route path="/feedback" element={protectedRoutes({ element: <Feedback loggedInUser={loggedInUser} /> })}/>
                 <Route path="/about" element={<AboutUs/>}/>
                 <Route path="/checkout" element={protectedRoutes({ element: <Checkout /> })}/>
+                <Route path="/payment" element={protectedRoutes({ element: <Payment /> })}/>
+                <Route path="/order-complete" element={protectedRoutes({ element: <OrderComplete /> })}/>
                 <Route path="/order-success" element={protectedRoutes({ element: <OrderSuccess /> })}/>
+                <Route path="/invoice/:orderId" element={protectedRoutes({ element: <Invoice /> })}/>
                 <Route path="/my-orders" element={protectedRoutes({ element: <MyOrders /> })}/>
                 <Route path="/account/favorites" element={ protectedRoutes({ element: <Favorites />})}/>
                 <Route element={<ProtectedAdminRoute/>}>
@@ -78,10 +84,6 @@ function App() {
                     <Route 
                         path="/admin/feedback"
                         element={<AdminFeedback/>}
-                    />
-                    <Route
-                        path="/account/favorites"
-                        element={<Favorites />}
                     />
                 </Route>
             </Routes>

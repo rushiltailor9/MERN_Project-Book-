@@ -10,6 +10,7 @@ const registerUser = async (req, res) =>{
     const {firstName, lastName, email, password} = req.body; //Client data
     const user = await UserModel.findOne({email}); //MongoDB Data
 
+
     if(user){
         return res.status(400)
             .json({
@@ -58,7 +59,10 @@ const registerUser = async (req, res) =>{
 
 const fetchUser = async(req, res) =>{
     try{
-        const data = await UserModel.find({});
+        const data = await UserModel
+            .find({})
+            .select("-password");
+
         res.status(200)
             .json({
                 message:"User Is Fetch",
@@ -76,6 +80,93 @@ const fetchUser = async(req, res) =>{
     }
 }
 
+const toggelBlockUser = async(req, res) =>{
+    try{
+        const {id} = req.params;
+        
+        const user = await UserModel.findById(id);
+
+        if(!user){
+            return res.status(404).json({
+                success:false,
+                message:"User Is Not Found"
+            });
+        }
+
+        if(user.role === "admin"){
+            return res.status(403).json({
+                success: false,
+                message: "Admin Can't be Blocked"
+            });
+        }
+
+        user.isBlocked = !user.isBlocked;
+
+        await user.save();
+
+        res.status(200).json({
+            success:true,
+            message: user.isBlocked 
+                ? "User Is Blocked Successfully"
+                : "User Is UnBlocked Successfully" ,
+            user:{
+                _id: user._id,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+                role: user.role,
+                isBlocked: user.isBlocked
+            }
+        });
+        
+    }catch(error){
+        console.error("Toggel Blocked Error",error);
+
+        res.status(500).json({
+            success:true,
+            message: "Internal Server Error",
+            error: error.message
+        });
+    }
+}
+
+const deleteUser = async(req, res) =>{
+    try{
+        const {id} = req.params;
+
+        const user = await UserModel.findById(id);
+
+        if(!user){
+            return res.status(403).json({
+                success: false,
+                message: "User is not found"
+            });
+        }
+
+        if(user.role === "admin"){
+            return res.status(403).json({
+                success: false,
+                message: "Admin can't be Deleted"
+            });
+        }
+
+        await UserModel.findByIdAndDelete(id);
+
+        res.status(200).json({
+            success: true,
+            message: "User Deleted Successfully"
+        });
+    }catch(error){
+        console.log("Deleted User",error);
+
+        res.status(500).json({
+            success: false,
+            message: "Inetrnal server error",
+            error: error.message
+        })
+    }
+}
+
 
 //Login Logic
 const loginUser = async (req, res) =>{
@@ -89,6 +180,12 @@ const loginUser = async (req, res) =>{
                 message: "Email or Password is incorrect",
                 success: false
             });
+    }
+    if(user.isBlocked){
+        return res.status(403).json({
+            success:false,
+            message:"Your Account is blocked by admin"
+        });
     }
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
 
@@ -133,5 +230,7 @@ const loginUser = async (req, res) =>{
 module.exports = {
     registerUser,
     fetchUser,
-    loginUser
+    loginUser,
+    toggelBlockUser,
+    deleteUser
 }

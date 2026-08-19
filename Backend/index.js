@@ -13,6 +13,8 @@ const AdminRouter = require("./Routes/AdminRouter");
 const OrderRouter = require("./Routes/OrderRouter");
 const FavoriteRouter = require("./Routes/FavoriteRouter");
 const NotificationRouter = require("./Routes/NotificationRouter");
+const paymentRouter = require("./Routes/PaymentRouter");
+const invoiceRouter = require("./Routes/InvoiceRouter");
 
 const PORT = process.env.PORT || 5000;
 
@@ -47,6 +49,10 @@ app.use('/order',OrderRouter);
 app.use('/favorite',FavoriteRouter);
 
 app.use('/notification',NotificationRouter);
+
+app.use('/payment',paymentRouter);
+
+app.use('/invoice',invoiceRouter);
 
 app.listen(PORT,()=>{
     console.log(`Server Is Running On Port ${PORT}`);

@@ -230,3 +230,142 @@
         box-sizing: border-box;
     }
 }
+
+/* =========================
+   BADGES
+========================= */
+
+.badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+}
+
+/* Status badges */
+.badge-active {
+    background: rgba(16, 185, 129, 0.12);
+    color: #059669;
+    border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.badge-blocked {
+    background: rgba(239, 68, 68, 0.1);
+    color: #DC2626;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+/* Role badges */
+.badge-user {
+    background: rgba(37, 99, 235, 0.08);
+    color: var(--accent-primary);
+    border: 1px solid rgba(37, 99, 235, 0.2);
+}
+
+.badge-admin {
+    background: rgba(139, 92, 246, 0.1);
+    color: #7C3AED;
+    border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+/* =========================
+   ACTION BUTTONS
+========================= */
+
+.action-btns {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.btn-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: var(--radius-btn, 8px);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn-action:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.btn-block {
+    background: rgba(245, 158, 11, 0.1);
+    color: #D97706;
+    border-color: rgba(245, 158, 11, 0.25);
+}
+
+.btn-block:hover:not(:disabled) {
+    background: rgba(245, 158, 11, 0.2);
+    border-color: rgba(245, 158, 11, 0.5);
+}
+
+.btn-unblock {
+    background: rgba(16, 185, 129, 0.1);
+    color: #059669;
+    border-color: rgba(16, 185, 129, 0.25);
+}
+
+.btn-unblock:hover:not(:disabled) {
+    background: rgba(16, 185, 129, 0.2);
+    border-color: rgba(16, 185, 129, 0.5);
+}
+
+.btn-delete {
+    background: rgba(239, 68, 68, 0.08);
+    color: #DC2626;
+    border-color: rgba(239, 68, 68, 0.2);
+}
+
+.btn-delete:hover:not(:disabled) {
+    background: #DC2626;
+    color: #fff;
+    border-color: #DC2626;
+}
+
+/* =========================
+   SPINNER
+========================= */
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.spinner-icon {
+    font-size: 2rem;
+    color: var(--accent-primary);
+    animation: spin 0.8s linear infinite;
+    margin-bottom: 12px;
+}
+
+.btn-spinner {
+    font-size: 0.9rem;
+    animation: spin 0.8s linear infinite;
+}
+
+/* =========================
+   MISC
+========================= */
+
+.user-email {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+
+.admin-protected-label {
+    display: inline-block;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-style: italic;
+}

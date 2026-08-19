@@ -64,7 +64,17 @@ const OrderSuccess = () => {
                     </div>
                 )}
 
-                <div style={{ display: "flex", gap: "15px", justifyContent: "center" }}>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "15px", justifyContent: "center" }}>
+                    {order && (
+                        <Link
+                            to={`/invoice/${order._id}`}
+                            className="place-order-btn"
+                            style={{ display: "inline-block", width: "auto", padding: "12px 24px", textDecoration: "none", background: "#2563eb" }}
+                        >
+                            📄 View Invoice
+                        </Link>
+                    )}
+
                     <Link
                         to="/my-orders"
                         className="place-order-btn"

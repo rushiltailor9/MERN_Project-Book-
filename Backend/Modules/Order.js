@@ -56,17 +56,33 @@ const orderSchema = new mongoose.Schema(
                 type:String,
                 require: true
             }
-
-        },
-        paymentMethod:{
-            type: String,
-            require:true
         },
         orderStatus:{
             type: String,
             default:"Pending"
+        },
+        paymentMethod: {
+            type: String,
+            enum: ["fake_card", "cod", "dummy_card", "dummy_upi", "COD", "ONLINE", "online"],
+            default: "COD"
+        },
+
+        paymentStatus: {
+            type: String,
+            enum: ["pending", "paid", "failed", "success", "Pending", "Paid", "Failed", "Success"],
+            default: "pending"
+        },
+
+        transactionId: {
+            type: String
+        },
+
+        invoiceId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "invoice"
         }
-    }
+    },
+    { timestamps: true }
 );
 
 const OrderModel = mongoose.model("orders",orderSchema);

@@ -117,13 +117,32 @@ const MyOrders = () => {
                                 </div>
                             </div>
 
-                            <div style={{ borderTop: "1px dashed #e2e8f0", paddingTop: "12px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                            <div style={{ borderTop: "1px dashed #e2e8f0", paddingTop: "12px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "10px" }}>
                                 <span style={{ color: "#64748b", fontSize: "0.9rem" }}>
                                     Placed on: {new Date(order.createdAt || order._id.substring(0,8)).toLocaleDateString()}
                                 </span>
-                                <span style={{ fontSize: "1.2rem", fontWeight: "700", color: "#0f172a" }}>
-                                    Total: ₹{order.totalAmount}
-                                </span>
+                                <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
+                                    <Link
+                                        to={`/invoice/${order._id}`}
+                                        style={{
+                                            padding: "6px 14px",
+                                            background: "#2563eb",
+                                            color: "#ffffff",
+                                            borderRadius: "6px",
+                                            fontSize: "0.85rem",
+                                            fontWeight: "600",
+                                            textDecoration: "none",
+                                            display: "inline-flex",
+                                            alignItems: "center",
+                                            gap: "5px"
+                                        }}
+                                    >
+                                        📄 View Invoice
+                                    </Link>
+                                    <span style={{ fontSize: "1.2rem", fontWeight: "700", color: "#0f172a" }}>
+                                        Total: ₹{order.totalAmount}
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     ))

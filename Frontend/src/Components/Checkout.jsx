@@ -57,12 +57,12 @@ const Checkout = () => {
     });
   };
 
-  const handlePlaceOrder = async () => {
+  const validateForm = () => {
     const token = localStorage.getItem("token");
     if (!token) {
       handleError("Please login to place an order");
       navigate("/login");
-      return;
+      return false;
     }
 
     if (
@@ -73,34 +73,65 @@ const Checkout = () => {
       !formData.pincode.trim()
     ) {
       handleError("Please fill in all delivery details");
-      return;
+      return false;
     }
 
     if (cart.length === 0) {
       handleError("Your cart is empty");
+      return false;
+    }
+
+    return true;
+  };
+
+  const getFormattedItems = () => {
+    return cart.map((item) => ({
+      bookId: item.bookId?._id || item.bookId,
+      bookName: item.bookName || item.bookId?.bookName || "Book",
+      price: item.price || item.bookId?.price || 0,
+      quantity: item.quantity,
+      bookImg: item.bookImg || item.bookId?.bookImg || ""
+    }));
+  };
+
+  const handleSubmit = async () => {
+    if (!validateForm()) return;
+
+    const formattedAddress = {
+      name: formData.name.trim(),
+      phone: formData.phone.trim(),
+      address: formData.address.trim(),
+      city: formData.city.trim(),
+      pincode: formData.pincode.trim()
+    };
+
+    const formattedItems = getFormattedItems();
+
+    // If online payment, navigate to payment page
+    if (formData.paymentMethod === "ONLINE") {
+      navigate("/payment", {
+        state: {
+          totalAmount: totalAmount,
+          orderData: {
+            items: formattedItems,
+            totalAmount: totalAmount,
+            address: formattedAddress,
+            paymentMethod: "ONLINE"
+          }
+        }
+      });
       return;
     }
 
+    // Otherwise place COD order
     try {
       setLoading(true);
 
       const orderData = {
-        items: cart.map((item) => ({
-          bookId: item.bookId?._id || item.bookId,
-          bookName: item.bookName || item.bookId?.bookName || "Book",
-          price: item.price || item.bookId?.price || 0,
-          quantity: item.quantity,
-          bookImg: item.bookImg || item.bookId?.bookImg || ""
-        })),
+        items: formattedItems,
         totalAmount: totalAmount,
-        address: {
-          name: formData.name.trim(),
-          phone: formData.phone.trim(),
-          address: formData.address.trim(),
-          city: formData.city.trim(),
-          pincode: formData.pincode.trim()
-        },
-        paymentMethod: formData.paymentMethod
+        address: formattedAddress,
+        paymentMethod: "COD"
       };
 
       const response = await placeOrder(orderData);
@@ -108,7 +139,19 @@ const Checkout = () => {
       if (response.success) {
         handleSuccess("Order Placed Successfully!");
         localStorage.removeItem("cart");
-        navigate("/order-success", { state: { order: response.order } });
+        navigate("/order-complete", { 
+          state: { 
+            order: response.order,
+            payment: {
+              paymentMethod: "Cash On Delivery (COD)",
+              paymentStatus: "Pending",
+              transactionId: "N/A"
+            },
+            invoice: {
+              invoiceNumber: "INV-" + Date.now()
+            }
+          } 
+        });
       } else {
         handleError(response.message || "Failed to place order");
       }
@@ -257,10 +300,14 @@ const Checkout = () => {
 
             <button
               className="place-order-btn"
-              onClick={handlePlaceOrder}
+              onClick={handleSubmit}
               disabled={loading || cart.length === 0}
             >
-              {loading ? "Placing Order..." : "Confirm & Place Order"}
+              {loading
+                ? "Processing..."
+                : formData.paymentMethod === "ONLINE"
+                ? "Proceed to Online Payment →"
+                : "Confirm & Place Order (COD)"}
             </button>
           </div>
         </div>
