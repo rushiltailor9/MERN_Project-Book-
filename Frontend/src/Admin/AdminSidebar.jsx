@@ -53,6 +53,9 @@ const AdminSidebar = () => {
                      Feedback
                 </Link>
 
+                <Link to="/admin/discount">
+                    Discount
+                </Link>
             </nav>
 
 

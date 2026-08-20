@@ -21,12 +21,12 @@ export const getNotifications = async() =>{
 }
 
 export const markNotificationRead = async(id) =>{
-    const response = await API.put(`/${id}`);
+    const response = await API.put(`/${id}`, {});
     return response.data;
 }
 
 export const markAllNotificationsRead = async() =>{
-    const response = await API.put("/read-all");
+    const response = await API.put("/read-all", {});
     return response.data;
 }
 

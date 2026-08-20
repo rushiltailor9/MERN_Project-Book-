@@ -1,10 +1,12 @@
 const BookModel = require('../Modules/Book');
+const { createLowStockNotification } = require("../Utils/createAdminNotifications");
 
 //create POST
 const createBooks = async(req, res) =>{
     try{
         const model = new BookModel(req.body);
         await model.save();
+        await createLowStockNotification(model);
         res.status(201)
             .json({
                 message:"Book Is Created",
@@ -55,7 +57,8 @@ const updateBookById = async(req, res) =>{
         }
 
         const obj = {$set: updateData};
-        await BookModel.findByIdAndUpdate( id, obj );
+        const updatedBook = await BookModel.findByIdAndUpdate(id, obj, { new: true });
+        await createLowStockNotification(updatedBook);
         res.status(200)
             .json({
                 message:"Book Is Updated",

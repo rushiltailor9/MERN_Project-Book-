@@ -1,22 +1,10 @@
-import {
-    useCallback,
-    useEffect,
-    useRef,
-    useState
-} from "react";
-
-import {
-    FaBell
-} from "react-icons/fa";
-
-
+import { useCallback, useEffect, useRef, useState } from "react";
+import { FaBell } from "react-icons/fa";
 import {
     getNotifications,
     markNotificationRead,
     markAllNotificationsRead
 } from "../API/notificationApi";
-
-
 import "../CSS/Notification.css";
 
 
@@ -24,78 +12,43 @@ const NotificationBell = () => {
 
     const notificationRef = useRef(null);
 
-
-    const [
-        notifications,
-        setNotifications
-    ] = useState([]);
-
-
-    const [
-        unreadCount,
-        setUnreadCount
-    ] = useState(0);
-
-
-    const [
-        isOpen,
-        setIsOpen
-    ] = useState(false);
-
-
-    const [
-        loading,
-        setLoading
-    ] = useState(false);
-
-
+    const [ notifications, setNotifications ] = useState([]);
+    const [ unreadCount, setUnreadCount ] = useState(0);
+    const [ isOpen, setIsOpen ] = useState(false);
+    const [ loading, setLoading ] = useState(false);
     // =================================================
     // FETCH NOTIFICATIONS
     // =================================================
 
     const fetchNotifications = useCallback(
         async (showLoading = false) => {
-
             try {
-
                 if (showLoading) {
                     setLoading(true);
                 }
 
-
                 const response =
                     await getNotifications();
-
-
                 if (response.success) {
-
                     setNotifications(
                         response.notifications || []
                     );
 
-
                     setUnreadCount(
                         response.unreadCount || 0
                     );
-
                 }
-
             } catch (error) {
-
                 console.error(
                     "Notification Fetch Error:",
                     error.response?.data ||
                     error.message
                 );
-
             } finally {
-
                 if (showLoading) {
                     setLoading(false);
                 }
-
             }
-
         },
         []
     );
@@ -295,6 +248,12 @@ const NotificationBell = () => {
             if (type === "FEEDBACK") {
 
                 return "💬";
+
+            }
+
+            if (type === "LOW_STOCK" || type === "OUT_OF_STOCK") {
+
+                return "⚠️";
 
             }
 

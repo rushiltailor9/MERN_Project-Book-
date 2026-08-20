@@ -28,6 +28,7 @@ import Favorites from "./Components/Favorite";
 import Payment from "./Components/Payment";
 import OrderComplete from "./Components/OrderComplete";
 import Invoice from "./Components/Invoice";
+import AdminDiscount from "./Admin/AdminDiscount";
 
 function App() {
     const [isLogin, setIsLogin] = useState(() => Boolean(localStorage.getItem("token")));
@@ -84,6 +85,10 @@ function App() {
                     <Route 
                         path="/admin/feedback"
                         element={<AdminFeedback/>}
+                    />
+                    <Route
+                        path="/admin/discount"
+                        element={<AdminDiscount/>}
                     />
                 </Route>
             </Routes>

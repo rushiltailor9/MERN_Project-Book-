@@ -14,12 +14,12 @@ function Payment() {
     // Data from Checkout
     const { totalAmount, orderData } = location.state || {};
 
-    const [paymentMethod, setPaymentMethod] = useState("dummy_card");
-    const [cardNumber, setCardNumber] = useState("4532 8901 2345 6789");
+    const [paymentMethod, setPaymentMethod] = useState("");
+    const [cardNumber, setCardNumber] = useState("");
     const [cardName, setCardName] = useState(orderData?.address?.name || "Demo Customer");
-    const [expiry, setExpiry] = useState("12/28");
-    const [cvv, setCvv] = useState("789");
-    const [upiId, setUpiId] = useState("user@okaxis");
+    const [expiry, setExpiry] = useState("");
+    const [cvv, setCvv] = useState("");
+    const [upiId, setUpiId] = useState("");
     const [loading, setLoading] = useState(false);
 
     // If no payment data, return back to checkout

@@ -51,9 +51,12 @@ const markNotificationRead = async(req, res) =>{
 
         res.status(200).json({
             success: true,
+            message: "Notification Mark as read",
             notifications
         })
     }catch(error){
+
+        console.error("Mark Notification Error",error);
 
         res.status(500).json({
             success: false,
@@ -79,6 +82,7 @@ const markAllNotificationsRead = async(req, res) => {
             message: "All notifications marked as read"
         });
     } catch (error) {
+        console.error("Mark all Notification Error",error);
         res.status(500).json({
             success: false,
             message: error.message

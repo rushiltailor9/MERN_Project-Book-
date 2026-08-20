@@ -349,18 +349,20 @@ const handleFavorite = async (bookId) => {
                 >
                   <FaHeart />
                 </button>
-                <img
-                  src={book.bookImg}
-                  alt={book.bookName}
-                  className="book-image"
-                />
-                <button
-                  type="button"
-                  className="quick-view-btn"
-                  onClick={() => setSelectedBook(book)}
-                >
-                  Quick view
-                </button>
+                <div className="book-image-wrap">
+                  <img
+                    src={book.bookImg}
+                    alt={book.bookName}
+                    className="book-image"
+                  />
+                  <button
+                    type="button"
+                    className="quick-view-btn"
+                    onClick={() => setSelectedBook(book)}
+                  >
+                    Quick view
+                  </button>
+                </div>
                 <div className="book-details">
                   <h2>{book.bookName}</h2>
                   <p>

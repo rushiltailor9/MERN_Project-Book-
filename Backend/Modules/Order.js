@@ -18,6 +18,18 @@ const orderSchema = new mongoose.Schema(
                     type: String,
                     require: true
                 },
+                originalPrice:{
+                    type: Number,
+                    require: true
+                },
+                discountPrice:{
+                    type: Number,
+                    require: 0
+                },
+                discountAmount:{
+                    type: Number,
+                    require: 0
+                },
                 price:{
                     type: Number,
                     require: true
@@ -56,6 +68,20 @@ const orderSchema = new mongoose.Schema(
                 type:String,
                 require: true
             }
+        },
+        subtotal: {
+            type: Number,
+            default: 0
+        },
+
+        totalDiscount: {
+            type: Number,
+            default: 0
+        },
+
+        totalAmount: {
+            type: Number,
+            required: true
         },
         orderStatus:{
             type: String,

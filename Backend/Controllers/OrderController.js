@@ -1,222 +1,341 @@
-const OrderModel = require("../Modules/Order");
-const CartModel = require("../Modules/Cart");
-const BookModel = require("../Modules/Book");
-const NotificationModel = require("../Modules/Notification");
-const createAdminNotifications = require("../Utils/createAdminNotifications");
+const Order = require("../Modules/Order");
+const Book = require("../Modules/Book");
+const Cart = require("../Modules/Cart");
+const Discount = require("../Modules/Discount");
 
-// ======================
-// Place Order
-// ======================
-const placeOrder = async (req, res) => {
-    try {
-        const userId = req.user?._id || req.body.userId;
-        const {
-            items,
-            totalAmount,
-            address,
-            paymentMethod,
-            paymentStatus,
-            transactionId
-        } = req.body;
+const calculateDiscount = async (book) => {
+    const now = new Date();
 
-        if (!userId) {
-            return res.status(400).json({
-                success: false,
-                message: "User ID is required"
-            });
+    let discount = await Discount.findOne({
+        bookId: book._id,
+        isActive: true,
+        startDate: {
+            $lte: now
+        },
+        endDate: {
+            $gte: now
         }
+    });
 
-        if (!items || items.length === 0) {
+    if (!discount) {
+        discount = await Discount.findOne({
+            bookId: null,
+            isActive: true,
+            startDate: {
+                $lte: now
+            },
+            endDate: {
+                $gte: now
+            }
+        });
+    }
+
+    const originalPrice =
+        Number(book.price);
+
+    let discountPercentage = 0;
+
+    if (discount) {
+        discountPercentage =
+            Number(
+                discount.discountPercentage
+            );
+    }
+
+    const discountAmount =
+        Number(
+            (
+                originalPrice *
+                discountPercentage /
+                100
+            ).toFixed(2)
+        );
+
+    const finalPrice =
+        Number(
+            (
+                originalPrice -
+                discountAmount
+            ).toFixed(2)
+        );
+
+    return {
+        originalPrice,
+        discountPercentage,
+        discountAmount,
+        finalPrice
+    };
+};
+
+const placeOrder = async (req, res) => {
+
+    try {
+        const userId =
+            req.user._id;
+
+        const cart =
+            await Cart.findOne({
+                user: userId
+            }).populate(
+                "items.bookId"
+            );
+
+        if (
+            !cart ||
+            !cart.items ||
+            cart.items.length === 0
+        ) {
             return res.status(400).json({
                 success: false,
                 message: "Cart is empty"
             });
         }
+        const orderItems = [];
+        let subtotal = 0;
+        let totalDiscount = 0;
+        let totalAmount = 0;
 
-        if (!totalAmount) {
-            return res.status(400).json({
-                success: false,
-                message: "Total amount is required"
-            });
-        }
-
-        if (!address || 
-            !address.name ||
-            !address.phone || 
-            !address.address || 
-            !address.city || 
-            !address.pincode
+        for (
+            const cartItem
+            of cart.items
         ) {
-            return res.status(400).json({
-                success: false,
-                message: "All address details (name, phone, address, city, pincode) are required"
-            });
-        }
 
-        if (!paymentMethod) {
-            return res.status(400).json({
-                success: false,
-                message: "Payment method is required"
-            });
-        }
-
-        for (const item of items) {
-            const book = await BookModel.findById(item.bookId);
+            const book =
+                cartItem.bookId;
 
             if (!book) {
-                return res.status(400).json({
+                return res.status(404).json({
                     success: false,
-                    message: `Book "${item.bookName}" Is Not Found`
-                });
-            }
-            const quantity = Number(item.quantity);
-
-            if (!Number.isInteger(quantity) || quantity <= 0) {
-                return res.status(400).json({
-                    success: false,
-                    message: `Invalid quantity for ${book.bookName}`
+                    message: "Book not found"
                 });
             }
 
-            if (Number(book.stock) < quantity) {
+            const quantity =
+                Number(
+                    cartItem.quantity
+                );
+
+            if ( !quantity || quantity < 1 ) {
                 return res.status(400).json({
                     success: false,
-                    message: `"${book.bookName}" has only ${book.stock} copies available`
+                    message: "Invalid quantity"
                 });
             }
+
+            if ( Number(book.stock) < quantity ) {
+                return res.status(400).json({
+                    success: false,
+                    message: `${book.bookName} has only ${book.stock} books available`
+                });
+            }
+            const priceData = await calculateDiscount(book);
+            const originalPrice = priceData.originalPrice;
+            const discountPercentage = priceData.discountPercentage;
+            const discountAmount = priceData.discountAmount;
+            const finalPrice = priceData.finalPrice;
+            const itemSubtotal =
+                Number(
+                    (
+                        originalPrice *
+                        quantity
+                    ).toFixed(2)
+                );
+
+            const itemDiscount =
+                Number(
+                    (
+                        discountAmount *
+                        quantity
+                    ).toFixed(2)
+                );
+
+            const itemTotal =
+                Number(
+                    (
+                        finalPrice *
+                        quantity
+                    ).toFixed(2)
+                );
+            subtotal += itemSubtotal;
+            totalDiscount += itemDiscount;
+            totalAmount += itemTotal;
+
+            orderItems.push({
+                bookId: book._id,
+                bookName: book.bookName,
+                quantity: quantity,
+                originalPrice: originalPrice,
+                discountPercentage: discountPercentage,
+                discountAmount: discountAmount,
+                price: finalPrice
+            });
+
         }
 
-        const normalizedPaymentMethod = paymentMethod || "COD";
-        const isOnline = !["COD", "cod"].includes(normalizedPaymentMethod);
+        subtotal =
+            Number(
+                subtotal.toFixed(2)
+            );
 
-        const order = new OrderModel({
-            userId,
-            items,
-            totalAmount,
-            address,
-            paymentMethod: normalizedPaymentMethod,
-            paymentStatus: paymentStatus || (isOnline ? "paid" : "pending"),
-            transactionId: transactionId || (isOnline ? ("TXN_" + Date.now()) : ""),
-            orderStatus: "Pending"
-        });
+        totalDiscount =
+            Number(
+                totalDiscount.toFixed(2)
+            );
+
+        totalAmount =
+            Number(
+                totalAmount.toFixed(2)
+            );
+
+        const order =
+            new Order({
+                user: userId,
+                items: orderItems,
+                subtotal: subtotal,
+                totalDiscount: totalDiscount,
+                totalAmount: totalAmount,
+                orderStatus: "Pending"
+            });
 
         const savedOrder = await order.save();
-
-        for (const item of items) {
-            const quantity = Number(item.quantity);
-            const book = await BookModel.findById(item.bookId);
-
-            if (book) {
-                const currentStock = Number(book.stock);
-                book.stock = Math.max(0, currentStock - quantity);
-                await book.save();
-            }
+            
+        for ( const cartItem of cart.items ) {
+            const book = cartItem.bookId;
+            const quantity = Number( cartItem.quantity );
+            await Book.findByIdAndUpdate(
+                book._id,
+                {
+                    $inc: {
+                        stock:
+                            -quantity
+                    }
+                }
+            );
         }
 
-        // Clear user's cart in DB after successful order placement
-        await CartModel.deleteMany({ userId });
+        cart.items = [];
 
-        await createAdminNotifications({
-            type: "ORDER",
-            title: "New Order",
-            message: `New order #${savedOrder._id.toString().substring(0, 8)} has been placed`,
-            orderId: savedOrder._id
-        });
+        await cart.save();
 
-        res.status(201).json({
+        return res.status(201).json({
             success: true,
-            message: "Order placed successfully!",
+            message: "Order placed successfully",
             order: savedOrder
         });
-
     } catch (error) {
-        console.error("Place order error:", error);
-        res.status(500).json({
+        console.error( "Place Order Error:", error );
+
+        return res.status(500).json({
             success: false,
             message: error.message
         });
     }
 };
 
-// ======================
-// Get Logged-in User Orders
-// ======================
-const getUserOrders = async (req, res) => {
-    try {
-        const userId = req.user?._id || req.params.userId;
-        if (!userId) {
-            return res.status(400).json({
-                success: false,
-                message: "User ID is required"
-            });
-        }
-
-        const orders = await OrderModel.find({ userId }).sort({ _id: -1 });
-
-        res.status(200).json({
-            success: true,
-            orders
-        });
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: error.message
-        });
-    }
-};
-
-// ======================
-// Get All Orders (Admin)
-// ======================
 const getAllOrders = async (req, res) => {
     try {
-        const orders = await OrderModel.find({})
-            .populate("userId", "firstName lastName email")
-            .sort({ _id: -1 });
+        const orders =
+            await Order.find()
+                .populate(
+                    "user",
+                    "name email"
+                )
+                .populate(
+                    "items.bookId"
+                )
+                .sort({
+                    createdAt: -1
+                });
 
-        res.status(200).json({
+        return res.status(200).json({
             success: true,
             orders
         });
     } catch (error) {
-        res.status(500).json({
+        console.error("Get All Orders Error:",error);
+
+        return res.status(500).json({
             success: false,
             message: error.message
         });
     }
 };
 
-// ======================
-// Update Order Status (Admin)
-// ======================
+const getUserOrders = async (req, res) => {
+    try {
+        const userId = req.user._id;
+
+        const orders =
+            await Order.find({
+                user: userId
+            })
+                .populate(
+                    "items.bookId"
+                )
+                .sort({
+                    createdAt: -1
+                });
+
+        return res.status(200).json({
+            success: true,
+            orders
+        });
+    } catch (error) {
+        console.error( "Get User Orders Error:",error);
+
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
+
+const getOrderById = async ( req, res ) => {
+    try {
+        const order =
+            await Order.findById(
+                req.params.id
+            )
+                .populate(
+                    "user",
+                    "name email"
+                )
+                .populate(
+                    "items.bookId"
+                );
+        if (!order) {
+            return res.status(404).json({
+                success: false,
+                message: "Order not found"
+            });
+        }
+        return res.status(200).json({
+            success: true,
+            order
+        });
+    } catch (error) {
+        console.error( "Get Order Error:", error);
+
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
+
 const updateOrderStatus = async (req, res) => {
     try {
-        const { orderStatus } = req.body;
-        const { id } = req.params;
+        const { status } = req.body;
 
-        if (!orderStatus) {
+        if (!status) {
             return res.status(400).json({
                 success: false,
                 message: "Order status is required"
             });
         }
 
-        const allowedStatues = [
-            "Pending",
-            "Processing",
-            "Shipped",
-            "Delivered",
-            "Cancelled"
-        ];
-
-        if (!allowedStatues.includes(orderStatus)) {
-            return res.status(400).json({
-                success: false,
-                message: "Invalid Order Status"
-            });
-        }
-
-        const order = await OrderModel.findById(id);
+        const order =
+            await Order.findById( req.params.id );
 
         if (!order) {
             return res.status(404).json({
@@ -225,79 +344,55 @@ const updateOrderStatus = async (req, res) => {
             });
         }
 
-        if (order.orderStatus === orderStatus) {
-            return res.status(200).json({
-                success: true,
-                message: "Status is already the same",
-                order
-            });
-        }
+        order.orderStatus = status;
 
-        const oldStatus = order.orderStatus || "Pending";
-        order.orderStatus = orderStatus;
         const updatedOrder = await order.save();
 
-        let notificationTitle = "";
-        let notificationMessage = "";
-
-        switch (orderStatus) {
-            case "Pending":
-                notificationTitle = "Order Pending";
-                notificationMessage = `Your order #${order._id.toString().substring(0, 8)} is pending.`;
-                break;
-            case "Processing":
-                notificationTitle = "Order Processing";
-                notificationMessage = `Your order #${order._id.toString().substring(0, 8)} is now being processed.`;
-                break;
-            case "Shipped":
-                notificationTitle = "Order Shipped";
-                notificationMessage = `Your order #${order._id.toString().substring(0, 8)} has now been shipped.`;
-                break;
-            case "Delivered":
-                notificationTitle = "Order Delivered";
-                notificationMessage = `Your order #${order._id.toString().substring(0, 8)} has been delivered.`;
-                break;
-            case "Cancelled":
-                notificationTitle = "Order Cancelled";
-                notificationMessage = `Your order #${order._id.toString().substring(0, 8)} has been cancelled.`;
-                break;
-            default:
-                notificationTitle = "Order Updated";
-                notificationMessage = `Your order status changed to ${orderStatus}`;
-        }
-
-        try {
-            await NotificationModel.create({
-                recevier: order.userId,
-                recevierRole: "user",
-                type: "ORDER",
-                title: notificationTitle,
-                message: notificationMessage,
-                orderId: order._id,
-                isRead: false
-            });
-        } catch (notifErr) {
-            console.error("Notification creation error:", notifErr);
-        }
-
-        res.status(200).json({
+        return res.status(200).json({
             success: true,
-            message: `Order status changed from ${oldStatus} to ${orderStatus}`,
+            message: "Order status updated successfully",
             order: updatedOrder
         });
-
     } catch (error) {
-        console.error("Update order status error:", error);
-        res.status(500).json({
+        console.error( "Update Order Status Error:",error);
+
+        return res.status(500).json({
             success: false,
             message: error.message
         });
     }
 };
 
+const deleteOrder = async ( req, res) => {
+
+    try {
+        const order = await Order.findByIdAndDelete( req.params.id );
+
+        if (!order) {
+            return res.status(404).json({
+                success: false,
+                message: "Order not found"
+            });
+        }
+
+        return res.status(200).json({
+            success: true,
+            message: "Order deleted successfully"
+        });
+    } catch (error) {
+        console.error( "Delete Order Error:",error);
+
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
 module.exports = {
     placeOrder,
-    getUserOrders,
     getAllOrders,
-    updateOrderStatus
+    getUserOrders,
+    getOrderById,
+    updateOrderStatus,
+    deleteOrder
 };

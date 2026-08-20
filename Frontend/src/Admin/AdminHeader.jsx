@@ -1,5 +1,5 @@
 import "../CSS/Admin.css";
-import NotificationBell from "../Components/NotificationBell";
+import AdminNotification from "./AdminNotification";
 
 const AdminHeader = () => {
 
@@ -11,10 +11,9 @@ const AdminHeader = () => {
                 <h2>Admin Panel</h2>
             </div>
 
-
             <div className="admin-profile">
 
-                <NotificationBell />
+                <AdminNotification />
 
                 <div className="admin-avatar">
                     A

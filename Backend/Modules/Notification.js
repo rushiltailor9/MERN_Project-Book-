@@ -14,7 +14,7 @@ const notificationSchema = new mongoose.Schema(
         },
         type:{
             type:String,
-            enum:["ORDER","USER","FEEDBACK"],
+            enum:["ORDER","USER","FEEDBACK","LOW_STOCK","OUT_OF_STOCK"],
             required:true
         },
         title:{
@@ -28,6 +28,11 @@ const notificationSchema = new mongoose.Schema(
         orderId:{
             type: mongoose.Schema.Types.ObjectId,
             ref:"orders",
+            default:null
+        },
+        bookId:{
+            type: mongoose.Schema.Types.ObjectId,
+            ref:"books",
             default:null
         },
         isRead:{
