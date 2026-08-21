@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "../CSS/Checkout.css";
 import { placeOrder } from "../API/orderApi";
 import { getCart } from "../API/cartApi";
+import { getAllDiscount } from "../API/discountApi";
 import { handleSuccess, handleError } from "../utils";
 
 const Checkout = () => {
@@ -11,6 +12,7 @@ const Checkout = () => {
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(false);
   const [fetchingCart, setFetchingCart] = useState(true);
+  const [discounts, setDiscounts] = useState([]);
 
   const [formData, setFormData] = useState({
     name: localStorage.getItem("name") || "",
@@ -44,9 +46,45 @@ const Checkout = () => {
     fetchCart();
   }, []);
 
+  useEffect(() => {
+    const fetchDiscounts = async () => {
+      try {
+        const response = await getAllDiscount();
+        if (response.success) setDiscounts(response.discounts || []);
+      } catch (error) {
+        console.error("Error loading discounts for checkout:", error);
+      }
+    };
+
+    fetchDiscounts();
+  }, []);
+
+  const getItemPricing = (item) => {
+    const bookId = item.bookId?._id || item.bookId;
+    const originalPrice = Number(item.price || item.bookId?.price || 0);
+    const now = new Date();
+    const discount = discounts.find((entry) => {
+      const appliesToBook = entry.bookId?._id === bookId;
+      const appliesToAll = !entry.bookId;
+      return (appliesToBook || appliesToAll) &&
+        entry.isActive &&
+        new Date(entry.startDate) <= now &&
+        new Date(entry.endDate) >= now;
+    });
+    const discountPercentage = Number(discount?.discountPercentage || 0);
+    const price = Number((originalPrice * (1 - discountPercentage / 100)).toFixed(2));
+
+    return { originalPrice, price, discountPercentage };
+  };
+
   const totalAmount = cart.reduce((total, item) => {
-    const price = item.price || item.bookId?.price || 0;
+    const { price } = getItemPricing(item);
     return total + price * item.quantity;
+  }, 0);
+
+  const subtotalAmount = cart.reduce((total, item) => {
+    const { originalPrice } = getItemPricing(item);
+    return total + originalPrice * item.quantity;
   }, 0);
 
   const handleChange = (e) => {
@@ -276,14 +314,16 @@ const Checkout = () => {
             ) : (
               cart.map((item) => {
                 const title = item.bookName || item.bookId?.bookName || "Book";
-                const price = item.price || item.bookId?.price || 0;
+                const { originalPrice, price, discountPercentage } = getItemPricing(item);
                 const itemId = item._id || item.bookId?._id || item.bookId;
 
                 return (
                   <div className="summary-item" key={itemId}>
                     <div>
                       <h4>{title}</h4>
-                      <p>₹{price} × {item.quantity}</p>
+                      <p>
+                        {discountPercentage > 0 && <del>₹{originalPrice}</del>} ₹{price} × {item.quantity}
+                      </p>
                     </div>
                     <strong>₹{price * item.quantity}</strong>
                   </div>
@@ -292,6 +332,13 @@ const Checkout = () => {
             )}
 
             <div className="summary-divider"></div>
+
+            {subtotalAmount > totalAmount && (
+              <div className="summary-total">
+                <span>Discount:</span>
+                <strong>-₹{(subtotalAmount - totalAmount).toFixed(2)}</strong>
+              </div>
+            )}
 
             <div className="summary-total">
               <span>Total Payable:</span>

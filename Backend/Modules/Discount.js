@@ -5,7 +5,8 @@ const discountSchema = new mongoose.Schema(
         bookId:{
             type: mongoose.Schema.Types.ObjectId,
             ref: "Book",
-            required: true
+            required: false,
+            default: null
         },
         discountPercentage:{
             type: Number,
@@ -26,7 +27,8 @@ const discountSchema = new mongoose.Schema(
             default:true
         }
 
-    }
+    },
+    { timestamps: true }
 );
 
 const DiscountModel = mongoose.model("discount",discountSchema);

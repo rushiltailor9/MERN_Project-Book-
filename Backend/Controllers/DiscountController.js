@@ -15,7 +15,7 @@ const addDiscount = async(req, res) =>{
                 message: "Discount Percentage, start date and end date require"
             });
         }
-        if(discountPercentage < 0 || discountPercentage > 100){
+        if(Number.isNaN(Number(discountPercentage)) || discountPercentage < 0 || discountPercentage > 100){
             return res.status(400).json({
                 success: false,
                 message: "Discount must be between 0 to 100"
@@ -33,7 +33,7 @@ const addDiscount = async(req, res) =>{
         });
         if(existingDiscount){
             return res.status(400).json({
-                success: true,
+                success: false,
                 message: "Active Discount already exists for this work"
             });
         }
@@ -46,7 +46,7 @@ const addDiscount = async(req, res) =>{
         });
 
         res.status(200).json({
-            success: true,
+            success: false,
             message: "Discount added Successfully",
             discount
         });
@@ -92,7 +92,7 @@ const getBookDiscount = async(req, res) =>{
         });
         if(!discount){
             discount = await DiscountModel.findOne({
-            bookId,
+            bookId: null,
             isActive:true,
             startDate:{
                 $lte: now
@@ -101,11 +101,11 @@ const getBookDiscount = async(req, res) =>{
                 $gte: now
             }
         });
+        }
         res.status(200).json({
             success: true,
             discount
         });
-        }
     }catch(error){
         res.status(500).json({
             success: false,
@@ -166,7 +166,7 @@ const deleteDiscount = async(req, res) =>{
                 message: "Discount not found"
             });
         }
-        res.status.json({
+        res.status(200).json({
             success: true,
             message: "Discount Deleted successfully"
         });

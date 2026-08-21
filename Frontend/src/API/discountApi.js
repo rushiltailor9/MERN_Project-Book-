@@ -10,7 +10,7 @@ export const getAllDiscount = async() =>{
                 withCredentials: true
             }
         );
-    return response;
+    return response.data;
 }
 
 export const addDiscount = async(discountData)=>{
@@ -22,18 +22,18 @@ export const addDiscount = async(discountData)=>{
                 withCredentials: true
             }
         );
-        return response;
+        return response.data;
 }
 
 export const updateDiscount = async(id, discountData) =>{
     const response = await axios.put(
-        `${API}/${id}}`,
+        `${API}/${id}`,
         discountData,
         {
             withCredentials: true
         }
     );
-    return response;
+    return response.data;
 }
 
 export const deleteDiscount = async (id) => {
@@ -54,5 +54,5 @@ export const getBookDiscount =async(bookId) =>{
             withCredentials: true
         }
     );
-    return response;
+    return response.data;
 }

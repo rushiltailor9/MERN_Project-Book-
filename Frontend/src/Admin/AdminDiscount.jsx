@@ -59,7 +59,7 @@ const AdminDiscount = () => {
                 alert("Discount added successfully");
             }
 
-            setBooks("");
+            setBookId("");
             setDiscountPercentage("");
             setStartDate("");
             setEndDate("");
