@@ -4,18 +4,18 @@ const notificationSchema = new mongoose.Schema(
     {
         recevier:{
             type: mongoose.Schema.Types.ObjectId,
-            required:true,
-            ref:"users"
+            required: true,
+            ref: "users"
         },
         recevierRole:{
             type: String,
-            enum:["user", "admin"],
+            enum: ["user", "admin"],
             required: true
         },
         type:{
-            type:String,
-            enum:["ORDER","USER","FEEDBACK","LOW_STOCK","OUT_OF_STOCK"],
-            required:true
+            type: String,
+            enum: ["ORDER", "USER", "FEEDBACK", "LOW_STOCK", "OUT_OF_STOCK", "DISCOUNT"],
+            required: true
         },
         title:{
             type: String,
@@ -27,24 +27,24 @@ const notificationSchema = new mongoose.Schema(
         },
         orderId:{
             type: mongoose.Schema.Types.ObjectId,
-            ref:"orders",
-            default:null
+            ref: "orders",
+            default: null
         },
         bookId:{
             type: mongoose.Schema.Types.ObjectId,
-            ref:"books",
-            default:null
+            ref: "books",
+            default: null
         },
         isRead:{
-            type:Boolean,
-            default:false
+            type: Boolean,
+            default: false
         }
     },
     {
         timestamps: true
     }
-)
+);
 
-const NotificationModel = mongoose.model("Notification",notificationSchema);
+const NotificationModel = mongoose.model("Notification", notificationSchema);
 
 module.exports = NotificationModel;

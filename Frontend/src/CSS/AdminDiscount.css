@@ -6,42 +6,33 @@
 .discount-management {
     width: 100%;
     min-height: 100vh;
-
-    padding: 30px 35px;
-
+    /* Increased outer padding for a wider, more breathable canvas */
+    padding: 40px 48px;
     box-sizing: border-box;
-
     background: #f8fafc;
-
     color: #1e293b;
 }
-
 
 /* =========================================================
    PAGE HEADER
 ========================================================= */
 
 .discount-management h1 {
-    margin: 0 0 28px 0;
-
-    font-size: 30px;
-
+    /* Larger, more prominent page title */
+    margin: 0 0 32px 0;
+    font-size: 32px;
     font-weight: 700;
-
     color: #0f172a;
+    letter-spacing: -0.5px;
 }
-
 
 .discount-management h2 {
-    margin: 0 0 20px 0;
-
-    font-size: 21px;
-
+    /* Slightly scaled up section headers */
+    margin: 0 0 24px 0;
+    font-size: 22px;
     font-weight: 650;
-
     color: #1e293b;
 }
-
 
 /* =========================================================
    MAIN CONTENT
@@ -49,12 +40,10 @@
 
 .discount-content {
     width: 100%;
-
-    max-width: 1250px;
-
+    /* Increased max-width for better use of desktop space */
+    max-width: 1400px; 
     margin: 0 auto;
 }
-
 
 /* =========================================================
    ADD DISCOUNT CARD
@@ -62,23 +51,17 @@
 
 .discount-form-card {
     width: 100%;
-
     background: #ffffff;
-
     border: 1px solid #e2e8f0;
-
-    border-radius: 12px;
-
-    padding: 25px;
-
+    /* Softer, larger border radius */
+    border-radius: 16px;
+    /* More generous internal spacing */
+    padding: 32px;
     box-sizing: border-box;
-
-    box-shadow:
-        0 2px 8px rgba(15, 23, 42, 0.05);
-
-    margin-bottom: 30px;
+    /* Slightly deeper shadow for better elevation (color unchanged) */
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+    margin-bottom: 32px;
 }
-
 
 /* =========================================================
    FORM
@@ -86,13 +69,11 @@
 
 .discount-form {
     display: grid;
-
-    grid-template-columns:
-        repeat(2, minmax(0, 1fr));
-
-    gap: 20px 24px;
+    /* Changed to 1 column so all inputs are one by one line */
+    grid-template-columns: 1fr;
+    /* Vertical gap between fields */
+    gap: 24px;
 }
-
 
 /* =========================================================
    FORM GROUP
@@ -100,26 +81,23 @@
 
 .discount-form-group {
     display: flex;
-
     flex-direction: column;
-
-    gap: 8px;
+    /* More space between label and input */
+    gap: 10px;
 }
-
 
 .discount-form-group.full-width {
     grid-column: 1 / -1;
 }
 
-
 .discount-form-group label {
-    font-size: 14px;
-
+    /* Slightly smaller, more refined label font */
+    font-size: 13px;
     font-weight: 600;
-
     color: #334155;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
-
 
 /* =========================================================
    INPUT / SELECT
@@ -128,44 +106,29 @@
 .discount-form-group input,
 .discount-form-group select {
     width: 100%;
-
-    height: 44px;
-
-    padding: 0 13px;
-
+    /* Taller inputs for a modern feel */
+    height: 48px;
+    padding: 0 16px;
     box-sizing: border-box;
-
     border: 1px solid #cbd5e1;
-
-    border-radius: 7px;
-
+    /* Rounded input corners */
+    border-radius: 8px;
     outline: none;
-
     background: #ffffff;
-
     color: #1e293b;
-
-    font-size: 14px;
-
-    transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
+    font-size: 15px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
-
 
 .discount-form-group input:focus,
 .discount-form-group select:focus {
     border-color: #2563eb;
-
-    box-shadow:
-        0 0 0 3px rgba(37, 99, 235, 0.10);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
 }
-
 
 .discount-form-group input::placeholder {
     color: #94a3b8;
 }
-
 
 /* =========================================================
    DISCOUNT INPUT
@@ -173,32 +136,22 @@
 
 .discount-percentage-wrapper {
     position: relative;
-
     width: 100%;
 }
 
-
 .discount-percentage-wrapper input {
-    padding-right: 45px;
+    padding-right: 48px;
 }
-
 
 .discount-percentage-symbol {
     position: absolute;
-
-    right: 14px;
-
+    right: 16px;
     top: 50%;
-
     transform: translateY(-50%);
-
     color: #64748b;
-
     font-weight: 600;
-
     pointer-events: none;
 }
-
 
 /* =========================================================
    FORM BUTTON AREA
@@ -206,108 +159,72 @@
 
 .discount-form-actions {
     grid-column: 1 / -1;
-
     display: flex;
-
     justify-content: flex-end;
-
     align-items: center;
-
-    gap: 12px;
-
-    margin-top: 5px;
+    /* Wider gap between buttons */
+    gap: 16px;
+    /* More space separating the form from actions */
+    margin-top: 12px;
 }
-
 
 /* =========================================================
    ADD BUTTON
 ========================================================= */
 
 .add-discount-btn {
-    min-width: 145px;
-
-    height: 44px;
-
-    padding: 0 20px;
-
+    min-width: 160px;
+    /* Matched input height */
+    height: 48px;
+    padding: 0 24px;
     border: none;
-
-    border-radius: 7px;
-
+    border-radius: 8px;
     background: #2563eb;
-
     color: #ffffff;
-
     font-size: 14px;
-
     font-weight: 600;
-
     cursor: pointer;
-
-    transition:
-        background 0.2s ease,
-        transform 0.15s ease;
+    transition: background 0.2s ease, transform 0.15s ease;
 }
-
 
 .add-discount-btn:hover {
     background: #1d4ed8;
-
     transform: translateY(-1px);
 }
-
 
 .add-discount-btn:active {
     transform: translateY(0);
 }
 
-
 .add-discount-btn:disabled {
     background: #94a3b8;
-
     cursor: not-allowed;
-
     transform: none;
 }
-
 
 /* =========================================================
    CANCEL BUTTON
 ========================================================= */
 
 .cancel-discount-btn {
-    min-width: 100px;
-
-    height: 44px;
-
-    padding: 0 18px;
-
+    min-width: 110px;
+    /* Matched input height */
+    height: 48px;
+    padding: 0 24px;
     border: 1px solid #cbd5e1;
-
-    border-radius: 7px;
-
+    border-radius: 8px;
     background: #ffffff;
-
     color: #475569;
-
     font-size: 14px;
-
     font-weight: 600;
-
     cursor: pointer;
-
-    transition:
-        background 0.2s ease,
-        border-color 0.2s ease;
+    transition: background 0.2s ease, border-color 0.2s ease;
 }
-
 
 .cancel-discount-btn:hover {
     background: #f8fafc;
-
     border-color: #94a3b8;
 }
-
 
 /* =========================================================
    DISCOUNT LIST SECTION
@@ -315,21 +232,14 @@
 
 .discount-list-card {
     width: 100%;
-
     background: #ffffff;
-
     border: 1px solid #e2e8f0;
-
-    border-radius: 12px;
-
-    padding: 25px;
-
+    border-radius: 16px;
+    /* Increased card padding */
+    padding: 32px;
     box-sizing: border-box;
-
-    box-shadow:
-        0 2px 8px rgba(15, 23, 42, 0.05);
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
 }
-
 
 /* =========================================================
    LIST HEADER
@@ -337,39 +247,25 @@
 
 .discount-list-header {
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
-
-    margin-bottom: 20px;
+    /* More space below the header */
+    margin-bottom: 24px;
 }
-
 
 .discount-count {
     display: inline-flex;
-
     align-items: center;
-
     justify-content: center;
-
-    min-width: 30px;
-
-    height: 28px;
-
-    padding: 0 8px;
-
+    min-width: 32px;
+    height: 32px;
+    padding: 0 10px;
     border-radius: 20px;
-
     background: #eff6ff;
-
     color: #2563eb;
-
-    font-size: 13px;
-
+    font-size: 14px;
     font-weight: 700;
 }
-
 
 /* =========================================================
    DISCOUNT TABLE
@@ -377,66 +273,49 @@
 
 .discount-table-wrapper {
     width: 100%;
-
     overflow-x: auto;
 }
 
-
 .discount-table {
     width: 100%;
-
     border-collapse: collapse;
-
-    min-width: 750px;
+    min-width: 850px; /* Increased to accommodate roomier cells */
 }
 
-
 .discount-table th {
-    padding: 14px 15px;
-
+    /* Roomier table headers */
+    padding: 16px 20px;
     text-align: left;
-
     background: #f8fafc;
-
     border-bottom: 1px solid #e2e8f0;
-
     color: #475569;
-
     font-size: 13px;
-
     font-weight: 700;
-
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
     white-space: nowrap;
 }
 
-
 .discount-table td {
-    padding: 15px;
-
+    /* Roomier table rows */
+    padding: 20px;
     border-bottom: 1px solid #e2e8f0;
-
     color: #334155;
-
     font-size: 14px;
-
     vertical-align: middle;
 }
-
 
 .discount-table tbody tr {
     transition: background 0.15s ease;
 }
 
-
 .discount-table tbody tr:hover {
     background: #f8fafc;
 }
 
-
 .discount-table tbody tr:last-child td {
     border-bottom: none;
 }
-
 
 /* =========================================================
    BOOK NAME
@@ -444,28 +323,20 @@
 
 .discount-book-name {
     display: flex;
-
     flex-direction: column;
-
-    gap: 3px;
+    gap: 4px; /* Increased gap */
 }
-
 
 .discount-book-name strong {
     color: #0f172a;
-
-    font-size: 14px;
-
+    font-size: 15px; /* Slightly larger text */
     font-weight: 650;
 }
 
-
 .discount-book-name span {
     color: #94a3b8;
-
-    font-size: 12px;
+    font-size: 13px;
 }
-
 
 /* =========================================================
    DISCOUNT BADGE
@@ -473,24 +344,15 @@
 
 .discount-badge {
     display: inline-flex;
-
     align-items: center;
-
     justify-content: center;
-
-    padding: 5px 10px;
-
-    border-radius: 6px;
-
+    padding: 6px 12px;
+    border-radius: 8px;
     background: #dcfce7;
-
     color: #15803d;
-
-    font-size: 12px;
-
+    font-size: 13px;
     font-weight: 700;
 }
-
 
 /* =========================================================
    ALL BOOKS BADGE
@@ -498,22 +360,14 @@
 
 .all-books-badge {
     display: inline-flex;
-
     align-items: center;
-
-    padding: 5px 10px;
-
-    border-radius: 6px;
-
+    padding: 6px 12px;
+    border-radius: 8px;
     background: #eff6ff;
-
     color: #2563eb;
-
-    font-size: 12px;
-
+    font-size: 13px;
     font-weight: 650;
 }
-
 
 /* =========================================================
    DATE
@@ -521,12 +375,9 @@
 
 .discount-date {
     color: #475569;
-
-    font-size: 13px;
-
+    font-size: 14px;
     white-space: nowrap;
 }
-
 
 /* =========================================================
    STATUS
@@ -534,52 +385,35 @@
 
 .discount-status {
     display: inline-flex;
-
     align-items: center;
-
-    gap: 6px;
-
-    padding: 5px 10px;
-
+    gap: 8px;
+    padding: 6px 14px;
     border-radius: 20px;
-
-    font-size: 12px;
-
+    font-size: 13px;
     font-weight: 650;
 }
 
-
 .discount-status.active {
     background: #dcfce7;
-
     color: #15803d;
 }
 
-
 .discount-status.inactive {
     background: #f1f5f9;
-
     color: #64748b;
 }
 
-
 .discount-status.expired {
     background: #fee2e2;
-
     color: #dc2626;
 }
 
-
 .discount-status-dot {
     width: 6px;
-
     height: 6px;
-
     border-radius: 50%;
-
     background: currentColor;
 }
-
 
 /* =========================================================
    ACTION BUTTONS
@@ -587,68 +421,44 @@
 
 .discount-actions {
     display: flex;
-
     align-items: center;
-
-    gap: 8px;
+    gap: 12px; /* Increased spacing between buttons */
 }
-
 
 .discount-edit-btn,
 .discount-delete-btn {
-    height: 34px;
-
-    padding: 0 12px;
-
-    border-radius: 6px;
-
-    font-size: 12px;
-
+    height: 38px; /* Taller action buttons */
+    padding: 0 16px;
+    border-radius: 8px;
+    font-size: 13px;
     font-weight: 600;
-
     cursor: pointer;
-
-    transition:
-        background 0.2s ease,
-        border-color 0.2s ease;
+    transition: background 0.2s ease, border-color 0.2s ease;
 }
 
-
 /* EDIT */
-
 .discount-edit-btn {
     border: 1px solid #bfdbfe;
-
     background: #eff6ff;
-
     color: #2563eb;
 }
 
-
 .discount-edit-btn:hover {
     background: #dbeafe;
-
     border-color: #93c5fd;
 }
 
-
 /* DELETE */
-
 .discount-delete-btn {
     border: 1px solid #fecaca;
-
     background: #fef2f2;
-
     color: #dc2626;
 }
 
-
 .discount-delete-btn:hover {
     background: #fee2e2;
-
     border-color: #fca5a5;
 }
-
 
 /* =========================================================
    EMPTY STATE
@@ -656,61 +466,40 @@
 
 .discount-empty {
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
-
     justify-content: center;
-
-    min-height: 220px;
-
-    padding: 30px;
-
+    /* Taller empty state */
+    min-height: 280px; 
+    padding: 40px;
     text-align: center;
 }
 
-
 .discount-empty-icon {
-    width: 52px;
-
-    height: 52px;
-
+    width: 64px;
+    height: 64px;
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
-    margin-bottom: 14px;
-
+    margin-bottom: 20px;
     border-radius: 50%;
-
     background: #f1f5f9;
-
     color: #64748b;
-
-    font-size: 22px;
+    font-size: 28px;
 }
 
-
 .discount-empty h3 {
-    margin: 0 0 7px 0;
-
-    font-size: 17px;
-
+    margin: 0 0 10px 0;
+    font-size: 18px;
     color: #334155;
 }
 
-
 .discount-empty p {
     margin: 0;
-
     color: #94a3b8;
-
-    font-size: 13px;
+    font-size: 14px;
+    line-height: 1.5;
 }
-
 
 /* =========================================================
    ERROR MESSAGE
@@ -718,26 +507,17 @@
 
 .discount-error {
     width: 100%;
-
-    padding: 12px 15px;
-
+    /* Thicker padding for alert banners */
+    padding: 16px 20px;
     box-sizing: border-box;
-
-    margin-bottom: 20px;
-
+    margin-bottom: 24px;
     border: 1px solid #fecaca;
-
-    border-radius: 7px;
-
+    border-radius: 8px;
     background: #fef2f2;
-
     color: #dc2626;
-
-    font-size: 13px;
-
+    font-size: 14px;
     font-weight: 500;
 }
-
 
 /* =========================================================
    SUCCESS MESSAGE
@@ -745,186 +525,141 @@
 
 .discount-success {
     width: 100%;
-
-    padding: 12px 15px;
-
+    /* Thicker padding for alert banners */
+    padding: 16px 20px;
     box-sizing: border-box;
-
-    margin-bottom: 20px;
-
+    margin-bottom: 24px;
     border: 1px solid #bbf7d0;
-
-    border-radius: 7px;
-
+    border-radius: 8px;
     background: #f0fdf4;
-
     color: #15803d;
-
-    font-size: 13px;
-
+    font-size: 14px;
     font-weight: 500;
 }
-
 
 /* =========================================================
    DELETE CONFIRMATION
 ========================================================= */
 
 .delete-confirmation {
-    padding: 20px;
-
+    padding: 24px;
     border: 1px solid #fecaca;
-
-    border-radius: 8px;
-
+    border-radius: 12px;
     background: #fff7f7;
+    margin-top: 16px;
 }
-
 
 .delete-confirmation p {
-    margin: 0 0 15px 0;
-
+    margin: 0 0 20px 0;
     color: #475569;
-
-    font-size: 14px;
+    font-size: 15px;
 }
-
 
 .delete-confirmation-actions {
     display: flex;
-
-    gap: 10px;
+    gap: 12px;
 }
-
 
 .confirm-delete-btn {
-    height: 38px;
-
-    padding: 0 15px;
-
+    height: 42px;
+    padding: 0 20px;
     border: none;
-
-    border-radius: 6px;
-
+    border-radius: 8px;
     background: #dc2626;
-
     color: #ffffff;
-
-    font-size: 13px;
-
+    font-size: 14px;
     font-weight: 600;
-
     cursor: pointer;
 }
-
 
 .confirm-delete-btn:hover {
     background: #b91c1c;
 }
 
-
 /* =========================================================
    RESPONSIVE
 ========================================================= */
 
-@media (max-width: 900px) {
-
+@media (max-width: 1024px) {
     .discount-management {
-        padding: 25px 20px;
+        padding: 32px 24px;
     }
+}
 
-
+@media (max-width: 900px) {
     .discount-form {
+        /* Already 1 column, but keeping class for gap adjustments if needed */
         grid-template-columns: 1fr;
+        gap: 20px;
     }
-
 
     .discount-form-actions {
         justify-content: flex-start;
     }
-
 }
-
 
 /* =========================================================
    TABLET
 ========================================================= */
 
 @media (max-width: 700px) {
-
     .discount-management {
-        padding: 20px 15px;
+        padding: 24px 16px;
     }
-
 
     .discount-management h1 {
-        font-size: 25px;
-
-        margin-bottom: 20px;
+        font-size: 28px;
+        margin-bottom: 24px;
     }
-
 
     .discount-form-card,
     .discount-list-card {
-        padding: 18px;
+        padding: 24px;
     }
-
 
     .discount-list-header {
         align-items: flex-start;
-
-        gap: 10px;
-
+        gap: 12px;
         flex-direction: column;
     }
-
 }
-
 
 /* =========================================================
    MOBILE
 ========================================================= */
 
 @media (max-width: 480px) {
-
     .discount-management {
-        padding: 15px 10px;
+        padding: 20px 12px;
     }
-
 
     .discount-management h1 {
-        font-size: 22px;
+        font-size: 24px;
     }
-
 
     .discount-management h2 {
-        font-size: 18px;
+        font-size: 20px;
     }
-
 
     .discount-form-card,
     .discount-list-card {
-        padding: 15px;
-
-        border-radius: 9px;
+        padding: 20px;
+        border-radius: 12px;
     }
-
 
     .discount-form-actions {
         width: 100%;
-
         flex-direction: column;
+        gap: 12px;
     }
-
 
     .add-discount-btn,
     .cancel-discount-btn {
         width: 100%;
+        min-width: unset;
     }
-
 
     .discount-table {
-        min-width: 700px;
+        min-width: 700px; /* Forces scroll bar rather than cramping on small phones */
     }
-
 }

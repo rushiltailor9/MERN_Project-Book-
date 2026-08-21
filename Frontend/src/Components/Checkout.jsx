@@ -123,13 +123,20 @@ const Checkout = () => {
   };
 
   const getFormattedItems = () => {
-    return cart.map((item) => ({
-      bookId: item.bookId?._id || item.bookId,
-      bookName: item.bookName || item.bookId?.bookName || "Book",
-      price: item.price || item.bookId?.price || 0,
-      quantity: item.quantity,
-      bookImg: item.bookImg || item.bookId?.bookImg || ""
-    }));
+    return cart.map((item) => {
+      const { originalPrice, price, discountPercentage } = getItemPricing(item);
+      const discountAmount = Number((originalPrice - price).toFixed(2));
+      return {
+        bookId: item.bookId?._id || item.bookId,
+        bookName: item.bookName || item.bookId?.bookName || "Book",
+        originalPrice,
+        price,
+        discountPercentage,
+        discountAmount,
+        quantity: item.quantity,
+        bookImg: item.bookImg || item.bookId?.bookImg || ""
+      };
+    });
   };
 
   const handleSubmit = async () => {
@@ -144,14 +151,19 @@ const Checkout = () => {
     };
 
     const formattedItems = getFormattedItems();
+    const discountTotal = Number((subtotalAmount - totalAmount).toFixed(2));
 
     // If online payment, navigate to payment page
     if (formData.paymentMethod === "ONLINE") {
       navigate("/payment", {
         state: {
           totalAmount: totalAmount,
+          subtotalAmount: subtotalAmount,
+          totalDiscount: discountTotal > 0 ? discountTotal : 0,
           orderData: {
             items: formattedItems,
+            subtotal: subtotalAmount,
+            totalDiscount: discountTotal > 0 ? discountTotal : 0,
             totalAmount: totalAmount,
             address: formattedAddress,
             paymentMethod: "ONLINE"
@@ -167,6 +179,8 @@ const Checkout = () => {
 
       const orderData = {
         items: formattedItems,
+        subtotal: subtotalAmount,
+        totalDiscount: discountTotal > 0 ? discountTotal : 0,
         totalAmount: totalAmount,
         address: formattedAddress,
         paymentMethod: "COD"

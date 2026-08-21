@@ -280,8 +280,14 @@ function Payment() {
                         <div className="summary-pricing-breakdown">
                             <div className="price-row">
                                 <span>Subtotal</span>
-                                <span>₹{totalAmount}</span>
+                                <span>₹{orderData.subtotal !== undefined ? orderData.subtotal : totalAmount}</span>
                             </div>
+                            {orderData.totalDiscount > 0 && (
+                                <div className="price-row">
+                                    <span>Discount Saved</span>
+                                    <span style={{ color: "#16a34a", fontWeight: "600" }}>-₹{orderData.totalDiscount}</span>
+                                </div>
+                            )}
                             <div className="price-row">
                                 <span>Estimated Delivery</span>
                                 <span className="free-text">FREE</span>

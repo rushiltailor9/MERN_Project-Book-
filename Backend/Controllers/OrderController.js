@@ -2,6 +2,9 @@ const Order = require("../Modules/Order");
 const Book = require("../Modules/Book");
 const Cart = require("../Modules/Cart");
 const Discount = require("../Modules/Discount");
+const NotificationModel = require("../Modules/Notification");
+const UserModel = require("../Modules/User");
+const createAdminNotifications = require("../Utils/createAdminNotifications");
 
 const calculateDiscount = async (book) => {
     const now = new Date();
@@ -86,17 +89,16 @@ const placeOrder = async (req, res) => {
             });
         }
 
-        const cart =
-            await Cart.findOne({
-                user: userId
+        const cartItems =
+            await Cart.find({
+                userId: userId
             }).populate(
-                "items.bookId"
+                "bookId"
             );
 
         if (
-            !cart ||
-            !cart.items ||
-            cart.items.length === 0
+            !cartItems ||
+            cartItems.length === 0
         ) {
             return res.status(400).json({
                 success: false,
@@ -110,7 +112,7 @@ const placeOrder = async (req, res) => {
 
         for (
             const cartItem
-            of cart.items
+            of cartItems
         ) {
 
             const book =
@@ -216,23 +218,38 @@ const placeOrder = async (req, res) => {
 
         const savedOrder = await order.save();
             
-        for ( const cartItem of cart.items ) {
+        for ( const cartItem of cartItems ) {
             const book = cartItem.bookId;
             const quantity = Number( cartItem.quantity );
+            const currentStock = Number( book.stock );
+            const newStock = Math.max(0, currentStock - quantity);
             await Book.findByIdAndUpdate(
                 book._id,
                 {
-                    $inc: {
-                        stock:
-                            -quantity
+                    $set: {
+                        stock: String(newStock)
                     }
                 }
             );
         }
 
-        cart.items = [];
+        await Cart.deleteMany({ userId: userId });
 
-        await cart.save();
+        // Notify admins about the new order
+        try {
+            const placingUser = await UserModel.findById(userId).select("firstName lastName email").lean();
+            const userName = placingUser
+                ? `${placingUser.firstName} ${placingUser.lastName}`.trim() || placingUser.email
+                : "A user";
+            await createAdminNotifications({
+                type: "ORDER",
+                title: "New Order Placed",
+                message: `${userName} placed a new order worth ₹${totalAmount}. Order ID: ${savedOrder._id}`,
+                orderId: savedOrder._id
+            });
+        } catch (notifErr) {
+            console.error("Order notification error:", notifErr);
+        }
 
         return res.status(201).json({
             success: true,
@@ -364,6 +381,35 @@ const updateOrderStatus = async (req, res) => {
         order.orderStatus = status;
 
         const updatedOrder = await order.save();
+
+        // Notify the user about the order status change
+        try {
+            const statusMessages = {
+                Pending:    "Your order has been received and is pending processing.",
+                Processing: "Your order is now being processed.",
+                Shipped:    "Great news! Your order has been shipped and is on its way.",
+                Delivered:  "Your order has been delivered. Enjoy your books!",
+                Cancelled:  "Your order has been cancelled. Contact support if this was unexpected."
+            };
+            const statusTitles = {
+                Pending:    "Order Received",
+                Processing: "Order Processing",
+                Shipped:    "Order Shipped",
+                Delivered:  "Order Delivered",
+                Cancelled:  "Order Cancelled"
+            };
+            await NotificationModel.create({
+                recevier: order.user,
+                recevierRole: "user",
+                type: "ORDER",
+                title: statusTitles[status] || `Order ${status}`,
+                message: statusMessages[status] || `Your order status has been updated to: ${status}.`,
+                orderId: order._id,
+                isRead: false
+            });
+        } catch (notifErr) {
+            console.error("Order status notification error:", notifErr);
+        }
 
         return res.status(200).json({
             success: true,

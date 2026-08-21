@@ -45,6 +45,9 @@ const createInvoice = async (req, res) => {
         const invoiceItems = (order.items || []).map((item) => ({
             bookName: item.bookName || "Book",
             quantity: item.quantity || 1,
+            originalPrice: item.originalPrice || item.price || 0,
+            discountPercentage: item.discountPercentage || 0,
+            discountAmount: item.discountAmount || 0,
             price: item.price || 0
         }));
 
@@ -56,12 +59,12 @@ const createInvoice = async (req, res) => {
         const invoice = await Invoice.create({
             invoiceNumber,
             orderId: order._id,
-            userId: order.userId,
+            userId: order.user || order.userId,
             customerName,
             customerEmail,
             items: invoiceItems,
-            subTotal: order.totalAmount,
-            discount: 0,
+            subTotal: order.subtotal !== undefined ? order.subtotal : order.totalAmount,
+            discount: order.totalDiscount || 0,
             totalAmount: order.totalAmount,
             paymentMethod,
             paymentStatus,
@@ -104,14 +107,20 @@ const getInvoice = async (req, res) => {
 
         // If invoice doesn't exist yet, auto-generate it if order exists
         if (!invoice) {
-            const orderQuery = req.user.role === "admin" ? { _id: orderId } : { _id: orderId, userId };
-            const order = await Order.findOne(orderQuery);
+            const orderQuery = req.user.role === "admin" ? { _id: orderId } : { _id: orderId, user: userId };
+            let order = await Order.findOne(orderQuery);
+            if (!order && req.user.role !== "admin") {
+                order = await Order.findOne({ _id: orderId, userId });
+            }
 
             if (order) {
                 const invoiceNumber = "INV-" + Date.now();
                 const invoiceItems = (order.items || []).map((item) => ({
                     bookName: item.bookName || "Book",
                     quantity: item.quantity || 1,
+                    originalPrice: item.originalPrice || item.price || 0,
+                    discountPercentage: item.discountPercentage || 0,
+                    discountAmount: item.discountAmount || 0,
                     price: item.price || 0
                 }));
 
@@ -123,12 +132,12 @@ const getInvoice = async (req, res) => {
                 invoice = await Invoice.create({
                     invoiceNumber,
                     orderId: order._id,
-                    userId: order.userId,
+                    userId: order.user || order.userId,
                     customerName: order.address?.name || req.user.name || "READ-EASY Customer",
                     customerEmail: req.user.email || "",
                     items: invoiceItems,
-                    subTotal: order.totalAmount,
-                    discount: 0,
+                    subTotal: order.subtotal !== undefined ? order.subtotal : order.totalAmount,
+                    discount: order.totalDiscount || 0,
                     totalAmount: order.totalAmount,
                     paymentMethod,
                     paymentStatus,

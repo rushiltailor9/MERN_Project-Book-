@@ -187,6 +187,7 @@ const Books = () => {
       throw new Error("Out of stock");
     }
     try {
+      // const { finalPrice } = getBookPricing(book);
       const response = await addToCart({
         bookId: book._id,
         bookName: book.bookName,
@@ -214,8 +215,9 @@ const Books = () => {
       await handleAddToCart(book);
       setSelectedBook(null);
       navigate("/checkout");
-    } catch {
+    } catch(error) {
       // The add-to-cart handler already displays the error message.
+      console.error(error);
     }
   };
   useEffect(() => {
@@ -242,14 +244,14 @@ const Books = () => {
                     .map((item) => item.bookId._id);
             setFavoriteIds(ids);
         } catch (error) {
-            console.error(
-                "Favorite fetch error:",
-                error.response?.data ||
-                error.message
-            );
-            // Don't show error for expired/not logged in
             if (error.response?.status === 401) {
                 setFavoriteIds([]);
+            } else {
+                console.error(
+                    "Favorite fetch error:",
+                    error.response?.data ||
+                    error.message
+                );
             }
         }
     };

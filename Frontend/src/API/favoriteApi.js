@@ -12,6 +12,19 @@ API.interceptors.request.use((config) => {
     return config;
 });
 
+API.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        if (error.response?.status === 401) {
+            localStorage.removeItem("token");
+            localStorage.removeItem("name");
+            localStorage.removeItem("role");
+            window.dispatchEvent(new Event("auth-logout"));
+        }
+        return Promise.reject(error);
+    }
+);
+
 // ADD FAVORITE — POST /favorite
 export const addFavorite = async (bookId) => {
     return API.post("/", { bookId });
@@ -19,6 +32,10 @@ export const addFavorite = async (bookId) => {
 
 // GET FAVORITES — GET /favorite
 export const getFavorites = async () => {
+    const token = localStorage.getItem("token");
+    if (!token || token === "admin-token") {
+        return { data: { favorite: [] } };
+    }
     return API.get("/");
 };
 

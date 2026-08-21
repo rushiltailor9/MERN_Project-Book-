@@ -9,7 +9,7 @@ const cartSchema = new mongoose.Schema(
         },
         bookId:{
             type: mongoose.Schema.Types.ObjectId,
-            ref:"Book",
+            ref:"books",
             require:true
         },
         bookName:{

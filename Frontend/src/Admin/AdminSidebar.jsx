@@ -35,26 +35,26 @@ const AdminSidebar = () => {
                 </Link>
 
                 <Link to="/admin/book">
-                    Book Upload
+                    Book Upload 
                 </Link>
 
 
                 <Link to="/admin/users">
-                    Users
+                    Users 
                 </Link>
 
 
                 <Link to="/admin/orders">
-                     Orders
+                     Orders Management
                 </Link>
 
 
                 <Link to="/admin/feedback">
-                     Feedback
+                     Feedback 
                 </Link>
 
                 <Link to="/admin/discount">
-                    Discount
+                    Discount Management
                 </Link>
             </nav>
 

@@ -29,6 +29,9 @@ const invoiceSchema = new mongoose.Schema(
             {
                 bookName: String,
                 quantity: Number,
+                originalPrice: Number,
+                discountPercentage: Number,
+                discountAmount: Number,
                 price: Number
             }
         ],

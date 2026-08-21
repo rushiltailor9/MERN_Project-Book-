@@ -74,11 +74,30 @@ function OrderComplete() {
                     border: "1px solid #e2e8f0"
                 }}>
                     <h3 style={{ margin: "0 0 12px 0", color: "#0f172a", fontSize: "1.1rem" }}>Order Summary</h3>
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", fontSize: "0.92rem" }}>
+                    <div style={{
+                        display: "grid",
+                        gridTemplateColumns: "1fr 1fr",
+                        gap: "10px",
+                        fontSize: "0.92rem"
+                    }}>
                         <div>
                             <span style={{ color: "#64748b" }}>Order ID:</span>
                             <div style={{ fontWeight: "700", fontFamily: "monospace" }}>#{order._id}</div>
                         </div>
+                        {/* Subtotal */}
+                        {order.subtotal !== undefined && (
+                            <div>
+                                <span style={{ color: "#64748b" }}>Subtotal:</span>
+                                <div style={{ fontWeight: "600", color: "#2563eb" }}>₹{order.subtotal}</div>
+                            </div>
+                        )}
+                        {/* Discount */}
+                        {order.totalDiscount && order.totalDiscount > 0 && (
+                            <div>
+                                <span style={{ color: "#64748b" }}>Discount:</span>
+                                <div style={{ fontWeight: "600", color: "#10b981" }}>-₹{order.totalDiscount}</div>
+                            </div>
+                        )}
                         <div>
                             <span style={{ color: "#64748b" }}>Total Amount:</span>
                             <div style={{ fontWeight: "700", color: "#2563eb", fontSize: "1.05rem" }}>₹{order.totalAmount}</div>

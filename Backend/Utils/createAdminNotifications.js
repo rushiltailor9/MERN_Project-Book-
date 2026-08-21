@@ -71,5 +71,35 @@ const createLowStockNotification = async (book) => {
     });
 };
 
+const createDiscountNotifications = async ({ discountPercentage, bookName = null, bookId = null }) => {
+    try {
+        const users = await UserModel.find({ role: "user" }).select("_id").lean();
+        if (users.length === 0) return;
+
+        const title = bookName
+            ? `Special Offer: ${discountPercentage}% OFF on ${bookName}!`
+            : `Special Offer: ${discountPercentage}% OFF on All Books!`;
+
+        const message = bookName
+            ? `Get ${discountPercentage}% discount on "${bookName}". Limited time offer!`
+            : `Enjoy ${discountPercentage}% discount across the store. Shop your favorite books now!`;
+
+        await NotificationModel.insertMany(
+            users.map((user) => ({
+                recevier: user._id,
+                recevierRole: "user",
+                type: "DISCOUNT",
+                title,
+                message,
+                bookId,
+                isRead: false
+            }))
+        );
+    } catch (err) {
+        console.error("Discount notification error:", err);
+    }
+};
+
 module.exports = createAdminNotifications;
 module.exports.createLowStockNotification = createLowStockNotification;
+module.exports.createDiscountNotifications = createDiscountNotifications;

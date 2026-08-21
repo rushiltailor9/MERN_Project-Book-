@@ -158,17 +158,34 @@ function Invoice() {
                             </tr>
                         </thead>
                         <tbody>
-                            {(invoice.items || []).map((item, index) => (
-                                <tr key={index}>
-                                    <td className="item-index">{index + 1}</td>
-                                    <td className="item-name">
-                                        <strong>{item.bookName}</strong>
-                                    </td>
-                                    <td className="text-center item-qty">{item.quantity}</td>
-                                    <td className="text-right">₹{item.price}</td>
-                                    <td className="text-right item-total">₹{item.price * item.quantity}</td>
-                                </tr>
-                            ))}
+                            {(invoice.items || []).map((item, index) => {
+                                const hasDiscount = item.originalPrice && item.originalPrice > item.price;
+                                return (
+                                    <tr key={index}>
+                                        <td className="item-index">{index + 1}</td>
+                                        <td className="item-name">
+                                            <strong>{item.bookName}</strong>
+                                            {hasDiscount && item.discountPercentage > 0 && (
+                                                <span style={{ marginLeft: "8px", fontSize: "0.75rem", background: "#dcfce7", color: "#15803d", padding: "1px 6px", borderRadius: "4px", fontWeight: "600" }}>
+                                                    {item.discountPercentage}% OFF
+                                                </span>
+                                            )}
+                                        </td>
+                                        <td className="text-center item-qty">{item.quantity}</td>
+                                        <td className="text-right">
+                                            {hasDiscount ? (
+                                                <>
+                                                    <span style={{ textDecoration: "line-through", color: "#94a3b8", fontSize: "0.85rem", marginRight: "6px" }}>₹{item.originalPrice}</span>
+                                                    <span>₹{item.price}</span>
+                                                </>
+                                            ) : (
+                                                `₹${item.price}`
+                                            )}
+                                        </td>
+                                        <td className="text-right item-total">₹{item.price * item.quantity}</td>
+                                    </tr>
+                                );
+                            })}
                         </tbody>
                     </table>
                 </div>

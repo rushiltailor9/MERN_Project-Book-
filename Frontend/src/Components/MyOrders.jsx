@@ -89,19 +89,35 @@ const MyOrders = () => {
                             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px", marginBottom: "15px" }}>
                                 <div>
                                     <h4 style={{ margin: "0 0 10px", color: "#334155" }}>Items:</h4>
-                                    {order.items?.map((item, idx) => (
-                                        <div key={idx} style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "8px" }}>
-                                            {item.bookImg && (
-                                                <img src={item.bookImg} alt={item.bookName} style={{ width: "40px", height: "50px", objectFit: "cover", borderRadius: "4px" }} />
-                                            )}
-                                            <div>
-                                                <span style={{ fontWeight: "600", color: "#1e293b" }}>{item.bookName}</span>
-                                                <div style={{ fontSize: "0.85rem", color: "#64748b" }}>
-                                                    ₹{item.price} × {item.quantity}
+                                    {order.items?.map((item, idx) => {
+                                        const hasDiscount = item.originalPrice && item.originalPrice > item.price;
+                                        return (
+                                            <div key={idx} style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "8px" }}>
+                                                {item.bookImg && (
+                                                    <img src={item.bookImg} alt={item.bookName} style={{ width: "40px", height: "50px", objectFit: "cover", borderRadius: "4px" }} />
+                                                )}
+                                                <div>
+                                                    <span style={{ fontWeight: "600", color: "#1e293b" }}>{item.bookName}</span>
+                                                    <div style={{ fontSize: "0.85rem", color: "#64748b" }}>
+                                                        {hasDiscount ? (
+                                                            <>
+                                                                <span style={{ textDecoration: "line-through", marginRight: "4px" }}>₹{item.originalPrice}</span>
+                                                                <strong style={{ color: "#2563eb" }}>₹{item.price}</strong>
+                                                                {item.discountPercentage > 0 && (
+                                                                    <span style={{ marginLeft: "6px", background: "#dcfce7", color: "#15803d", padding: "1px 5px", borderRadius: "3px", fontSize: "0.75rem", fontWeight: "600" }}>
+                                                                        {item.discountPercentage}% OFF
+                                                                    </span>
+                                                                )}
+                                                                <span> × {item.quantity}</span>
+                                                            </>
+                                                        ) : (
+                                                            `₹${item.price} × ${item.quantity}`
+                                                        )}
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    ))}
+                                        );
+                                    })}
                                 </div>
 
                                 <div>
@@ -118,9 +134,17 @@ const MyOrders = () => {
                             </div>
 
                             <div style={{ borderTop: "1px dashed #e2e8f0", paddingTop: "12px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "10px" }}>
-                                <span style={{ color: "#64748b", fontSize: "0.9rem" }}>
-                                    Placed on: {new Date(order.createdAt || order._id.substring(0,8)).toLocaleDateString()}
-                                </span>
+                                <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+                                    <span style={{ color: "#64748b", fontSize: "0.85rem" }}>
+                                        Placed on: {new Date(order.createdAt || order._id.substring(0,8)).toLocaleDateString()}
+                                    </span>
+                                    {order.totalDiscount && order.totalDiscount > 0 ? (
+                                        <div style={{ fontSize: "0.85rem", color: "#64748b" }}>
+                                            Subtotal: <span style={{ textDecoration: "line-through" }}>₹{order.subtotal || (order.totalAmount + order.totalDiscount)}</span>{" "}
+                                            | Discount: <strong style={{ color: "#16a34a" }}>-₹{order.totalDiscount}</strong>
+                                        </div>
+                                    ) : null}
+                                </div>
                                 <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
                                     <Link
                                         to={`/invoice/${order._id}`}

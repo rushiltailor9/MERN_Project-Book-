@@ -6,11 +6,24 @@ const API = axios.create({
 
 API.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
-  if (token) {
+  if (token && token !== "admin-token") {
     config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
 });
+
+API.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("name");
+      localStorage.removeItem("role");
+      window.dispatchEvent(new Event("auth-logout"));
+    }
+    return Promise.reject(error);
+  }
+);
 
 export const placeOrder = async (orderData) => {
   const response = await API.post("/", orderData);

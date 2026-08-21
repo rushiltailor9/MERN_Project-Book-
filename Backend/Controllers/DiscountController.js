@@ -1,4 +1,6 @@
 const DiscountModel = require("../Modules/Discount");
+const BookModel = require("../Modules/Book");
+const { createDiscountNotifications } = require("../Utils/createAdminNotifications");
 
 const addDiscount = async(req, res) =>{
     try{
@@ -43,6 +45,18 @@ const addDiscount = async(req, res) =>{
             startDate: new Date(startDate),
             endDate: new Date(endDate),
             isActive: true
+        });
+
+        let bookName = null;
+        if (bookId) {
+            const book = await BookModel.findById(bookId);
+            bookName = book?.bookName || null;
+        }
+
+        await createDiscountNotifications({
+            discountPercentage: Number(discountPercentage),
+            bookName,
+            bookId: bookId || null
         });
 
         res.status(200).json({

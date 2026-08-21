@@ -2,6 +2,15 @@ import AdminHeader from "./AdminHeader"
 import AdminSidebar from "./AdminSidebar"
 import "../CSS/Admin.css";
 import { useEffect, useState } from "react";
+import {
+    ResponsiveContainer,
+    BarChart,
+    Bar,
+    XAxis,
+    YAxis,
+    CartesianGrid,
+    Tooltip
+} from "recharts"
 import { getBooks } from "../API/bookApi";
 import { getAllUsers } from "../API/userApi";
 import { getAllOrders } from "../API/orderApi";
@@ -13,7 +22,8 @@ const AdminDashboard = () => {
     const [books, setBooks] = useState([]);
     const [users, setUsers] = useState([]);
     const [orders, setOrders] = useState([]);
-
+    const [revenueData, setRevenueData] = useState([]);
+ 
     const fetchDashboard = async () => {
         try {
             const token = localStorage.getItem("token");
@@ -63,6 +73,53 @@ const AdminDashboard = () => {
         } catch (error) {
             console.log("Order fetch error", error);
         }
+    }
+
+    const prepareRevenueData = (orderList) =>{
+        const today = new Date();
+
+        const month = [];
+        for( let i = 5; i >= 0; i--){
+            const date = new Date(
+                today.getFullYear(),
+                today.getMonth() - i,
+                1
+            );
+
+            month.push({
+                year: date.getFullYear(),
+                month: date.getMonth(),
+                name: date.toLocaleString("en-US",{
+                    month: "short"
+                }),
+                revenue: 0
+            });
+        }
+        orderList.forEach((order)=>{
+            if(order.orderStatus === "Cancelled"){
+                return;
+            }
+            if(!order.createdAt){
+                return;
+            }
+            const orderDate = new Date(order.createdAt);
+
+            const year = orderDate.getFullYear();
+            const month = orderDate.getMonth();
+
+            const foundMonth = month.find(
+                (item)=>
+                    item.year === year &&
+                    item.month === month
+            );
+            if(foundMonth){
+                foundMonth.revenue += Number(order.totalAmount) || 0;
+            }
+        });
+        return months.map((item)=>({
+            month: item.name,
+            revenue: Number(item.revenue.toFixed(2))
+        }));
     }
 
     useEffect(() => {
