@@ -14,6 +14,7 @@ import {
     removeFavorite,
     getFavorites
 } from "../API/favoriteApi";
+import { getAllDiscount } from "../API/discountApi";
 
 const Books = () => {
   const [books, setBooks] = useState([]);
@@ -24,6 +25,7 @@ const Books = () => {
   const [activeLanguage, setActiveLanguage] = useState("All");
   const [favoriteIds, setFavoriteIds] = useState([]);
   const [selectedBook, setSelectedBook] = useState(null);
+  const [discounts, setDiscounts] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -41,6 +43,65 @@ const Books = () => {
   };
     fetchBooks();
   }, []);
+
+  const fetchDiscount = async () => {
+    try {
+      const response = await getAllDiscount();
+      setDiscounts(response.discounts || []);
+    } catch (error) {
+      console.error("Fetch Discount Error", error);
+      setDiscounts([]);
+    }
+  }
+  useEffect(() => {
+    const onLoad = () => {
+      fetchDiscount();
+    }
+    onLoad();
+  }, []);
+
+  const getBookPricing = (book) => {
+    const originalPrice = Number(book.price);
+    const now = new Date();
+
+    const isCurrentlyActive = (d) =>
+      d.isActive &&
+      new Date(d.startDate) <= now &&
+      new Date(d.endDate) >= now;
+
+    const specificDiscount = discounts.find((d) => {
+      const discountBookId =
+        d.bookId && typeof d.bookId === "object" ? d.bookId._id : d.bookId;
+      return isCurrentlyActive(d) && discountBookId === book._id;
+    });
+
+    const globalDiscount = discounts.find(
+      (d) => isCurrentlyActive(d) && !d.bookId
+    );
+
+    const discount = specificDiscount || globalDiscount;
+
+    if (!discount) {
+      return {
+        originalPrice,
+        finalPrice: originalPrice,
+        discountPercentage: 0,
+        hasDiscount: false
+      };
+    }
+
+    const discountPercentage = Number(discount.discountPercentage);
+    const finalPrice = Number(
+      (originalPrice - (originalPrice * discountPercentage) / 100).toFixed(2)
+    );
+
+    return {
+      originalPrice,
+      finalPrice,
+      discountPercentage,
+      hasDiscount: discountPercentage > 0
+    };
+  };
 
   const allCategories = [
     "All",
@@ -371,9 +432,28 @@ const handleFavorite = async (bookId) => {
                   <p>
                     <strong>Language:</strong> {book.language}
                   </p>
-                  <p>
-                    <strong>Price:</strong> ₹{book.price}
-                  </p>
+                  {(() => {
+                    const {
+                      originalPrice,
+                      finalPrice,
+                      discountPercentage,
+                      hasDiscount
+                    } = getBookPricing(book);
+                    return (
+                      <p className="price">
+                        <strong>Price:</strong>{" "}
+                        {hasDiscount ? (
+                          <>
+                            <span className="original-price">₹{originalPrice}</span>
+                            <span className="discounted-price">₹{finalPrice}</span>
+                            <span className="discount-badge">{discountPercentage}% OFF</span>
+                          </>
+                        ) : (
+                          <span className="discounted-price">₹{originalPrice}</span>
+                        )}
+                      </p>
+                    );
+                  })()}
                   <div className="stock-status">
                     {
                       book.stock > 0 ? (
@@ -446,7 +526,28 @@ const handleFavorite = async (bookId) => {
               </div>
               <p className="book-modal-description">{selectedBook.description || "No description is available for this book."}</p>
               <dl className="book-modal-data">
-                <div><dt>Price</dt><dd>₹{selectedBook.price}</dd></div>
+                <div>
+                  <dt>Price</dt>
+                  <dd>
+                    {(() => {
+                      const {
+                        originalPrice,
+                        finalPrice,
+                        discountPercentage,
+                        hasDiscount
+                      } = getBookPricing(selectedBook);
+                      return hasDiscount ? (
+                        <>
+                          <span className="original-price">₹{originalPrice}</span>{" "}
+                          <span className="discounted-price">₹{finalPrice}</span>{" "}
+                          <span className="discount-badge">{discountPercentage}% OFF</span>
+                        </>
+                      ) : (
+                        <span className="discounted-price">₹{originalPrice}</span>
+                      );
+                    })()}
+                  </dd>
+                </div>
                 <div><dt>Language</dt><dd>{selectedBook.language}</dd></div>
                 <div><dt>Category</dt><dd>{selectedBook.category?.join(", ") || "—"}</dd></div>
                 <div><dt>Availability</dt><dd>{selectedBook.stock > 0 ? `${selectedBook.stock} in stock` : "Out of stock"}</dd></div>

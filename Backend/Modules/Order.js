@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const orderSchema = new mongoose.Schema(
     {
-        userId:{
+        user:{
             type: mongoose.Schema.Types.ObjectId,
             ref: "users",
             require: true
@@ -29,6 +29,10 @@ const orderSchema = new mongoose.Schema(
                 discountAmount:{
                     type: Number,
                     require: 0
+                },
+                discountPercentage:{
+                    type: Number,
+                    default: 0
                 },
                 price:{
                     type: Number,

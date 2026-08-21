@@ -46,7 +46,7 @@ const addDiscount = async(req, res) =>{
         });
 
         res.status(200).json({
-            success: false,
+            success: true,
             message: "Discount added Successfully",
             discount
         });
@@ -69,7 +69,7 @@ const getAllDiscounts = async(req, res) =>{
         });
     }catch(error){
         res.status(500).json({
-            success: true,
+            success: false,
             message: error.message
         });
     }

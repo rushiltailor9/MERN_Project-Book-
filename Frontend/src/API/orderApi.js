@@ -28,6 +28,6 @@ export const getAllOrders = async () => {
 };
 
 export const updateOrderStatus = async (id, orderStatus) => {
-  const response = await API.put(`/status/${id}`, { orderStatus });
+  const response = await API.put(`/status/${id}`, { status: orderStatus });
   return response.data;
-};
+};

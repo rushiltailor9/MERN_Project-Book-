@@ -4,7 +4,7 @@ const discountSchema = new mongoose.Schema(
     {
         bookId:{
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Book",
+            ref: "books",
             required: false,
             default: null
         },

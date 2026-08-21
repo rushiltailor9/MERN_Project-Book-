@@ -72,6 +72,19 @@ const placeOrder = async (req, res) => {
     try {
         const userId =
             req.user._id;
+        const {
+            address,
+            paymentMethod = "COD",
+            paymentStatus,
+            transactionId
+        } = req.body;
+
+        if (!address || !address.name || !address.phone || !address.address || !address.city || !address.pincode) {
+            return res.status(400).json({
+                success: false,
+                message: "Complete delivery address is required"
+            });
+        }
 
         const cart =
             await Cart.findOne({
@@ -191,10 +204,14 @@ const placeOrder = async (req, res) => {
             new Order({
                 user: userId,
                 items: orderItems,
+                address,
                 subtotal: subtotal,
                 totalDiscount: totalDiscount,
                 totalAmount: totalAmount,
-                orderStatus: "Pending"
+                orderStatus: "Pending",
+                paymentMethod,
+                paymentStatus: paymentStatus || (paymentMethod === "COD" ? "Pending" : "Paid"),
+                transactionId
             });
 
         const savedOrder = await order.save();

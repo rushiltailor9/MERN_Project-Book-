@@ -18,4 +18,4 @@ router.get("/my-orders", getUserOrders);
 router.get("/all", adminMiddleware, getAllOrders);
 router.put("/status/:id", adminMiddleware, updateOrderStatus);
 
-module.exports = router;
+module.exports = router;
